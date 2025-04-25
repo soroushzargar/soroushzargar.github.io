@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soroush H. Zargarbashi | Academic Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero" id="home">
+            <div class="container">
+                <h1>Soroush H. Zargarbashi</h1>
+                <p class="subtitle">Ph.D. Candidate in Artificial Intelligence</p>
+                <p class="affiliation">CISPA Helmholtz Center for Information Security - University of Cologne</p>
+                <div class="social-links">
+                    <a href="https://github.com/soroushzargar" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/soroushzargar" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:zargarbashi@cs.uni-koeln.de"><i class="far fa-envelope"></i></a>
+                    <a href="resume.pdf" target="_blank"><i class="far fa-file-pdf"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section id="about" class="section about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <p>I am a Ph.D. candidate in Artificial Intelligence at CISPA Helmholtz Center for Information Security, working under the supervision of <a href="https://abojchevski.github.io" target="_blank">Prof. Dr. Aleksandar Bojchevski</a>. My research focuses on Trustworthy Machine Learning with emphasis on:</p>
+                    <ul class="expertise-list">
+                        <li>Uncertainty Quantification</li>
+                        <li>Conformal Prediction</li>
+                        <li>Adversarial Robustness</li>
+                        <li>Graph Neural Networks</li>
+                    </ul>
+                    <p>I am excited to announce my upcoming internship at Apple's machine intelligence team in 2025.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="section publications">
+            <div class="container">
+                <h2 class="section-title">Publications</h2>
+                
+                <div class="publication">
+                    <h3>Conformal Prediction with Access to Epistemic Uncertainty</h3>
+                    <p class="pub-meta">Under preparation, 2025</p>
+                    <p class="authors">Alireza Javanmardi*, <strong>Soroush H. Zargarbashi*</strong>, Aleksandar Bojchevski, Willem Waegeman, Eyke Hüllermeier</p>
+                </div>
+
+                <div class="publication">
+                    <h3>One Sample is Enough to make Conformal Prediction Robust</h3>
+                    <p class="pub-meta">Under preparation, 2025</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski</p>
+                </div>
+
+                <div class="publication">
+                    <h3>Eva: Evolutionary Attack on Graphs</h3>
+                    <p class="pub-meta">Under review, 2024</p>
+                    <p class="authors">Mohammad Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Jimin Cao, Aleksandar Bojchevski</p>
+                </div>
+
+                <div class="publication">
+                    <h3>Robust Conformal Prediction with a Single Binary Certificate</h3>
+                    <p class="pub-meta">Proceedings of the 13<sup>th</sup> ICLR, 2024</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski</p>
+                    <p class="pub-abstract">We show that for symmetric randomized smoothing methods (including almost all current certificates) with only one binary certificate we can attain robust conformal prediction. Therefore we significantly reduce the number of needed Monte-Carlo samples per input.</p>
+                </div>
+
+                <div class="publication">
+                    <h3>Robust yet Efficient Conformal Prediction Sets</h3>
+                    <p class="pub-meta">Proceedings of the 41<sup>st</sup> ICML, 2024</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski</p>
+                    <p class="pub-abstract">We leverage the distribution information of the model's output, to provide prediction sets that guarantee to include the true label with high probability even given the adversarial data.</p>
+                </div>
+
+                <div class="publication">
+                    <h3><a href="https://openreview.net/pdf?id=homn1jOKI5" target="_blank">Conformal Inductive Graph Neural Networks</a></h3>
+                    <p class="pub-meta">Proceedings of the 12<sup>th</sup> ICLR, 2024</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski</p>
+                    <p class="pub-abstract">We return prediction sets with a guarantee to cover the true label with adjustable probability. We propose an algorithm that works even when the graph is updated in a node- or edge-exchangeable sequence (inductive GNNs). Many uncertainty quantification methods do not work on GNN since i.i.d. assumption is violated.</p>
+                </div>
+
+                <div class="publication">
+                    <h3><a href="https://proceedings.mlr.press/v202/h-zargarbashi23a.html" target="_blank">Conformal Prediction Set for Graph Neural Networks</a></h3>
+                    <p class="pub-meta">Proceedings of the 40<sup>th</sup> ICML, 2023</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Simone Antonelli, Aleksandar Bojchevski</p>
+                    <p class="pub-abstract">We leverage the homophily structure in a graph to define efficient prediction sets with valid guarantees to include the true label. Our method works on top of any confidence approach.</p>
+                </div>
+
+                <div class="publication">
+                    <h3>A Multimodal Feature Embedding Approach to Diagnose Alzheimer's Disease</h3>
+                    <p class="pub-meta">ArXiv Preprint, 2019</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Bagher Babaali</p>
+                    <p class="pub-abstract">We use linguistic and acoustic feature extraction (commonly used in speaker identification methods) to diagnose Alzheimer's disease.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section experience">
+            <div class="container">
+                <h2 class="section-title">Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Apple - R&D</h3>
+                        <p class="experience-position">Intern at machine intelligence team</p>
+                        <p class="experience-date">May - September 2025 (Upcoming)</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>CISPA-Helmholtz Center for Information Security</h3>
+                        <p class="experience-position">Fully Funded Research Assistant</p>
+                        <p class="experience-date">September 2022 - Present</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Arman Suba - Electricity Market Forecast</h3>
+                        <p class="experience-position">Backend Developer and Data Scientist</p>
+                        <p class="experience-date">2020 - 2021</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Speech Recognition Lab at University of Tehran</h3>
+                        <p class="experience-position">Research Assistant</p>
+                        <p class="experience-date">2018 - 2021</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Academic Experience</h3>
+                
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Reviewer</h3>
+                        <p>NeurIPS, ICLR</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Attended Academic Events</h3>
+                        <ul>
+                            <li><strong>HIDA PhD Meetup:</strong> Event from Helmholtz Information & Data Science Academy on Machine Learning. Berlin 2024 - <em>Presented poster: Certified conformal prediction sets</em></li>
+                            <li><strong>CISPA Trustworthy AI summer school:</strong> 2022 on robustness, privacy and fairness of machine learning models. Saarbruecken- 2024</li>
+                            <li><strong>LoG Meetup:</strong> Learning on Graphs conference local meetup Munich 2023 - <em>Presented poster: Conformal Prediction for GNNs</em></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Master's Degree Thesis</h3>
+                        <p><strong>Fractional Fourier Transform in Deep Speech Enhancement</strong></p>
+                        <p class="thesis-description">We showed that the generalization short-term Fourier transform, to fractional transformation via eigen-decomposition can extract more meaningful features leading to a better speech enhancement.</p>
+                        <p><em>Supervisors: Dr. Bagher Babaali, Prof. Tsao Yu</em></p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Teaching Assistant</h3>
+                        <ul>
+                            <li>Advanced Machine Learning (University of Cologne)</li>
+                            <li>Elements of Machine Learning (University of Cologne)</li>
+                            <li>Algorithm Design (Isfahan University of Technology, 3 years)</li>
+                            <li>Data Structures (Isfahan University of Technology, 1 year)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Lab Instructor</h3>
+                        <p>Advanced Programming (Isfahan University of Technology, 2 years)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                
+                <div class="education-item">
+                    <h3>CISPA Helmholtz Center for Information Security - University of Cologne</h3>
+                    <p class="degree">Ph.D. in Artificial Intelligence (Trustworthy Machine Learning)</p>
+                    <p class="date">2022 - Present</p>
+                    <p class="supervisor"><strong>Supervisor:</strong> <a href="https://abojchevski.github.io" target="_blank">Prof. Dr. Aleksandar Bojchevski</a></p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>University of Tehran</h3>
+                    <p class="degree">M.Sc. in Computer Science</p>
+                    <p class="date">2018 - 2021</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Isfahan University of Technology</h3>
+                    <p class="degree">B.Sc. in Computer Engineering (Software Major)</p>
+                    <p class="date">2013 - 2018</p>
+                </div>
+                
+                <div class="relevant-courses">
+                    <h3 class="subsection-title">Relevant Courses</h3>
+                    <ul class="courses-list">
+                        <li>Approximation Algorithm (19.5/20)</li>
+                        <li>Data Science (19.25/20)</li>
+                        <li>Advanced Algorithms (17.25/20)</li>
+                        <li>Advanced Artificial Intelligence (18.48/20)</li>
+                        <li>Machine Learning (17/20)</li>
+                        <li>Graph Theory (16.78/20)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Languages</h3>
+                        <ul class="skills-list">
+                            <li>Python</li>
+                            <li>R</li>
+                            <li>C++</li>
+                            <li>C#</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Libraries</h3>
+                        <ul class="skills-list">
+                            <li>PyTorch</li>
+                            <li>PyTorch Geometric</li>
+                            <li>TensorFlow</li>
+                            <li>Librosa (speech processing)</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools</h3>
+                        <ul class="skills-list">
+                            <li>Git/GitHub</li>
+                            <li>Unix Shell</li>
+                            <li>VS Code</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Backend Development</h3>
+                        <ul class="skills-list">
+                            <li>Django Rest Framework</li>
+                            <li>Docker</li>
+                            <li>RabbitMQ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="awards" class="section awards">
+            <div class="container">
+                <h2 class="section-title">Honors and Awards</h2>
+                <div class="award-item">
+                    <h3>International IEEEXtreme Programming Contests</h3>
+                    <ul>
+                        <li>Ranked top 4% (11th contest among 3350 teams)</li>
+                        <li>Ranked top 6% (10th contest among 2000 teams)</li>
+                        <li>Ranked top 7% (9th contest among 2477 teams)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2 class="section-title">Contact & References</h2>
+                
+                <div class="contact-info">
+                    <p><i class="far fa-envelope"></i> <a href="mailto:zargarbashi@cs.uni-koeln.de">zargarbashi@cs.uni-koeln.de</a></p>
+                </div>
+                
+                <div class="references">
+                    <h3 class="subsection-title">References</h3>
+                    
+                    <div class="reference">
+                        <h4>Prof. Dr. Aleksandar Bojchevski</h4>
+                        <p>Professor, University of Cologne</p>
+                        <p><a href="mailto:a.bojchevski@uni-koeln.de">a.bojchevski@uni-koeln.de</a></p>
+                    </div>
+                    
+                    <div class="reference">
+                        <h4>Dr. Bagher BabaAli</h4>
+                        <p>Assistant Professor, University of Tehran</p>
+                        <p><a href="mailto:babaali@ut.ac.ir">babaali@ut.ac.ir</a></p>
+                    </div>
+                    
+                    <div class="reference">
+                        <h4>Dr. Ramin Javadi</h4>
+                        <p>Assistant Professor, Isfahan University of Technology</p>
+                        <p><a href="mailto:rjavadi@cc.ut.ac.ir">rjavadi@cc.ut.ac.ir</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Soroush H. Zargarbashi. Last Updated: April 25, 2025.</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
