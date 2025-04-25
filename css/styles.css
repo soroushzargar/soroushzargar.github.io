@@ -182,6 +182,11 @@ nav {
 
 .publication h3 {
     margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.publication h3:hover {
+    color: #0066cc;
 }
 
 .pub-meta {
@@ -194,9 +199,51 @@ nav {
     margin-bottom: 1rem;
 }
 
+.pub-content {
+    margin-top: 1rem;
+    display: none;
+}
+
+.pub-content.show {
+    display: block;
+}
+
 .pub-abstract {
     font-size: 0.9rem;
     color: #555;
+    margin-bottom: 1rem;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-left: 3px solid #0066cc;
+}
+
+.citation-box {
+    font-family: monospace;
+    font-size: 0.85rem;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin-top: 1rem;
+}
+
+.toggle-btn {
+    display: inline-block;
+    background-color: #e6f0ff;
+    color: #0066cc;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.toggle-btn:hover {
+    background-color: #cce0ff;
 }
 
 /* Experience and Education Sections */

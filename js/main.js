@@ -42,4 +42,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Toggle publication details
+    const publications = document.querySelectorAll('.publication');
+    publications.forEach(pub => {
+        const heading = pub.querySelector('h3');
+        const contentDiv = pub.querySelector('.pub-content');
+        const toggleBtn = pub.querySelector('.toggle-btn');
+        
+        if (heading && toggleBtn && contentDiv) {
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent heading click from firing
+                contentDiv.classList.toggle('show');
+                if (contentDiv.classList.contains('show')) {
+                    toggleBtn.textContent = 'Hide details';
+                } else {
+                    toggleBtn.textContent = 'Show details';
+                }
+            });
+            
+            heading.addEventListener('click', function() {
+                if (contentDiv) {
+                    contentDiv.classList.toggle('show');
+                    if (contentDiv.classList.contains('show')) {
+                        toggleBtn.textContent = 'Hide details';
+                    } else {
+                        toggleBtn.textContent = 'Show details';
+                    }
+                }
+            });
+        }
+    });
 });
