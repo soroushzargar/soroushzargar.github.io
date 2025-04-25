@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications | Soroush H. Zargarbashi</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="#" class="active">Publications</a></li>
+                    <li><a href="../index.html#experience">Experience</a></li>
+                    <li><a href="../index.html#education">Education</a></li>
+                    <li><a href="../index.html#skills">Skills</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="section publications">
+            <div class="container">
+                <h2 class="section-title">Publications</h2>
+                
+                <div class="publication">
+                    <h3>Conformal Prediction with Access to Epistemic Uncertainty <button class="toggle-btn" disabled>Show details</button></h3>
+                    <p class="pub-meta">Under preparation, 2025</p>
+                    <p class="authors">Alireza Javanmardi*, <strong>Soroush H. Zargarbashi*</strong>, Aleksandar Bojchevski, Willem Waegeman, Eyke Hüllermeier</p>
+                </div>
+
+                <div class="publication">
+                    <h3>One Sample is Enough to make Conformal Prediction Robust <button class="toggle-btn" disabled>Show details</button></h3>
+                    <p class="pub-meta">Under preparation, 2025</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski</p>
+                </div>
+
+                <div class="publication">
+                    <h3>Eva: Evolutionary Attack on Graphs <button class="toggle-btn">Show details</button></h3>
+                    <p class="pub-meta">Under review, 2024</p>
+                    <p class="authors">Mohammad Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Jimin Cao, Aleksandar Bojchevski</p>
+                    <div class="pub-content">
+                        <div class="pub-tldr">
+                            <strong>TLDR:</strong> We develop a new evolutionary algorithm for creating powerful adversarial attacks on graph neural networks that maintain structural plausibility.
+                        </div>
+                        <div class="pub-abstract">
+                            <strong>Abstract:</strong>
+                            <p>Even a slight perturbation in the graph structure can cause a significant drop in the accuracy of graph neural networks (GNNs). Most existing attacks leverage gradient information to perturb edges. This relaxes the attack's optimization problem from a discrete to a continuous space, resulting in solutions far from optimal. It also restricts the adaptability of the attack to non-differentiable objectives. Instead, we propose an evolutionary-based algorithm to solve the discrete optimization problem directly. Our Evolutionary Attack (EvA) works with any black-box model and objective, eliminating the need for a differentiable proxy loss. This permits us to design two novel attacks that: reduce the effectiveness of robustness certificates and break conformal sets. We introduce a sparse encoding that results in memory complexity that is linear in the attack budget. EvA reduces the accuracy by an additional 11% on average compared to the best previous attack, revealing significant untapped potential in designing attacks.</p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-video"></i> Video</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-presentation"></i> Slides</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                        <div class="citation-box">@article{akhondzadeh2024eva,
+  title={Eva: Evolutionary Attack on Graphs},
+  author={Akhondzadeh, Mohammad Sadegh and Zargarbashi, Soroush H. and Cao, Jimin and Bojchevski, Aleksandar},
+  journal={Under review},
+  year={2024}
+}</div>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <h3>Robust Conformal Prediction with a Single Binary Certificate <button class="toggle-btn">Show details</button></h3>
+                    <p class="pub-meta">Proceedings of the 13<sup>th</sup> ICLR, 2024</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski</p>
+                    <div class="pub-content">
+                        <div class="pub-tldr">
+                            <strong>TLDR:</strong> We dramatically reduce the computational cost of robust conformal prediction by showing that only one binary certificate is needed rather than thousands.
+                        </div>
+                        <div class="pub-abstract">
+                            <strong>Abstract:</strong>
+                            <p>We show that for symmetric randomized smoothing methods (including almost all current certificates) with only one binary certificate we can attain robust conformal prediction. Therefore we significantly reduce the number of needed Monte-Carlo samples per input.</p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link-btn disabked"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-video"></i> Video</a>
+                            <a href="#" class="pub-link-btn disabked"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                            <a href="#" class="pub-link-btn disabked"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                        <div class="citation-box">@inproceedings{zargarbashi2024robust,
+  title={Robust Conformal Prediction with a Single Binary Certificate},
+  author={Zargarbashi, Soroush H. and Bojchevski, Aleksandar},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2024}
+}</div>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <h3>Robust yet Efficient Conformal Prediction Sets <button class="toggle-btn">Show details</button></h3>
+                    <p class="pub-meta">Proceedings of the 41<sup>st</sup> ICML, 2024</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski</p>
+                    <div class="pub-content">
+                        <div class="pub-tldr">
+                            <strong>TLDR:</strong> We create smaller, more practical prediction sets that remain robust against adversarial attacks by using the model's output distribution.
+                        </div>
+                        <div class="pub-abstract">
+                            <strong>Abstract:</strong>
+                            <p>We leverage the distribution information of the model's output, to provide prediction sets that guarantee to include the true label with high probability even given the adversarial data. Our approach significantly reduces the size of conformal prediction sets while maintaining robustness against adversarial attacks.</p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-video"></i> Video</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                        <div class="citation-box">@inproceedings{zargarbashi2024robust_efficient,
+  title={Robust yet Efficient Conformal Prediction Sets},
+  author={Zargarbashi, Soroush H. and Akhondzadeh, Mohammad Sadegh and Bojchevski, Aleksandar},
+  booktitle={Proceedings of the 41st International Conference on Machine Learning (ICML)},
+  year={2024}
+}</div>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <h3><a>Conformal Inductive Graph Neural Networks</a> <button class="toggle-btn">Show details</button></h3>
+                    <p class="pub-meta">Proceedings of the 12<sup>th</sup> ICLR, 2024</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski</p>
+                    <div class="pub-content">
+                        <div class="pub-tldr">
+                            <strong>TLDR:</strong> We extend conformal prediction to inductive graph neural networks, enabling reliable uncertainty quantification in dynamic graph environments.
+                        </div>
+                        <div class="pub-abstract">
+                            <strong>Abstract:</strong>
+                            <p>Conformal prediction (CP) transforms any model's output into prediction sets guaranteed to include (cover) the true label. CP requires exchangeability, a relaxation of the i.i.d. assumption, to obtain a valid distribution-free coverage guarantee. This makes it directly applicable to transductive node-classification. However, conventional CP cannot be applied in inductive settings due to the implicit shift in the (calibration) scores caused by message passing with the new nodes. We fix this issue for both cases of node and edge-exchangeable graphs, recovering the standard coverage guarantee without sacrificing statistical efficiency. We further prove that the guarantee holds independently of the prediction time, e.g. upon arrival of a new node/edge or at any subsequent moment.</p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-video"></i> Video</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                        <div class="citation-box">@inproceedings{zargarbashi2024conformal,
+  title={Conformal Inductive Graph Neural Networks},
+  author={Zargarbashi, Soroush H. and Bojchevski, Aleksandar},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2024}
+}</div>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <h3><a>Conformal Prediction Set for Graph Neural Networks</a> <button class="toggle-btn">Show details</button></h3>
+                    <p class="pub-meta">Proceedings of the 40<sup>th</sup> ICML, 2023</p>
+                    <p class="authors"><strong>Soroush H. Zargarbashi</strong>, Simone Antonelli, Aleksandar Bojchevski</p>
+                    <div class="pub-content">
+                        <div class="pub-tldr">
+                            <strong>TLDR:</strong> We use graph structure to create more efficient prediction sets with guaranteed coverage, improving uncertainty quantification for GNNs.
+                        </div>
+                        <div class="pub-abstract">
+                            <strong>Abstract:</strong>
+                            <p>Despite the widespread use of graph neural networks (GNNs) we lack methods to reliably quantify their uncertainty. We propose a conformal procedure to equip GNNs with prediction sets that come with distribution-free guarantees – the output set contains the true label with arbitrarily high probability. Our post-processing procedure can wrap around any (pretrained) GNN, and unlike existing methods, results in meaningful sets even when the model provides only the top class. The key idea is to diffuse the node-wise conformity scores to incorporate neighborhood information. By leveraging the network homophily we construct sets with comparable or better efficiency (average size) and significantly improved singleton hit ratio (correct sets of size one). In addition to an extensive empirical evaluation, we investigate the theoretical conditions under which smoothing provably improves efficiency.
+                            </p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-video"></i> Video</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                            <a href="#" class="pub-link-btn disabled"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                        <div class="citation-box">@inproceedings{h-zargarbashi2023conformal,
+  title={Conformal Prediction Set for Graph Neural Networks},
+  author={H-Zargarbashi, Soroush and Antonelli, Simone and Bojchevski, Aleksandar},
+  booktitle={Proceedings of the 40th International Conference on Machine Learning (ICML)},
+  pages={12318--12329},
+  year={2023},
+  volume={202}
+}</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Soroush H. Zargarbashi. Last Updated: April 25, 2025.</p>
+        </div>
+    </footer>
+    
+    <script src="../js/main.js"></script>
+</body>
+</html>
