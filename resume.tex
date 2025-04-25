@@ -1,0 +1,365 @@
+%-------------------------
+% Resume in Latex
+% Author : Matty
+% Based on: https://github.com/jakegut/resume (which was itself based on https://github.com/sb2nov/resume)
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+
+\input{glyphtounicode}
+
+% -------------------- FONT OPTIONS --------------------
+% sans-serif
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% serif
+% \usepackage{charter}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.6in} % Default was -.5in
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Subsection formatting
+\titleformat{\subsection}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{\hspace{-.15in}}{0em}{}[\color{black}\vspace{-8pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% -------------------- CUSTOM COMMANDS --------------------
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\setlength{\footskip}{4.08003pt}
+
+% -------------------- START OF DOCUMENT --------------------
+\begin{document}
+
+% -------------------- HEADING--------------------
+\begin{flushright}
+  % \vspace{-4pt}
+  \color{gray}
+  \item
+  Last Updated on Feb 12th, 2024
+\end{flushright}
+
+\vspace{-5pt}
+
+\begin{center}
+    \textbf{\Huge \scshape Soroush H. Zargarbashi} \\ \vspace{8pt}
+    \small 
+    \faIcon{github}
+    \href{https://github.com/soroushzargar}{{github.com/soroushzargar}} $  $
+    \faIcon{linkedin}
+    \href{https://www.linkedin.com/in/soroushzargar}{linkedin.com/in/soroushzargar} $  $
+    \faIcon{envelope}
+    \href{mailto:zargarbashi@cs.uni-koeln.de}{zargarbashi@cs.uni-koeln.de}
+    {{zargarbashi@cs.uni-koeln.de}}
+\end{center}
+
+% -------------------- EDUCATION --------------------
+\section{Education}
+  \resumeSubHeadingListStart
+  
+    \resumeSubheading
+      {CISPA Helmholtz Center for Information Security - University of Cologne (Ongoing)}{2022}
+      {Ph.D. in Artificial Intelligence (Trustworthy Machine Learning) \textbf{Supervisor:} \href{https://abojchevski.github.io}{Prof. Dr. Aleksandar Bojchevski}}{}
+    
+    \resumeSubheading
+      {University of Tehran}{2018 - 2021}
+      {M.Sc. in Computer Science}{}
+      
+    \resumeSubheading
+      {Isfahan University of Technology}{2013 - 2018}
+      {B.Sc. in Computer Engineering (Software Major)}{}
+
+    \vspace{-5pt}
+
+    \subsection{Expertise}
+      Uncertainty Quantification 
+      \textbullet\ Conformal Prediction 
+      \textbullet\ Adversarial robustness 
+      \textbullet\ Graph neural networks
+
+    \vspace{-1em}
+    \subsection{Relevant Taken Courses}
+      \textbf{Courses:} Approximation Algorithm (19.5/20) 
+      \textbullet\ Data Science (19.25) 
+      \textbullet\ Advanced Algorithms(17.25/20)
+      \textbullet\ Advanced Artificial Intelligence (18.48/20) 
+      \textbullet\ Machine Learning (17/20)
+      \textbullet\ Graph Theory (16.78/20)
+
+  \resumeSubHeadingListEnd
+
+% -------------------- PUBLICATION --------------------
+\section{Publications}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+        {\textbf{Conformal Prediction with Access to Epistemic Uncertainty} $|$ \footnotesize\emph{Under prepration}}{2025}
+        \resumeItemListStart
+            \resumeItem{\textit{Alireza Javanmardi}$^*$, \underline{Soroush H. Zargarbashi}$^*$, \textit{Aleksandar Bojchevski, Willem Waegeman, Eyke H\"ullermeier}}
+            \vspace{0.2em}
+        \resumeItemListEnd
+        
+        \resumeProjectHeading
+        {\textbf{One Sample is Enough to make Conformal Prediction Robust} $|$ \footnotesize\emph{Under prepration}}{2025}
+        \resumeItemListStart
+            \resumeItem{\underline{Soroush H. Zargarbashi}, \textit{Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski}}
+            \vspace{0.2em}
+        \resumeItemListEnd
+        
+        \resumeProjectHeading
+        {\textbf{Eva: Evolutionary Attack on Graphs} $|$ \footnotesize\emph{Under review}}{2024}
+        \resumeItemListStart
+            \resumeItem{Mohammad Sadegh Akhondzadeh*, \underline{Soroush H. Zargarbashi*}, \textit{Jimin Cao, Aleksandar Bojchevski}}
+            \vspace{0.2em}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{Robust Conformal Prediction with a Single Binary Certificate} $|$ \footnotesize\emph{Proceedings of the 13\textsuperscript{th} ICLR}}{ICLR - 2024}
+        \resumeItemListStart
+            \resumeItem{\underline{Soroush H. Zargarbashi}, \textit{Aleksandar Bojchevski}}
+            \vspace{0.2em}
+             \resumeItem{\texttt{TL;DR:} We show that for symmetric randomized smoothing methods (including almost all current certificates) with only one binary certificate we can attain robust conformal prediction. Therefore we significantly reduce the number of needed Monte-Carlo samples per input.}
+        \resumeItemListEnd
+        
+        \resumeProjectHeading
+        {\textbf{Robust yet Efficient Conformal Prediction Sets} $|$ \footnotesize\emph{Proceedings of the 41\textsuperscript{st} ICML}}{ICML - 2024}
+        \resumeItemListStart
+            \resumeItem{\underline{Soroush H. Zargarbashi}, \textit{Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski}}
+            \vspace{0.2em}
+            \resumeItem{\texttt{TL;DR:} We leverage the distribution information of the model's output, to provide prediction sets that guarantee to include the true label with high probability even given the adversarial data.}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{\href{https://openreview.net/pdf?id=homn1jOKI5}{Conformal Inductive Graph Neural Networks}} $|$ \footnotesize\emph{Proceedings of the 12\textsuperscript{th} ICLR}}{ICLR - 2024}
+        \resumeItemListStart
+            \resumeItem{\underline{Soroush H. Zargarbashi}, \textit{Aleksandar Bojchevski}}
+            \vspace{0.2em}
+            \resumeItem{\texttt{TL;DR:} We return prediction sets with a guarantee to cover the true label with adjustable probability. We propose an algorithm that works even when the graph is updated in a node- or edge-exchangeable sequence (inductive GNNs). Many uncertainty quantification methods do not work on GNN since i.i.d. assumption is violated.}
+        \resumeItemListEnd
+        
+        \resumeProjectHeading
+        {\textbf{\href{https://proceedings.mlr.press/v202/h-zargarbashi23a.html}{Conformal Prediction Set for Graph Neural Networks}} $|$ \footnotesize\emph{Proceedings of the 40\textsuperscript{th} ICML}}{ICML - 2023}
+        \resumeItemListStart
+            \resumeItem{\underline{Soroush H. Zargarbashi}, \textit{Simone Antonelli, Aleksandar Bojchevski}}
+            \vspace{0.2em}
+            
+            \resumeItem{\texttt{TL;DR:} We leverage the homophily structure in a graph to define efficient prediction sets with valid guarantees to include the true label. Our method works on top of any confidence approach.}
+        \resumeItemListEnd
+        
+        \resumeProjectHeading
+        {\textbf{A Multimodal Feature Embedding Approach to Diagnose Alzheimer’s Disease} $|$ \footnotesize\emph{ArXiv Preprint}}{2019}
+        \resumeItemListStart
+            \resumeItem{\underline{Soroush H. Zargarbashi}, \textit{Bagher Babaali}}
+            \vspace{0.2em}
+            \resumeItem{\texttt{TL;DR:} We use linguistic and acoustic feature extraction (commonly used in speaker identification methods) to diagnose Alzheimer's disease.}
+        \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+% -------------------- Current Projects ----------
+
+\section{Experiences}
+  \resumeSubHeadingListStart
+          \resumeProjectHeading
+          {\textbf{Apple - R\&D} (Upcoming) \vspace{8pt}}{May - Sep. 2025}
+          {\small{Intern at machine intelligence team.}}
+          \resumeProjectHeading
+          {\textbf{CISPA-Helmholtz Center for Information Security} (Ongoing) \vspace{8pt}}{Sep. 2022}
+          {\small{Fully Funded Research Assistant}}
+          \resumeProjectHeading
+          {\textbf{Arman Suba - Electricity Market Forecast} \vspace{8pt}}{2020 - 2021}
+          {\small{Backend Developer and Data Scientist}}
+          \resumeProjectHeading
+          {\textbf{Speech Recognition Lab at University of Tehran} \vspace{8pt}}{2018 - 2021}
+          {\small{Research Assistant}}
+
+    \resumeSubHeadingListEnd 
+
+% -------------------- SKILLS --------------------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+    
+     \textbf{Languages:}{ Python, R, C++, C\#} \\
+     
+     \textbf{Libraries:}{ Pytorch, Pytorch Geometric, Tensorflow, Librosa (speech processing)} \\
+     
+     \textbf{Tools:}{ Git/GitHub, Unix Shell, VS Code} \\
+     
+     \textbf{Backend Development:}{ Django Rest Framework, Docker, RabbitMQ}
+     
+     % \textbf{Frameworks}{: React, Node.js, Flask, JUnit, WordPress, Material-UI, FastAPI} \\
+     
+     % \textbf{Libraries}{: pandas, NumPy, Matplotlib}
+     
+    }}
+ \end{itemize}
+
+% -------------------- WORKS --------------------
+% \section{Professional Works Experiences}
+%     \resumeSubHeadingListStart
+
+%         \resumeProjectHeading
+%         {\textbf{Dorfak Intelligent Trading} $|$ \footnotesize\emph{
+%         Intelligent and Algorithmic Trading in Financial Markets.}}{July 2021 - 2022}
+%         \resumeItemListStart
+%             \resumeItem{\emph{Senior AI Specialist and Senior Backend Developer}: Designing AI-powered Trading algorithms - Design and implementation of micro-service application system for intelligent online (real-time trading.}
+%           \resumeItemListEnd
+    
+%         \resumeProjectHeading
+%         {\textbf{Aarman Pajouhan Sooba} $|$ \footnotesize\emph{
+%         High-end artificial intelligence-based electricity market prediction.}}{June 2020 -- 2021}
+%         \resumeItemListStart
+%             \resumeItem{\emph{Senior Data Scientist and ML Developer}: Development, Maintenance, and Refactoring the Core
+% AI-Machine software - Time Series Data Analysis, designed AI prediction models.}
+%           \resumeItemListEnd
+          
+%       \resumeProjectHeading
+%         {\textbf{Kasra Co} $|$ \footnotesize\emph{Time attendance system for companies with a large number of employees.}}{May. 2016-2017}
+%         \resumeItemListStart
+%             \resumeItem{\emph{Research and Development Specialist}: Design and Development of company's software token. Working on online meeting software, biometric devices, and ... .}
+%         \resumeItemListEnd
+          
+%     \resumeSubHeadingListEnd
+
+% -------------------- EXPERIENCE --------------------
+
+\section{Academic Experiences}
+  \resumeSubHeadingListStart
+
+          \resumeProjectHeading
+          {\textbf{Reviewer} $|$ \footnotesize\emph{NeurIPS, ICLR} \vspace{8pt}}
+
+        \resumeProjectHeading
+          {\textbf{Attended Academic Events}\vspace{8pt}  \footnotesize\emph{}}{}
+          \resumeItemListStart
+            \resumeItem{\emph{HIDA PhD Meetup}: Event from Helmholtz Information \& Data Science Academy on Machine Learning. Berlin 2024 - \underline{Presented poster}: Certified conformal prediction sets}
+            \resumeItem{\emph{CISPA Trustworthy AI summer school}: 2022 on robustness, privacy and fairness of machine learning models. Saarbruecken- 2024}
+            \resumeItem{\emph{LoG Meetup} Learning on Graphs conference local meetup Munich 2023 - \underline{Presented poster}: Conformal Prediction for GNNs}
+            \resumeItemListEnd
+          
+          \resumeProjectHeading
+          {\textbf{Master's Degree Thesis} $|$ \footnotesize\emph{Fractional Fourier Transform in Deep Speech Enhancement} \vspace{8pt}}{}
+          {\small{\texttt{TL;DR:} We showed that the generalization short-term Fourier transform, to fractional transformation via eigen-decomposition can extract more meaningful features leading to a better speech enhancement.\\
+          \emph{Supervisors}: Dr. Bagher Babaali, Prof. Tsao Yu}}
+          
+          \resumeProjectHeading
+          {\textbf{Teaching Assistant} $|$ \footnotesize\emph{UzK: University of Cologne, IUT: Isfahan Uni. of Tech.} \vspace{8pt}}{}
+          {\small{
+          Advanced Machine Learning (UzK)
+          \textbullet\ Elements of Machine Learning (UzK)
+          \textbullet\ Algorithm Design (IUT, 3 years)
+          \textbullet\ Data Structures (IUT, 1 year)}}
+
+          \resumeProjectHeading
+          {\textbf{Lab Instructor}\vspace{8pt} $|$ \footnotesize\emph{Tutor}}{}
+          \small{Advanced Programming (IUT, 2 years)}
+
+    \resumeSubHeadingListEnd 
+
+\section{Honors and Awards}
+  \resumeSubHeadingListStart
+
+          \resumeProjectHeading
+          {\textbf{International IEEEXtreme Programming Contests} \vspace{8pt}}{}
+          {\small{Ranked top 4\% (11th contest among 3350 teams), top 6\% (10th contest among 2000 teams), and top 7\% (9th contest among 2477 teams)}}
+
+    \resumeSubHeadingListEnd 
+
+
+\section{References}
+  \resumeSubHeadingListStart
+
+          \resumeProjectHeading
+          {\textbf{Prof. Dr. Aleksandar Bojchevski} $|$ \footnotesize\emph{Professor, University of Cologne} \vspace{8pt}}{}
+          {\small{Contact: \href{mailto:a.bojchevski@uni-koeln.de}
+            {\underline{a.bojchevski@uni-koeln.de}}}}
+          
+          \resumeProjectHeading
+          {\textbf{Dr. Bagher BabaAli} $|$ \footnotesize\emph{Assistant Professor, University of Tehran} \vspace{8pt}}{}
+          {\small{Contact: \href{mailto:babaali@ut.ac.ir}
+            {\underline{babaali@ut.ac.ir}}}}
+          
+          \resumeProjectHeading
+          {\textbf{Dr. Ramin Javadi} $|$ \footnotesize\emph{Assistant Professor, Isfahan University of Technology} \vspace{8pt}}{}
+          {\small{Contact: \href{mailto:rjavadi@cc.ut.ac.ir}
+            {\underline{rjavadi@cc.ut.ac.ir}}}}
+
+
+    \resumeSubHeadingListEnd 
+
+\end{document}
+
+
