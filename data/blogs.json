@@ -1,0 +1,20 @@
+{
+  "_template": {
+    "slug": "my-post-slug",
+    "title": "Post Title",
+    "date": "YYYY-MM-DD",
+    "dateDisplay": "Month DD, YYYY",
+    "tags": ["Tag1", "Tag2"],
+    "description": "One-sentence summary shown on the blog listing card."
+  },
+  "posts": [
+    {
+      "slug": "one-sample-robust-conformal",
+      "title": "One Sample is Enough to Make Conformal Prediction Robust",
+      "date": "2025-12-15",
+      "dateDisplay": "December 15, 2025",
+      "tags": ["NeurIPS 2025", "Conformal Prediction", "Adversarial Robustness"],
+      "description": "We show that augmenting each calibration point with a single adversarial example is sufficient to obtain tight, valid coverage guarantees under attack — matching expensive worst-case methods at a fraction of the cost."
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+[
+  {
+    "id": "eva-2026",
+    "year": 2026,
+    "title": "EvA: Evolutionary Attack on Graphs",
+    "authorsHtml": "Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Jimin Cao, Aleksandar Bojchevski",
+    "venue": "International Conference on Learning Representations (ICLR 2026)",
+    "venueTag": "ICLR 2026",
+    "venueTagItalic": false,
+    "tags": [
+      "ICLR 2026",
+      "Adversarial Robustness",
+      "Graph Neural Networks"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": true,
+    "abstract": "Adversarial attacks on graph neural networks typically rely on gradient-based methods that struggle with the discrete, combinatorial structure of graphs. We introduce EvA, an evolutionary algorithm for generating adversarial perturbations on graphs. By treating graph modifications as a combinatorial search problem, EvA leverages population-based optimization to find highly effective perturbations without requiring gradient computations through the graph structure. Our method achieves state-of-the-art attack performance across multiple datasets and GNN architectures while remaining computationally efficient and applicable to non-differentiable defenses. Extensive experiments demonstrate that EvA consistently outperforms gradient-based baselines, especially in settings where the defense is non-differentiable or the perturbation budget is large, establishing a new standard for evaluating the robustness of graph learning systems."
+  },
+  {
+    "id": "cats-2026",
+    "year": 2026,
+    "title": "Conformal Adaptive Test-time Scaling (CATS)",
+    "authorsHtml": "Mohammad Sadegh Akhondzadeh, <strong>Soroush H. Zargarbashi</strong>, Simone Antonelli, Aleksandar Bojchevski",
+    "venue": "ICLR Workshop: Catch, Adapt, and Operate — <em>Best Poster Award</em>",
+    "venueTag": "ICLR 2026 Workshop (Accepted) · Under Review ICML 2026",
+    "venueTagItalic": false,
+    "tags": [
+      "ICLR 2026 Workshop",
+      "Best Poster Award",
+      "Test-Time Adaptation",
+      "Conformal Prediction"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Distribution shift at test time undermines the reliability of conformal prediction, which relies on an exchangeability assumption between calibration and test data. We introduce CATS (Conformalized Adaptive Test-time Scaling), a method that recalibrates the conformal threshold adaptively during deployment using only the unlabeled test stream. CATS couples a lightweight test-time scaling mechanism with a conformal wrapper, restoring valid coverage guarantees under a broad class of covariate shifts. We provide a formal characterization of the conditions under which adaptive updates remain compatible with conformal validity and demonstrate significant improvements in coverage and efficiency across vision and language benchmarks. CATS requires no labeled target data and adds minimal overhead to the inference pipeline, making it practical for real-world deployment scenarios where distribution shift is common and labels are unavailable."
+  },
+  {
+    "id": "front-loaded-2026",
+    "year": 2026,
+    "title": "Front-Loaded Robust Conformal Prediction: Heavy Calibration and Light Weight Inference",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski",
+    "venue": "Under Review — International Conference on Machine Learning (ICML 2026)",
+    "venueTag": "Under Review — ICML 2026",
+    "venueTagItalic": true,
+    "tags": [
+      "Under Review · ICML 2026",
+      "Conformal Prediction",
+      "Adversarial Robustness"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Standard approaches to adversarially robust conformal prediction require expensive worst-case computations at every test point, making them impractical for latency-sensitive deployment scenarios. We propose a front-loading strategy that shifts the computational burden entirely to calibration time: by performing adversarial augmentation during calibration, we derive prediction sets that maintain validity under adversarial perturbations at test time with no additional overhead beyond a standard forward pass. This clean separation between a heavy calibration phase and a lightweight inference phase makes adversarially robust uncertainty quantification practical for real-time systems. We prove that the resulting prediction sets achieve the desired coverage guarantee under the specified threat model, and show empirically that the front-loaded approach matches the coverage tightness of per-sample robust methods while reducing inference-time cost by orders of magnitude."
+  },
+  {
+    "id": "epistemic-cp-2026",
+    "year": 2026,
+    "title": "Quantifying Epistemic Predictive Uncertainty in Conformal Prediction",
+    "authorsHtml": "Siu Lun Chau, <strong>Soroush H. Zargarbashi</strong>, Yusuf Sale, Michele Caprio",
+    "venue": "Under Review — International Conference on Machine Learning (ICML 2026)",
+    "venueTag": "Under Review — ICML 2026",
+    "venueTagItalic": true,
+    "tags": [
+      "Under Review · ICML 2026",
+      "Conformal Prediction",
+      "Epistemic Uncertainty"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Conformal prediction provides marginal coverage guarantees but does not distinguish between uncertainty arising from model limitations (epistemic) and inherent data randomness (aleatoric). This distinction matters in practice: epistemic uncertainty signals inputs for which collecting more data or improving the model would reduce prediction uncertainty, while aleatoric uncertainty reflects irreducible noise. We develop a framework for quantifying epistemic predictive uncertainty within conformal prediction, enabling practitioners to identify predictions where model improvement would be most impactful. Our approach connects conformal theory with imprecise probability, providing theoretical guarantees on epistemic uncertainty quantification while maintaining the distribution-free coverage properties of classical conformal methods. Experiments on standard benchmarks demonstrate that our epistemic decomposition reveals meaningful structure in prediction sets beyond what marginal coverage alone provides."
+  },
+  {
+    "id": "proxy-certs-2026",
+    "year": 2026,
+    "title": "Efficient (Proxy) Robustness Certificates with Marginal Guarantee",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi*</strong>, Mohammad Sadegh Akhondzadeh*, Aleksandar Bojchevski",
+    "venue": "In Preparation · * Equal contribution",
+    "venueTag": "In Preparation",
+    "venueTagItalic": true,
+    "tags": [
+      "In Preparation",
+      "Adversarial Robustness",
+      "Conformal Prediction"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Randomized smoothing provides state-of-the-art robustness certificates but is computationally intensive, requiring thousands of model evaluations per input to estimate certified radii with high confidence. This cost is prohibitive for large-scale deployment where certification must happen at inference time. We introduce proxy robustness certificates that approximate the true certified radius using a small number of forward passes, while maintaining a marginal coverage guarantee over the test distribution through the conformal prediction framework. By certifying not every input individually but the distribution of inputs collectively, we obtain certificates that are both efficient to compute and formally valid. Our approach bridges the gap between the theoretical guarantees of randomized smoothing and the practical constraints of real-time inference systems."
+  },
+  {
+    "id": "one-sample-2025",
+    "year": 2025,
+    "title": "One Sample is Enough to Make Conformal Prediction Robust",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski",
+    "venue": "Advances in Neural Information Processing Systems (NeurIPS 2025)",
+    "venueTag": "NeurIPS 2025",
+    "venueTagItalic": false,
+    "tags": [
+      "NeurIPS 2025",
+      "Conformal Prediction",
+      "Adversarial Robustness"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": true,
+    "abstract": "Adversarially robust conformal prediction requires searching over worst-case perturbations for each calibration point — a process that scales poorly with the perturbation budget and model complexity. We show that a single adversarial example per calibration point is sufficient to obtain tight, valid coverage guarantees under attack. By augmenting each calibration score with exactly one adversarial perturbation and adjusting the quantile threshold accordingly, our method matches the coverage of computationally expensive worst-case methods while reducing calibration runtime by an order of magnitude. The approach generalizes across $\\ell_\\infty$ and $\\ell_2$ threat models with no change to the core algorithm, and we provide rigorous theoretical guarantees showing that the one-shot augmentation strategy yields prediction sets with the correct marginal coverage under the specified adversarial threat model."
+  },
+  {
+    "id": "optimal-epistemic-2025",
+    "year": 2025,
+    "title": "Optimal Conformal Prediction under Epistemic Uncertainty",
+    "authorsHtml": "Alireza Javanmardi*, <strong>Soroush H. Zargarbashi*</strong>, Aleksandar Bojchevski, Willem Waegeman, Eyke Hüllermeier",
+    "venue": "2025 · * Equal contribution",
+    "venueTag": "2025",
+    "venueTagItalic": false,
+    "tags": [
+      "2025",
+      "Conformal Prediction",
+      "Epistemic Uncertainty"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Conformal prediction sets are constructed using a threshold derived from calibration scores, but the choice of score function critically determines the size and informativeness of the resulting sets. We study optimal conformal prediction under epistemic uncertainty, characterizing the score functions that minimize expected set size while maintaining coverage. Our analysis reveals a fundamental connection between epistemic uncertainty and the efficiency of conformal sets: when the model's epistemic uncertainty is well-calibrated, score functions derived from uncertainty estimates achieve near-optimal efficiency. We propose a practical algorithm that approximates optimal scores under epistemic uncertainty and demonstrate consistent improvements in set size — without sacrificing coverage — over standard score-based baselines across a range of classification benchmarks."
+  },
+  {
+    "id": "single-cert-2025",
+    "year": 2025,
+    "title": "Robust Conformal Prediction with a Single Binary Certificate",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski",
+    "venue": "International Conference on Learning Representations (ICLR 2025)",
+    "venueTag": "ICLR 2025",
+    "venueTagItalic": false,
+    "tags": [
+      "ICLR 2025",
+      "Conformal Prediction",
+      "Adversarial Robustness"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": true,
+    "abstract": "Existing approaches to adversarially robust conformal prediction require computing a separate, continuous certificate for each candidate class at calibration time, leading to computational costs that scale with the number of classes. We show that a single binary certificate — one that answers only whether the true class is included in the prediction set under any perturbation in the threat model — is sufficient to construct valid robust prediction sets. This reduction from per-class continuous certification to a single binary query reduces computational cost by a factor equal to the number of classes and enables the use of efficient binary certification methods that are not applicable in the continuous setting. We prove that the resulting prediction sets achieve valid marginal coverage under adversarial perturbations and show empirically that they are tighter than those produced by prior class-wise certification approaches, especially on tasks with many classes."
+  },
+  {
+    "id": "robust-efficient-2024",
+    "year": 2024,
+    "title": "Robust Yet Efficient Conformal Prediction Sets",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski",
+    "venue": "International Conference on Machine Learning (ICML 2024)",
+    "venueTag": "ICML 2024",
+    "venueTagItalic": false,
+    "tags": [
+      "ICML 2024",
+      "Conformal Prediction",
+      "Adversarial Robustness"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": true,
+    "abstract": "Conformal prediction provides distribution-free coverage guarantees but is vulnerable to adversarial perturbations: a malicious actor can cause the true class to fall outside the prediction set with high probability. We propose a framework for constructing conformal prediction sets that are robust to adversarial inputs while remaining efficient at test time. Our key insight is that robustness can be certified at calibration time using existing smoothing-based certificates, without modifying the test-time prediction procedure. By incorporating worst-case nonconformity scores into the calibration quantile, the resulting prediction sets maintain valid coverage under adversarial attack. Empirically, the robust sets are only marginally larger than standard non-robust conformal sets on clean inputs, demonstrating that robustness and efficiency need not be at odds. We validate our approach across multiple vision benchmarks and threat models, achieving state-of-the-art coverage guarantees under adversarial attack."
+  },
+  {
+    "id": "conformal-inductive-2024",
+    "year": 2024,
+    "title": "Conformal Inductive Graph Neural Networks",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski",
+    "venue": "International Conference on Learning Representations (ICLR 2024)",
+    "venueTag": "ICLR 2024",
+    "venueTagItalic": false,
+    "tags": [
+      "ICLR 2024",
+      "Graph Neural Networks",
+      "Conformal Prediction"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Applying conformal prediction to graph neural networks is complicated by the fact that node predictions are not exchangeable — each node's representation depends on its neighborhood, creating complex statistical dependencies that invalidate the coverage guarantees of standard conformal methods. We develop conformal inductive graph neural networks that resolve this dependency problem through a careful separation of training, calibration, and inference phases. Our construction allows inductive GNNs to be used within the conformal prediction framework with a valid marginal coverage guarantee, by identifying and exploiting an approximate exchangeability structure that arises from the inductive setting. We also provide tools for understanding how the graph topology and message-passing depth affect coverage empirically, and validate our approach across multiple node classification benchmarks with various GNN architectures."
+  },
+  {
+    "id": "conformal-gnn-2023",
+    "year": 2023,
+    "title": "Conformal Prediction Sets for Graph Neural Networks",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Simone Antonelli, Aleksandar Bojchevski",
+    "venue": "International Conference on Machine Learning (ICML 2023)",
+    "venueTag": "ICML 2023",
+    "venueTagItalic": false,
+    "tags": [
+      "ICML 2023",
+      "Graph Neural Networks",
+      "Conformal Prediction"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": true,
+    "abstract": "Conformal prediction requires that calibration and test examples be exchangeable, an assumption that fails for node classification in graphs due to message passing: each node's representation is influenced by its neighbors, creating statistical dependencies across the dataset. We study when and how conformal prediction can be validly applied to graph neural networks, providing a rigorous analysis of the exchangeability violations induced by message passing and identifying sufficient conditions under which coverage guarantees are preserved. We introduce a calibration strategy that provably satisfies these conditions by exploiting the structure of GNN message passing and demonstrate that it yields smaller, more informative prediction sets than naive conformal methods. Extensive empirical evaluation across standard graph benchmarks with multiple GNN architectures confirms that the theoretical guarantees translate to strong practical coverage and efficiency."
+  },
+  {
+    "id": "alzheimer-2019",
+    "year": 2019,
+    "title": "A Multi-Modal Feature Embedding Approach to Diagnose Alzheimer Disease from Spoken Language",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Bagher BabaAli",
+    "venue": "Interspeech 2019",
+    "venueTag": "Interspeech 2019",
+    "venueTagItalic": false,
+    "tags": [
+      "Interspeech 2019",
+      "Speech Processing",
+      "Alzheimer Detection"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Early detection of Alzheimer's disease from spontaneous speech analysis offers a non-invasive and cost-effective diagnostic pathway that could complement or reduce the need for expensive clinical assessments. We present a multi-modal feature embedding approach that jointly learns from acoustic, lexical, and semantic features extracted from speech recordings to distinguish Alzheimer's patients from healthy controls. By fusing heterogeneous feature types through a shared embedding space, our model captures complementary aspects of the cognitive decline that manifest in speech — including prosodic changes, word-finding difficulties, reduced vocabulary diversity, and semantic coherence degradation. Evaluated on the DementiaBank Pitt Corpus, our multi-modal approach achieves competitive classification performance while the learned attention weights provide interpretable insights into which linguistic and acoustic markers are most predictive of disease status."
+  }
+]

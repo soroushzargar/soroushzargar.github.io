@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="transitions.js" defer></script>
 </head>
 <body>
 
@@ -58,51 +59,7 @@
     <p class="subtitle">Thoughts on trustworthy AI, conformal prediction, research life, and the intersection of theory and practice.</p>
   </div>
 
-  <div class="blog-grid" style="padding-bottom: 80px;">
-
-    <a class="blog-card" href="blog-post-3.html">
-      <div class="blog-card-date">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        May 10, 2026
-      </div>
-      <div class="blog-card-title">Best Poster Award at ICLR 2026 Workshop</div>
-      <div class="blog-card-desc">Received Best Poster Award at the "Catch, Adapt, and Operate: Monitoring ML Models Under Drift" workshop for CATS: Conformalized Adaptive Test-time Scaling.</div>
-      <div class="blog-card-tags">
-        <span class="tag">ICLR 2026</span>
-        <span class="tag">Award</span>
-        <span class="tag">Test-Time Adaptation</span>
-      </div>
-    </a>
-
-    <a class="blog-card" href="blog-post-2.html">
-      <div class="blog-card-date">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        December 15, 2025
-      </div>
-      <div class="blog-card-title">Reflections on NeurIPS 2025: One Sample is Enough</div>
-      <div class="blog-card-desc">At NeurIPS 2025 we showed that a single adversarial example is sufficient to make conformal prediction robust. Some reflections on the paper and the conference experience.</div>
-      <div class="blog-card-tags">
-        <span class="tag">NeurIPS 2025</span>
-        <span class="tag">Conformal Prediction</span>
-        <span class="tag">Robustness</span>
-      </div>
-    </a>
-
-    <a class="blog-card" href="blog-post-1.html">
-      <div class="blog-card-date">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        October 5, 2025
-      </div>
-      <div class="blog-card-title">What is Conformal Prediction? A Gentle Introduction</div>
-      <div class="blog-card-desc">Conformal prediction is a framework for uncertainty quantification with formal, distribution-free coverage guarantees. Here is an accessible introduction to the core ideas and why they matter.</div>
-      <div class="blog-card-tags">
-        <span class="tag">Conformal Prediction</span>
-        <span class="tag">Tutorial</span>
-        <span class="tag">Uncertainty</span>
-      </div>
-    </a>
-
-  </div>
+  <div class="blog-grid" id="blog-grid" style="padding-bottom: 80px;"></div>
 </div>
 
 <footer id="contact">
@@ -120,6 +77,26 @@
   const links  = document.getElementById('navLinks');
   toggle.addEventListener('click', () => links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  const SVG_CAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+
+  function blogCardHtml(post) {
+    return `
+      <a class="blog-card" href="blog-post.html?slug=${post.slug}">
+        <div class="blog-card-date">${SVG_CAL} ${post.dateDisplay}</div>
+        <div class="blog-card-title">${post.title}</div>
+        <div class="blog-card-desc">${post.description}</div>
+        <div class="blog-card-tags">
+          ${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+      </a>`;
+  }
+
+  fetch('data/blogs.json')
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById('blog-grid').innerHTML = data.posts.map(blogCardHtml).join('');
+    });
 </script>
 </body>
 </html>

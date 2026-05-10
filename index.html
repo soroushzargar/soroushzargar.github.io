@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="transitions.js" defer></script>
 </head>
 <body>
 
@@ -64,17 +65,17 @@
   <div class="container">
     <div class="hero-inner">
 
-      <div class="hero-photo-wrap">
+      <div class="hero-photo-wrap hero-anim" style="--anim-delay:60ms">
         <img src="photo.jpeg" alt="Soroush H. Zargarbashi" class="hero-photo">
       </div>
 
       <div class="hero-info">
-        <div class="hero-names">
+        <div class="hero-names hero-anim" style="--anim-delay:160ms">
           <h1>Soroush H. Zargarbashi</h1>
           <p class="hero-role">PhD Researcher in Trustworthy AI</p>
         </div>
 
-        <div class="hero-meta">
+        <div class="hero-meta hero-anim" style="--anim-delay:240ms">
           <div class="hero-meta-row">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             CISPA Helmholtz Center for Information Security &amp; University of Cologne
@@ -85,7 +86,7 @@
           </div>
         </div>
 
-        <p class="hero-bio">
+        <p class="hero-bio hero-anim" style="--anim-delay:310ms">
           I am a PhD researcher specializing in Trustworthy AI, advised by
           <a href="https://abojchevski.github.io" target="_blank" rel="noopener" style="color: var(--text-sub);">Prof. Dr. Aleksandar Bojchevski</a>.
           My work focuses on developing efficient algorithms with provable guarantees for
@@ -94,7 +95,7 @@
           experience in LLM fine-tuning and backend systems.
         </p>
 
-        <div class="hero-links">
+        <div class="hero-links hero-anim" style="--anim-delay:380ms">
           <a href="https://linkedin.com/in/soroushzargar" target="_blank" rel="noopener" class="hero-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
@@ -124,75 +125,148 @@
 
       <!-- Experience -->
       <div class="exp-edu-col">
-        <div class="sec-heading">
+        <div class="sec-heading anim">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           <h2>Experience</h2>
         </div>
 
-        <div class="card">
-          <div class="card-role">Applied Scientist Intern</div>
-          <div class="card-org">Microsoft</div>
-          <div class="card-period">Expected: Apr – Jul 2026</div>
-          <div class="card-desc">Upcoming applied science internship.</div>
-        </div>
+        <div class="timeline">
 
-        <div class="card">
-          <div class="card-role">Research Intern — Speech Translation Team</div>
-          <div class="card-org">Apple</div>
-          <div class="card-period">May – Oct 2025</div>
-          <div class="card-desc">Finetuning LLMs for speech translation; distributed multi-GPU training setups and data sharding; speech embeddings and synthetic data generation.</div>
-        </div>
+          <div class="tl-item anim">
+            <div class="tl-side">
+              <div class="card-logo" style="background:#fff; border-color:#e0e0e0; padding:6px;">
+                <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                  <rect x="0" y="0" width="9.5" height="9.5" fill="#F25022"/>
+                  <rect x="11.5" y="0" width="9.5" height="9.5" fill="#7FBA00"/>
+                  <rect x="0" y="11.5" width="9.5" height="9.5" fill="#00A4EF"/>
+                  <rect x="11.5" y="11.5" width="9.5" height="9.5" fill="#FFB900"/>
+                </svg>
+              </div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-content">
+              <div class="card">
+                <div class="card-role">Applied Scientist Intern</div>
+                <div class="card-org">Microsoft</div>
+                <div class="card-period">Expected: Apr – Jul 2026</div>
+                <div class="card-desc">Upcoming applied science internship.</div>
+              </div>
+            </div>
+          </div>
 
-        <div class="card">
-          <div class="card-role">Doctoral Researcher</div>
-          <div class="card-org">CISPA Helmholtz Center for Information Security</div>
-          <div class="card-period">Sep 2022 – Present</div>
-          <div class="card-desc">Research on Trustworthy AI: uncertainty quantification, conformal prediction, and robustness. Developed efficient algorithms with provable coverage guarantees under adversarial perturbations. Published at ICML 2024, ICLR 2025, and NeurIPS 2025.</div>
-        </div>
+          <div class="tl-item anim">
+            <div class="tl-side">
+              <div class="card-logo" style="background:#1d1d1f; padding:7px;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="white">
+                  <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.46 2.208 3.09 3.792 3.029 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
+                </svg>
+              </div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-content">
+              <div class="card">
+                <div class="card-role">Research Intern — Speech Translation Team</div>
+                <div class="card-org">Apple</div>
+                <div class="card-period">May – Oct 2025</div>
+                <div class="card-desc">Finetuning LLMs for speech translation; distributed multi-GPU training setups and data sharding; speech embeddings and synthetic data generation.</div>
+              </div>
+            </div>
+          </div>
 
-        <div class="card">
-          <div class="card-role">Senior Backend Developer</div>
-          <div class="card-org">Dorfak Intelligent Trading — Quantitative Research</div>
-          <div class="card-period">2021 – 2022</div>
-          <div class="card-desc">Designed and implemented microservice applications for scalable intelligent trading systems. AI-powered and algorithmic trading, Django REST Framework, Docker.</div>
-        </div>
+          <div class="tl-item anim">
+            <div class="tl-side">
+              <div class="card-logo" style="background:#fff; padding:3px; border-color:rgba(0,0,0,0.09);">
+                <img src="logos/cispa.svg" alt="CISPA" style="width:38px;height:38px;object-fit:contain;">
+              </div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-content">
+              <div class="card">
+                <div class="card-role">Doctoral Researcher</div>
+                <div class="card-org">CISPA Helmholtz Center for Information Security</div>
+                <div class="card-period">Sep 2022 – Present</div>
+                <div class="card-desc">Research on Trustworthy AI: uncertainty quantification, conformal prediction, and robustness. Developed efficient algorithms with provable coverage guarantees under adversarial perturbations. Published at ICML 2024, ICLR 2025, and NeurIPS 2025.</div>
+              </div>
+            </div>
+          </div>
 
-        <div class="card">
-          <div class="card-role">Senior Data and ML Scientist</div>
-          <div class="card-org">Aarman Pajouhan Sooba — Electricity Market Forecast</div>
-          <div class="card-period">2020 – 2021</div>
-          <div class="card-desc">Developed AI-based electricity market forecasting systems; time series prediction and model fine-tuning; international research collaboration.</div>
+          <div class="tl-item anim">
+            <div class="tl-side">
+              <div class="card-logo" style="background:#D97706; font-size:12px;">DF</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-content">
+              <div class="card">
+                <div class="card-role">Senior Backend Developer</div>
+                <div class="card-org">Dorfak Intelligent Trading — Quantitative Research</div>
+                <div class="card-period">2021 – 2022</div>
+                <div class="card-desc">Designed and implemented microservice applications for scalable intelligent trading systems. AI-powered and algorithmic trading, Django REST Framework, Docker.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item anim">
+            <div class="tl-side">
+              <div class="card-logo" style="background:#7C3AED; font-size:10px; letter-spacing:0.03em;">APS</div>
+            </div>
+            <div class="tl-content">
+              <div class="card">
+                <div class="card-role">Senior Data and ML Scientist</div>
+                <div class="card-org">Aarman Pajouhan Sooba — Electricity Market Forecast</div>
+                <div class="card-period">2020 – 2021</div>
+                <div class="card-desc">Developed AI-based electricity market forecasting systems; time series prediction and model fine-tuning; international research collaboration.</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <!-- Education -->
       <div class="exp-edu-col" id="education">
-        <div class="sec-heading">
+        <div class="sec-heading anim">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           <h2>Education</h2>
         </div>
 
-        <div class="card">
-          <div class="card-role">Ph.D. in Artificial Intelligence</div>
-          <div class="card-org">University of Cologne</div>
-          <div class="card-period">2022 – Present</div>
-          <div class="card-thesis">Trustworthy AI — Uncertainty Quantification, Conformal Prediction, and Robustness</div>
+        <div class="card anim">
+          <div class="card-top">
+            <div class="card-logo" style="background:#fff; padding:3px; border-color:rgba(0,0,0,0.09);">
+                <img src="logos/uni-cologne.svg" alt="University of Cologne" style="width:38px;height:38px;object-fit:contain;">
+              </div>
+            <div class="card-title-block">
+              <div class="card-role">Ph.D. in Artificial Intelligence</div>
+              <div class="card-org">University of Cologne</div>
+              <div class="card-period">2022 – Present</div>
+              <div class="card-thesis">Trustworthy AI — Uncertainty Quantification, Conformal Prediction, and Robustness</div>
+            </div>
+          </div>
           <div class="card-desc">Advisor: Prof. Dr. Aleksandar Bojchevski. Selected publications at ICML 2024, ICLR 2025, NeurIPS 2025.</div>
         </div>
 
-        <div class="card">
-          <div class="card-role">M.Sc. in Artificial Intelligence</div>
-          <div class="card-org">University of Tehran</div>
-          <div class="card-period">2017 – 2020</div>
-          <div class="card-thesis">Thesis: Speech Enhancement under Adverse Acoustic Conditions</div>
+        <div class="card anim">
+          <div class="card-top">
+            <div class="card-logo" style="background:#003DA5; font-size:13px;">UT</div>
+            <div class="card-title-block">
+              <div class="card-role">M.Sc. in Artificial Intelligence</div>
+              <div class="card-org">University of Tehran</div>
+              <div class="card-period">2017 – 2020</div>
+              <div class="card-thesis">Thesis: Speech Enhancement under Adverse Acoustic Conditions</div>
+            </div>
+          </div>
           <div class="card-desc">Supervised by Dr. Bagher BabaAli and Prof. Dr. Yu Tsao (Academia Sinica). Approximation Algorithms: 19.5/20 · Data Science: 19.25/20 · Advanced AI: 18.48/20.</div>
         </div>
 
-        <div class="card">
-          <div class="card-role">B.Sc. in Computer Engineering</div>
-          <div class="card-org">Isfahan University of Technology</div>
-          <div class="card-period">2012 – 2017</div>
-          <div class="card-thesis">Thesis: Normalized Dot Product Representation of Graphs</div>
+        <div class="card anim">
+          <div class="card-top">
+            <div class="card-logo" style="background:#1B5E20; font-size:11px; letter-spacing:0.03em;">IUT</div>
+            <div class="card-title-block">
+              <div class="card-role">B.Sc. in Computer Engineering</div>
+              <div class="card-org">Isfahan University of Technology</div>
+              <div class="card-period">2012 – 2017</div>
+              <div class="card-thesis">Thesis: Normalized Dot Product Representation of Graphs</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -206,12 +280,12 @@
 ══════════════════════════════════════ -->
 <section id="research" class="section">
   <div class="container">
-    <div class="sec-heading">
+    <div class="sec-heading anim">
       <h2>Research Areas</h2>
     </div>
     <div class="research-grid">
 
-      <div class="research-card">
+      <div class="research-card anim">
         <div class="research-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
         </div>
@@ -219,7 +293,7 @@
         <p>Developing efficient conformal prediction algorithms with formal, distribution-free coverage guarantees for classification, regression, and graph learning tasks.</p>
       </div>
 
-      <div class="research-card">
+      <div class="research-card anim">
         <div class="research-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
@@ -227,7 +301,7 @@
         <p>Creating prediction methods with provable guarantees under adversarial perturbations, using efficient single-certificate and single-sample robustness certification techniques.</p>
       </div>
 
-      <div class="research-card">
+      <div class="research-card anim">
         <div class="research-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
         </div>
@@ -245,7 +319,7 @@
 ══════════════════════════════════════ -->
 <section id="publications" class="section">
   <div class="container">
-    <div class="sec-heading-row">
+    <div class="sec-heading-row anim">
       <h2>Selected Publications</h2>
       <a href="publications.html" class="view-all">
         View All
@@ -253,59 +327,7 @@
       </a>
     </div>
 
-    <div class="pub-list">
-
-      <a class="pub-row" href="pub-eva-2026.html">
-        <div class="pub-body">
-          <div class="pub-header"><span class="pub-year">2026</span><span class="pub-venue-tag">ICLR 2026</span></div>
-          <div class="pub-title-text">EvA: Evolutionary Attack on Graphs</div>
-          <div class="pub-authors">Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Jimin Cao, Aleksandar Bojchevski</div>
-          <div class="pub-venue-italic">International Conference on Learning Representations (ICLR)</div>
-        </div>
-        <svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-
-      <a class="pub-row" href="pub-one-sample-2025.html">
-        <div class="pub-body">
-          <div class="pub-header"><span class="pub-year">2025</span><span class="pub-venue-tag">NeurIPS 2025</span></div>
-          <div class="pub-title-text">One Sample is Enough to Make Conformal Prediction Robust</div>
-          <div class="pub-authors"><strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski</div>
-          <div class="pub-venue-italic">Advances in Neural Information Processing Systems (NeurIPS)</div>
-        </div>
-        <svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-
-      <a class="pub-row" href="pub-single-cert-2025.html">
-        <div class="pub-body">
-          <div class="pub-header"><span class="pub-year">2025</span><span class="pub-venue-tag">ICLR 2025</span></div>
-          <div class="pub-title-text">Robust Conformal Prediction with a Single Binary Certificate</div>
-          <div class="pub-authors"><strong>Soroush H. Zargarbashi</strong>, Aleksandar Bojchevski</div>
-          <div class="pub-venue-italic">International Conference on Learning Representations (ICLR)</div>
-        </div>
-        <svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-
-      <a class="pub-row" href="pub-robust-efficient-2024.html">
-        <div class="pub-body">
-          <div class="pub-header"><span class="pub-year">2024</span><span class="pub-venue-tag">ICML 2024</span></div>
-          <div class="pub-title-text">Robust Yet Efficient Conformal Prediction Sets</div>
-          <div class="pub-authors"><strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski</div>
-          <div class="pub-venue-italic">International Conference on Machine Learning (ICML)</div>
-        </div>
-        <svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-
-      <a class="pub-row" href="pub-conformal-gnn-2023.html">
-        <div class="pub-body">
-          <div class="pub-header"><span class="pub-year">2023</span><span class="pub-venue-tag">ICML 2023</span></div>
-          <div class="pub-title-text">Conformal Prediction Sets for Graph Neural Networks</div>
-          <div class="pub-authors"><strong>Soroush H. Zargarbashi</strong>, Simone Antonelli, Aleksandar Bojchevski</div>
-          <div class="pub-venue-italic">International Conference on Machine Learning (ICML)</div>
-        </div>
-        <svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-
-    </div>
+    <div class="pub-list" id="selected-pubs-list"></div>
   </div>
 </section>
 
@@ -315,52 +337,14 @@
 ══════════════════════════════════════ -->
 <section id="news" class="section">
   <div class="container">
-    <div class="sec-heading-row">
+    <div class="sec-heading-row anim">
       <h2>Recent Blog Posts</h2>
       <a href="blog.html" class="view-all">
         View All
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
-    <div class="blog-grid">
-
-      <a class="blog-card" href="blog-post-3.html">
-        <div class="blog-card-date">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-          May 10, 2026
-        </div>
-        <div class="blog-card-title">Best Poster Award at ICLR 2026 Workshop</div>
-        <div class="blog-card-desc">Received Best Poster Award at the "Catch, Adapt, and Operate: Monitoring ML Models Under Drift" workshop for CATS: Conformalized Adaptive Test-time Scaling.</div>
-        <div class="blog-card-tags">
-          <span class="tag">ICLR 2026</span><span class="tag">Award</span><span class="tag">Test-Time Adaptation</span>
-        </div>
-      </a>
-
-      <a class="blog-card" href="blog-post-2.html">
-        <div class="blog-card-date">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-          December 15, 2025
-        </div>
-        <div class="blog-card-title">Reflections on NeurIPS 2025: One Sample is Enough</div>
-        <div class="blog-card-desc">At NeurIPS 2025 we showed that a single adversarial example is sufficient to make conformal prediction robust. Here are some reflections on the paper and the conference.</div>
-        <div class="blog-card-tags">
-          <span class="tag">NeurIPS 2025</span><span class="tag">Conformal Prediction</span><span class="tag">Robustness</span>
-        </div>
-      </a>
-
-      <a class="blog-card" href="blog-post-1.html">
-        <div class="blog-card-date">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-          October 5, 2025
-        </div>
-        <div class="blog-card-title">What is Conformal Prediction? A Gentle Introduction</div>
-        <div class="blog-card-desc">Conformal prediction is a framework for uncertainty quantification with formal, distribution-free guarantees. Here is an accessible introduction to the core ideas.</div>
-        <div class="blog-card-tags">
-          <span class="tag">Conformal Prediction</span><span class="tag">Tutorial</span><span class="tag">Uncertainty</span>
-        </div>
-      </a>
-
-    </div><!-- end blog-grid -->
+    <div class="blog-grid" id="recent-blog-grid"></div>
   </div>
 </section>
 
@@ -397,6 +381,75 @@
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => io.observe(s));
+
+  // Scroll-triggered animations
+  const animIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        animIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  // Stagger delays within each group, then observe all .anim elements
+  [
+    '.timeline .tl-item',
+    '#education .card',
+    '.research-grid .research-card',
+  ].forEach(sel => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      el.style.setProperty('--anim-delay', `${i * 75}ms`);
+    });
+  });
+  document.querySelectorAll('.anim').forEach(el => animIO.observe(el));
+
+  // Selected publications
+  const SVG_ARROW = `<svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`;
+  fetch('data/publications.json')
+    .then(r => r.json())
+    .then(pubs => {
+      const selected = pubs.filter(p => p.selected);
+      document.getElementById('selected-pubs-list').innerHTML = selected.map(pub => `
+        <a class="pub-row" href="pub.html?id=${pub.id}">
+          <div class="pub-body">
+            <div class="pub-header">
+              <span class="pub-year">${pub.year}</span>
+              <span class="pub-venue-tag">${pub.venueTag}</span>
+            </div>
+            <div class="pub-title-text">${pub.title}</div>
+            <div class="pub-authors">${pub.authorsHtml}</div>
+            ${pub.venue ? `<div class="pub-venue-italic">${pub.venue}</div>` : ''}
+          </div>
+          ${SVG_ARROW}
+        </a>`).join('');
+      document.querySelectorAll('.pub-row').forEach((el, i) => {
+        el.classList.add('anim');
+        el.style.setProperty('--anim-delay', `${i * 60}ms`);
+        animIO.observe(el);
+      });
+    });
+
+  // Recent blog posts
+  const SVG_CAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+  fetch('data/blogs.json')
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById('recent-blog-grid').innerHTML = data.posts.slice(0, 3).map(post => `
+        <a class="blog-card" href="blog-post.html?slug=${post.slug}">
+          <div class="blog-card-date">${SVG_CAL} ${post.dateDisplay}</div>
+          <div class="blog-card-title">${post.title}</div>
+          <div class="blog-card-desc">${post.description}</div>
+          <div class="blog-card-tags">
+            ${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+        </a>`).join('');
+      document.querySelectorAll('.blog-card').forEach((el, i) => {
+        el.classList.add('anim');
+        el.style.setProperty('--anim-delay', `${i * 75}ms`);
+        animIO.observe(el);
+      });
+    });
 </script>
 
 </body>
