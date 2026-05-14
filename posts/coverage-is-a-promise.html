@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coverage is a promise, not a metric — Soroush H. Zargarbashi</title>
+<meta name="description" content="Why conformal prediction reframes the question of trust in machine learning." />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body data-screen-label="Post">
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="../index.html">
+      <span class="mark">SZ</span>
+      <span class="mark-text">
+        <span class="name">Soroush H. Zargarbashi</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html">Index</a>
+      <a href="../publications.html">Publications</a>
+      <a href="../blog.html" class="active">Writing</a>
+      <a href="../cv.html">CV</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── ARTICLE MASTHEAD ────────────────────────────────────────── -->
+<section style="border-bottom: 1px solid var(--ink); padding: clamp(40px, 6vw, 80px) 0;">
+  <div class="wrap" style="max-width: 1200px;">
+    <div style="display: grid; grid-template-columns: 1fr 6fr 1fr; gap: 24px; align-items: baseline; margin-bottom: 40px;">
+      <div class="kicker">№ 03</div>
+      
+      <div class="kicker" style="text-align: right;">14 min read</div>
+    </div>
+
+    <h1 style="font-family: var(--f-display); font-weight: 500; font-size: clamp(56px, 9vw, 132px); line-height: 0.9; letter-spacing: -0.035em; margin-bottom: 32px; text-wrap: balance;">
+      <em style="font-family: var(--f-serif); font-style: italic; font-weight: 400;">Coverage</em> is a promise,<br/>not a metric<span style="color: var(--accent);">.</span>
+    </h1>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; border-top: 1px solid var(--ink); padding-top: 20px;">
+      <div>
+        <div class="kicker" style="margin-bottom: 8px;">By</div>
+        <div style="font-family: var(--f-display); font-size: 18px;">Soroush H. Zargarbashi</div>
+      </div>
+      <div>
+        <div class="kicker" style="margin-bottom: 8px;">Published</div>
+        <div style="font-family: var(--f-display); font-size: 18px;">April 14, 2026</div>
+      </div>
+      <div>
+        <div class="kicker" style="margin-bottom: 8px;">Filed under</div>
+        <div style="font-family: var(--f-display); font-size: 18px;">Theory · Manifesto</div>
+      </div>
+      <div>
+        <div class="kicker" style="margin-bottom: 8px;">Set in</div>
+        <div style="font-family: var(--f-display); font-size: 18px;">Cologne, DE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDITORIAL FIGURE ────────────────────────────────────────── -->
+<figure style="background: var(--ink); padding: 64px 0; border-bottom: 1px solid var(--ink); margin: 0;">
+  <div class="wrap" style="max-width: 1100px;">
+    <svg width="100%" viewBox="0 0 1100 380" preserveAspectRatio="xMidYMid meet" fill="none">
+      <g stroke="#fafafa" stroke-width="1.5">
+        <rect x="40" y="30" width="1020" height="320"/>
+        <rect x="90" y="55" width="920" height="270" stroke-dasharray="3 4"/>
+        <rect x="180" y="80" width="740" height="220" stroke-dasharray="3 4"/>
+        <rect x="320" y="120" width="460" height="140" stroke-dasharray="3 4"/>
+        <rect x="460" y="160" width="180" height="60" stroke-dasharray="3 4"/>
+      </g>
+      <circle cx="550" cy="190" r="7" fill="#ff5b1f"/>
+      <text x="60" y="50" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">α = 0.50 · COVERAGE 50%</text>
+      <text x="110" y="75" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">α = 0.20 · COVERAGE 80%</text>
+      <text x="200" y="100" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">α = 0.10 · COVERAGE 90%</text>
+      <text x="340" y="140" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">α = 0.05 · COVERAGE 95%</text>
+      <text x="480" y="180" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">α = 0.01 · 99%</text>
+      <text x="570" y="195" fill="#ff5b1f" font-family="Newsreader, serif" font-style="italic" font-size="13">y*</text>
+      <text x="550" y="365" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="3" text-anchor="middle">FIG. 01  ·  NESTED PREDICTION SETS AT DECREASING SIGNIFICANCE LEVELS</text>
+    </svg>
+  </div>
+</figure>
+
+<!-- ── ARTICLE BODY ────────────────────────────────────────────── -->
+<article class="article">
+
+<p class="article-lede">
+  Most machine learning metrics describe the past. Accuracy says: out of the inputs we've already seen, this is the fraction we got right. Coverage is different. Coverage is a <em class="math">promise</em> about the future — about every input the model hasn't seen yet.
+</p>
+
+<p>
+  There is a small but stubborn family of methods in statistics that does not ask you to trust the model. It asks the model to <em>declare</em>, in advance, how confident it is — and then it checks the receipts. The cleanest member of that family is <a href="https://en.wikipedia.org/wiki/Conformal_prediction">conformal prediction</a>, and once you have seen it, you cannot un-see it.
+</p>
+
+<p>
+  This essay is an attempt to explain why I think coverage is the most underappreciated idea in modern machine learning. It is not new — Vladimir Vovk and his collaborators were writing about it in the 1990s — but it has acquired, in the past five years, a strange and welcome second life. I want to argue for why.
+</p>
+
+<h2 data-num="§ 01">What coverage is, exactly</h2>
+
+<p>
+  Suppose your classifier is asked to label an image as one of <span class="math">K</span> classes. The usual output is a single label and a softmax-shaped lie about confidence. A conformal procedure outputs something different: a <em>set</em> of labels. The set is constructed so that for every new test point, the probability that it contains the true label is at least <span class="math">1 − α</span>. You pick α; the procedure delivers the guarantee.
+</p>
+
+<div class="math-block">
+  ℙ ( y<sub>test</sub> ∈ C(x<sub>test</sub>) )  ≥  1 − α
+</div>
+
+<p>
+  The catch — and it is a small one — is exchangeability. Your calibration data and your test data must be drawn from the same distribution (or rather, be jointly exchangeable, which is a weaker condition). Get that, and the guarantee is <em>distribution-free</em> in the technical sense. It does not care what model you used. It does not care whether the model is well-calibrated. It does not even care whether the model is any good.
+</p>
+
+<blockquote>
+  Conformal prediction is the rare statistical method that improves the worst model in your portfolio by exactly as much as it improves the best.
+</blockquote>
+
+<h2 data-num="§ 02">Why this changes the question</h2>
+
+<p>
+  When you frame uncertainty as a number — 0.93, say — you are implicitly asking the model to be a thermometer. The number tells you how hot it is. You trust the thermometer because you trust the calibration of mercury and glass. With a deep network, you have neither the mercury nor the glass. You have a function trained to minimize cross-entropy, which is to say, a function trained to be <em>confident</em>. The Brier score is a downstream side-effect; calibration is rarely an explicit objective.
+</p>
+
+<p>
+  Set-valued prediction reframes the question. The model is no longer asked, "how confident are you?" It is asked, "what would you bet on?" And — crucially — it pays a cost when it bets on more than it has to. <span class="code-inline">|C(x)|</span> is the size of the prediction set; smaller is better, but only if the coverage holds. The trade-off is honest and visible.
+</p>
+
+<p class="pull">
+  A 90% set is a contract with reality. The fine print is short. The signatures are mathematical.
+</p>
+
+<h2 data-num="§ 03">The trick, in one paragraph</h2>
+
+<p>
+  Take a model. Take a calibration set you held out. Compute a <em class="math">non-conformity score</em> for every calibration point — anything that quantifies how badly the model would have failed on it, e.g. one minus the softmax of the true class. Sort the scores. Find the (1−α)-quantile. At test time, include in the prediction set every class whose score is below that threshold. That's it. That is the whole method. It runs in a few lines of code, and it produces sets with finite-sample, distribution-free coverage. The proof fits on a napkin.
+</p>
+
+<pre><code># pseudo-code, the whole thing
+scores = [score(x_i, y_i) for (x_i, y_i) in cal]
+q = quantile(scores, level=1-alpha)
+C = lambda x: {y for y in classes if score(x, y) &lt;= q}</code></pre>
+
+<p>
+  When I show this in a talk, someone always asks: <em>where is the catch?</em> The catch is that the sets can be large when the model is bad. That is not a bug. That is the model telling you it is bad. Most ML pipelines have no mechanism for this confession. Conformal prediction is, among other things, a confessional booth.
+</p>
+
+<h2 data-num="§ 04">Where this gets hard</h2>
+
+<p>
+  Exchangeability is the catch. Real test data drifts. Graphs have dependencies. LLMs have prompts that look nothing like their training. Adversaries do things on purpose. Most of my own research is, in one form or another, an attempt to weaken or replace the exchangeability assumption — to keep the coverage guarantee alive when the world is being uncooperative.
+</p>
+
+<p>
+  Three lines of attack interest me:
+</p>
+
+<ul>
+  <li><strong>Graphs.</strong> When your data points are nodes in a network, they are not i.i.d. and not exchangeable. <a href="../publications.html">Our 2023 paper</a> gave the first principled fix; the 2025 follow-up extended it to inductive settings under distribution shift.</li>
+  <li><strong>Robustness.</strong> If an adversary perturbs the test input, the calibration data is no longer exchangeable with what the model sees. We can recover guarantees by considering the worst-case score over the perturbation set — and we can do it without blowing up set sizes.</li>
+  <li><strong>LLMs.</strong> Sequence outputs are not labels. Coverage for them has to be redefined — over factual claims, over abstention behaviors, over the answer space itself. This is the next frontier and most of it is unwritten.</li>
+</ul>
+
+<h2 data-num="§ 05">What I want you to take away</h2>
+
+<p>
+  If you are deploying ML and you are not measuring some form of coverage — even a rough one, even on a held-out slice — you are guessing. Accuracy on a benchmark is not the same as honesty in production. A prediction set is a contract. A point prediction is a marketing claim.
+</p>
+
+<p>
+  The good news is that the entry cost is small. You can wrap conformal prediction around any model you already have. You do not have to retrain. You do not have to switch frameworks. You just have to <em>hold out a calibration set</em> — the same calibration set you should have been holding out anyway — and write the four lines above.
+</p>
+
+<p>
+  I will keep writing about this. The next essay will be on conformal prediction for LLMs, where everything I said above is true and yet nothing is easy. Subscribe if you want it in your inbox. Argue with me if you disagree — that's where the next paper comes from.
+</p>
+
+<p style="font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--ink);">
+  Written in Cologne · April 2026 · Set in Space Grotesk and Newsreader
+</p>
+
+</article>
+
+<!-- ── KEEP READING ────────────────────────────────────────────── -->
+<section class="section" style="background: var(--paper-2); border-top: 1px solid var(--ink); border-bottom: 0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">§ Keep reading</div>
+      <h2 class="section-title">More writing<span style="color: var(--accent);">.</span></h2>
+    </div>
+
+    <div class="blog-list" style="background: var(--paper);">
+      <a class="blog-row" href="coverage-is-a-promise.html">
+        <span class="br-num">№ 02</span>
+        <div>
+          <div class="br-title">The model is confidently <em>wrong.</em> Now what?</div>
+          <div class="br-dek">A field guide to calibration failures in large language models.</div>
+        </div>
+        <div class="br-meta">
+          <span>Feb 2026</span>
+          <span class="read">11 min</span>
+        </div>
+        <div class="br-arr">→</div>
+      </a>
+      <a class="blog-row" href="coverage-is-a-promise.html">
+        <span class="br-num">№ 01</span>
+        <div>
+          <div class="br-title">A short defense of <em>provable</em> things.</div>
+          <div class="br-dek">In a field that worships empirical wins, why proofs still matter.</div>
+        </div>
+        <div class="br-meta">
+          <span>Dec 2025</span>
+          <span class="read">9 min</span>
+        </div>
+        <div class="br-arr">→</div>
+      </a>
+    </div>
+
+    <div style="margin-top: 40px;">
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-glyph">ZARGAR<span class="accent">.</span>BASHI<span class="accent">/</span></div>
+    <div class="footer-row">
+      <div>
+        <h4>Colophon</h4>
+        <p style="font-family: var(--f-serif); font-size: 16px; line-height: 1.4; max-width: 420px;">
+          Set in <em>Space Grotesk</em> and Newsreader.
+        </p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <a href="../index.html">Index</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../blog.html">Writing</a>
+        <a href="../cv.html">CV</a>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="mailto:soroushzargar@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/soroushzargar">LinkedIn</a>
+        <a href="https://github.com/soroushzargar">GitHub</a>
+        <a href="../resume.pdf">CV (PDF)</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Soroush H. Zargarbashi.</span>
+      <span>Made in Cologne.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

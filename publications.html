@@ -1,107 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publications — Soroush H. Zargarbashi</title>
-  <meta name="description" content="Complete list of research publications by Soroush H. Zargarbashi on conformal prediction, adversarial robustness, and uncertainty quantification.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="transitions.js" defer></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Publications — Soroush H. Zargarbashi</title>
+<meta name="description" content="Complete list of research publications in trustworthy AI, conformal prediction, adversarial robustness, and graph neural networks." />
+<link rel="stylesheet" href="assets/site.css" />
 </head>
-<body>
+<body data-screen-label="Publications">
 
-<header>
-  <div class="container">
-    <nav>
-      <div class="nav-brand">
-        <a href="index.html">
-          <div class="name">Soroush H. Zargarbashi</div>
-          <div class="title">PhD Researcher in Trustworthy AI</div>
-        </a>
-      </div>
-      <div class="nav-right">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="index.html#research">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v7.5l-5 9a1 1 0 0 0 .9 1.5h14.2a1 1 0 0 0 .9-1.5l-5-9V3"/><path d="M7 15h10"/></svg>
-            Research
-          </a></li>
-          <li><a href="publications.html" style="color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-            Publications
-          </a></li>
-          <li><a href="blog.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            Blog
-          </a></li>
-          <li><a href="index.html#contact">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Contact
-          </a></li>
-        </ul>
-        <a href="resume.pdf" download class="nav-cv">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          Download CV
-        </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="index.html">
+      <span class="mark">SZ</span>
+      <span class="mark-text">
+        <span class="name">Soroush H. Zargarbashi</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Index</a>
+      <a href="publications.html" class="active">Publications</a>
+      <a href="blog.html">Writing</a>
+      <a href="cv.html">CV</a>
     </nav>
   </div>
 </header>
 
-<div class="container">
-  <div class="page-hero">
-    <h1>Publications</h1>
-    <p class="subtitle">Complete list of research publications in trustworthy AI, conformal prediction, adversarial robustness, and graph neural networks. * indicates equal contribution.</p>
+<section class="pubs-head">
+  <div class="wrap">
+    <h1 class="pubs-mast reveal">
+      Publications<span style="color: var(--accent);">.</span>
+    </h1>
+    <p class="pubs-sub reveal reveal-delay-1">
+      Trustworthy AI, conformal prediction, adversarial robustness, graph neural networks. <strong>*</strong> denotes equal contribution.
+    </p>
   </div>
+</section>
 
-  <div class="pub-list" id="pub-list" style="padding-bottom: 80px;"></div>
-</div>
+<!-- Year-grouped publication sections are injected here -->
+<div id="pub-sections"></div>
 
-<footer id="contact">
-  <div class="footer-links">
-    <a href="mailto:soroushzargar@gmail.com">soroushzargar@gmail.com</a>
-    <a href="https://linkedin.com/in/soroushzargar" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://github.com/soroushzargar" target="_blank" rel="noopener">GitHub</a>
-    <a href="resume.pdf" download>Download CV</a>
+<section class="section" style="border-top: 1px solid var(--ink); padding: clamp(40px, 6vw, 80px) 0;">
+  <div class="wrap">
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <a class="cta cta-ghost" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar <span class="arrow">↗</span></a>
+    </div>
   </div>
-  <p>© 2026 Soroush H. Zargarbashi. All rights reserved.</p>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-glyph">ZARGAR<span class="accent">.</span>BASHI<span class="accent">/</span></div>
+    <div class="footer-row">
+      <div>
+        <h4>Colophon</h4>
+        <p style="font-family: var(--f-serif); font-size: 16px; line-height: 1.4; max-width: 420px;">
+          Set in <em>Space Grotesk</em> and Newsreader.
+        </p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <a href="index.html">Index</a>
+        <a href="publications.html">Publications</a>
+        <a href="blog.html">Writing</a>
+        <a href="cv.html">CV</a>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="mailto:soroushzargar@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/soroushzargar">LinkedIn</a>
+        <a href="https://github.com/soroushzargar">GitHub</a>
+        <a href="resume.pdf">CV (PDF)</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Soroush H. Zargarbashi.</span>
+      <span>Made in Cologne.</span>
+    </div>
+  </div>
 </footer>
 
+<script src="assets/site.js"></script>
 <script>
-  const toggle = document.getElementById('navToggle');
-  const links  = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-
-  const SVG_ARROW = `<svg class="pub-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`;
-
-  function pubRowHtml(pub) {
-    const tagStyle = pub.venueTagItalic ? ' style="font-style:italic;font-weight:400;"' : '';
-    const venueItalic = pub.venue ? `<div class="pub-venue-italic">${pub.venue}</div>` : '';
-    return `
-      <a class="pub-row" href="pub.html?id=${pub.id}">
-        <div class="pub-body">
-          <div class="pub-header">
-            <span class="pub-year">${pub.year}</span>
-            <span class="pub-venue-tag"${tagStyle}>${pub.venueTag}</span>
-          </div>
-          <div class="pub-title-text">${pub.title}</div>
-          <div class="pub-authors">${pub.authorsHtml}</div>
-          ${venueItalic}
-        </div>
-        ${SVG_ARROW}
-      </a>`;
-  }
-
   fetch('data/publications.json')
     .then(r => r.json())
     .then(pubs => {
-      document.getElementById('pub-list').innerHTML = pubs.map(pubRowHtml).join('');
+      const years = [...new Set(pubs.map(p => p.year))].sort((a, b) => b - a);
+      const byYear = {};
+      years.forEach(y => byYear[y] = pubs.filter(p => p.year === y));
+
+      let globalIdx = 0;
+
+      const html = years.map((year, yi) => {
+        const isLast = yi === years.length - 1;
+        const cards = byYear[year].map(pub => {
+          globalIdx++;
+          const num = String(globalIdx).padStart(2, '0');
+          const abstract = pub.abstract ? pub.abstract.substring(0, 240).trim() + '…' : '';
+          const links = pub.links || {};
+          const linkHtml = [
+            links.paper  ? `<a class="pc-link" href="${links.paper}" target="_blank" rel="noopener">PDF</a>` : '',
+            links.poster ? `<a class="pc-link" href="${links.poster}" target="_blank" rel="noopener">Poster</a>` : '',
+            links.talk   ? `<a class="pc-link" href="${links.talk}" target="_blank" rel="noopener">Talk</a>` : '',
+            `<a class="pc-link" href="pub.html?id=${pub.id}">Abstract →</a>`,
+          ].filter(Boolean).join('');
+          const venueStyle = pub.venueTagItalic ? ' style="font-style:italic;"' : '';
+
+          return `
+            <article class="pub-card">
+              <div class="pc-num">№ ${num}</div>
+              <div>
+                <h3 class="pc-title">${pub.title}.</h3>
+                <p class="pc-auth">${pub.authorsHtml}</p>
+                ${abstract ? `<p class="pc-abs">${abstract}</p>` : ''}
+                <div class="pc-tags">${pub.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+              </div>
+              <div class="pc-side">
+                <span class="pc-venue"${venueStyle}>${pub.venueTag}</span>
+                <div class="pc-links">${linkHtml}</div>
+              </div>
+            </article>`;
+        }).join('');
+
+        const sectionStyle = isLast ? ' style="border-bottom: 0;"' : '';
+        return `
+          <section class="pubs-group"${sectionStyle}>
+            <div class="wrap">
+              <div class="pubs-group-head">
+                <div class="pubs-group-year">${year}.</div>
+              </div>
+              ${cards}
+            </div>
+          </section>`;
+      }).join('');
+
+      document.getElementById('pub-sections').innerHTML = html;
     });
 </script>
 </body>

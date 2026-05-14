@@ -1,101 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — Soroush H. Zargarbashi</title>
-  <meta name="description" content="Thoughts on trustworthy AI, conformal prediction, research life, and machine learning.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="transitions.js" defer></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Writing — Soroush H. Zargarbashi</title>
+<meta name="description" content="Long-form essays on trustworthy AI, conformal prediction, research life, and the intersection of theory and practice." />
+<link rel="stylesheet" href="assets/site.css" />
 </head>
-<body>
+<body data-screen-label="Writing">
 
-<header>
-  <div class="container">
-    <nav>
-      <div class="nav-brand">
-        <a href="index.html">
-          <div class="name">Soroush H. Zargarbashi</div>
-          <div class="title">PhD Researcher in Trustworthy AI</div>
-        </a>
-      </div>
-      <div class="nav-right">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="index.html#research">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v7.5l-5 9a1 1 0 0 0 .9 1.5h14.2a1 1 0 0 0 .9-1.5l-5-9V3"/><path d="M7 15h10"/></svg>
-            Research
-          </a></li>
-          <li><a href="publications.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-            Publications
-          </a></li>
-          <li><a href="blog.html" style="color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            Blog
-          </a></li>
-          <li><a href="index.html#contact">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Contact
-          </a></li>
-        </ul>
-        <a href="resume.pdf" download class="nav-cv">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-          Download CV
-        </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="index.html">
+      <span class="mark">SZ</span>
+      <span class="mark-text">
+        <span class="name">Soroush H. Zargarbashi</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Index</a>
+      <a href="publications.html">Publications</a>
+      <a href="blog.html" class="active">Writing</a>
+      <a href="cv.html">CV</a>
     </nav>
   </div>
 </header>
 
-<div class="container">
-  <div class="page-hero">
-    <h1>Blog</h1>
-    <p class="subtitle">Thoughts on trustworthy AI, conformal prediction, research life, and the intersection of theory and practice.</p>
+<section class="pubs-head">
+  <div class="wrap">
+    <h1 class="pubs-mast reveal">
+      Writing<span style="color: var(--accent);">.</span>
+    </h1>
+    <p class="pubs-sub reveal reveal-delay-1">
+      Long-form essays on confidence and its discontents. On what models know, and what they merely <em class="math">claim</em>.
+    </p>
   </div>
+</section>
 
-  <div class="blog-grid" id="blog-grid" style="padding-bottom: 80px;"></div>
-</div>
+<!-- Featured post — injected by JS -->
+<div id="featured-post"></div>
 
-<footer id="contact">
-  <div class="footer-links">
-    <a href="mailto:soroushzargar@gmail.com">soroushzargar@gmail.com</a>
-    <a href="https://linkedin.com/in/soroushzargar" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://github.com/soroushzargar" target="_blank" rel="noopener">GitHub</a>
-    <a href="resume.pdf" download>Download CV</a>
+<!-- Archive -->
+<section class="section" id="archive-section" style="display:none;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">§ Archive</div>
+      <h2 class="section-title">Archive<span style="color: var(--accent);">.</span></h2>
+    </div>
+    <div class="blog-list reveal" id="blog-archive">
+      <!-- Populated by JS -->
+    </div>
   </div>
-  <p>© 2026 Soroush H. Zargarbashi. All rights reserved.</p>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-glyph">ZARGAR<span class="accent">.</span>BASHI<span class="accent">/</span></div>
+    <div class="footer-row">
+      <div>
+        <h4>Colophon</h4>
+        <p style="font-family: var(--f-serif); font-size: 16px; line-height: 1.4; max-width: 420px;">
+          Set in <em>Space Grotesk</em> and Newsreader.
+        </p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <a href="index.html">Index</a>
+        <a href="publications.html">Publications</a>
+        <a href="blog.html">Writing</a>
+        <a href="cv.html">CV</a>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="mailto:soroushzargar@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/soroushzargar">LinkedIn</a>
+        <a href="https://github.com/soroushzargar">GitHub</a>
+        <a href="resume.pdf">CV (PDF)</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Soroush H. Zargarbashi.</span>
+      <span>Made in Cologne.</span>
+    </div>
+  </div>
 </footer>
 
+<script src="assets/site.js"></script>
 <script>
-  const toggle = document.getElementById('navToggle');
-  const links  = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-
-  const SVG_CAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
-
-  function blogCardHtml(post) {
-    return `
-      <a class="blog-card" href="blog-post.html?slug=${post.slug}">
-        <div class="blog-card-date">${SVG_CAL} ${post.dateDisplay}</div>
-        <div class="blog-card-title">${post.title}</div>
-        <div class="blog-card-desc">${post.description}</div>
-        <div class="blog-card-tags">
-          ${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
-      </a>`;
-  }
-
   fetch('data/blogs.json')
     .then(r => r.json())
     .then(data => {
-      document.getElementById('blog-grid').innerHTML = data.posts.map(blogCardHtml).join('');
+      const posts = data.posts;
+      if (!posts || posts.length === 0) return;
+
+      // Featured first post
+      const featured = posts[0];
+      document.getElementById('featured-post').innerHTML = `
+        <section class="section" style="padding-top: clamp(40px, 6vw, 80px);">
+          <div class="wrap">
+            <a href="blog-post.html?slug=${featured.slug}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding-bottom: 48px; border-bottom: 1px solid var(--ink);">
+              <div style="aspect-ratio: 4/3; background: var(--ink); position: relative; overflow: hidden;">
+                <svg width="100%" height="100%" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" fill="none">
+                  <rect width="600" height="450" fill="#0a0a0a"/>
+                  <g stroke="#fafafa" stroke-width="1.5">
+                    <rect x="20" y="20" width="560" height="410"/>
+                    <rect x="50" y="50" width="500" height="350" stroke-dasharray="3 4"/>
+                    <rect x="100" y="100" width="400" height="250" stroke-dasharray="3 4"/>
+                    <rect x="180" y="160" width="240" height="130" stroke-dasharray="3 4"/>
+                    <rect x="240" y="200" width="120" height="50" stroke-dasharray="3 4"/>
+                  </g>
+                  <circle cx="300" cy="225" r="6" fill="#ff5b1f"/>
+                  <text x="300" y="430" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" text-anchor="middle">FIG. 01 — A PREDICTION SET, NESTED</text>
+                  <text x="40" y="40" fill="#fafafa" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2">α = 0.10  ·  COVERAGE 90%</text>
+                </svg>
+              </div>
+              <div>
+                <h2 style="font-family: var(--f-display); font-weight: 500; font-size: clamp(36px, 4.5vw, 60px); line-height: 0.98; letter-spacing: -0.03em; margin-bottom: 24px; text-wrap: balance;">
+                  ${featured.title}
+                </h2>
+                <p style="font-family: var(--f-serif); font-size: 20px; line-height: 1.4; margin-bottom: 24px; color: #222; max-width: 480px;">
+                  ${featured.description}
+                </p>
+                <span style="font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">${featured.dateDisplay}</span>
+              </div>
+            </a>
+          </div>
+        </section>`;
+
+      // Archive — remaining posts
+      const archive = posts.slice(1);
+      if (archive.length > 0) {
+        document.getElementById('archive-section').style.display = '';
+        document.getElementById('blog-archive').innerHTML = archive.map((post, i) => `
+          <a class="blog-row" href="blog-post.html?slug=${post.slug}">
+            <span class="br-num">№ ${String(archive.length - i).padStart(2, '0')}</span>
+            <div>
+              <div class="br-title">${post.title}</div>
+              <div class="br-dek">${post.description}</div>
+            </div>
+            <div class="br-meta">
+              <span>${post.dateDisplay}</span>
+            </div>
+            <div class="br-arr">→</div>
+          </a>`).join('');
+      }
     });
 </script>
 </body>
