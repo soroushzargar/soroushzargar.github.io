@@ -4,15 +4,39 @@
     "title": "Post Title",
     "date": "YYYY-MM-DD",
     "dateDisplay": "Month DD, YYYY",
+    "readingMinutes": 5,
+    "category": "Essay | Technical",
     "tags": ["Tag1", "Tag2"],
     "description": "One-sentence summary shown on the blog listing card."
   },
   "posts": [
     {
+      "slug": "ai-is-competent",
+      "title": "AI is Competent, But is it Intelligent?",
+      "date": "2026-08-14",
+      "dateDisplay": "August 14, 2026",
+      "readingMinutes": 16,
+      "category": "Essay",
+      "tags": ["Essay", "Philosophy of AI", "Intelligence"],
+      "description": "Behaviorism, functionalism, and the symbol grounding problem, read against what machine learning actually does — and the argument that intelligence is a question of architecture, not of imitation."
+    },
+    {
+      "slug": "ai-as-a-judge",
+      "title": "For and Against an AI becoming a Judge, or a Policy Maker",
+      "date": "2026-08-14",
+      "dateDisplay": "August 14, 2026",
+      "readingMinutes": 11,
+      "category": "Essay",
+      "tags": ["Essay", "AI Governance", "Fairness"],
+      "description": "What would justify outsourcing human judgement to an artificial intelligence? Reproducibility and availability argue for it; benchmarks, missing counterfactuals, and a legacy of biased data argue against."
+    },
+    {
       "slug": "one-sample-robust-conformal",
       "title": "One Sample is Enough to Make Conformal Prediction Robust",
       "date": "2025-12-15",
       "dateDisplay": "December 15, 2025",
+      "readingMinutes": 3,
+      "category": "Technical",
       "tags": ["NeurIPS 2025", "Conformal Prediction", "Adversarial Robustness"],
       "description": "We show that augmenting each calibration point with a single adversarial example is sufficient to obtain tight, valid coverage guarantees under attack — matching expensive worst-case methods at a fraction of the cost."
     }

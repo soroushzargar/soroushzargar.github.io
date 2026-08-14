@@ -2,8 +2,8 @@
   {
     "id": "eva-2026",
     "year": 2026,
-    "title": "EvA: Evolutionary Attack on Graphs",
-    "authorsHtml": "Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Jimin Cao, Aleksandar Bojchevski",
+    "title": "EvA: Evolutionary Attacks on Graphs",
+    "authorsHtml": "Mohammad Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Jimin Cao, Aleksandar Bojchevski",
     "venue": "International Conference on Learning Representations (ICLR 2026)",
     "venueTag": "ICLR 2026",
     "venueTagItalic": false,
@@ -13,7 +13,7 @@
       "Graph Neural Networks"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/2507.08212",
       "poster": null,
       "talk": null
     },
@@ -23,10 +23,10 @@
   {
     "id": "cats-2026",
     "year": 2026,
-    "title": "Conformal Adaptive Test-time Scaling (CATS)",
+    "title": "CATS: Conformalized Adaptive Test-Time Scaling",
     "authorsHtml": "Mohammad Sadegh Akhondzadeh, <strong>Soroush H. Zargarbashi</strong>, Simone Antonelli, Aleksandar Bojchevski",
     "venue": "ICLR Workshop: Catch, Adapt, and Operate — <em>Best Poster Award</em>",
-    "venueTag": "ICLR 2026 Workshop (Accepted) · Under Review ICML 2026",
+    "venueTag": "ICLR 2026 Workshop · Best Poster Award",
     "venueTagItalic": false,
     "tags": [
       "ICLR 2026 Workshop",
@@ -45,13 +45,13 @@
   {
     "id": "front-loaded-2026",
     "year": 2026,
-    "title": "Front-Loaded Robust Conformal Prediction: Heavy Calibration and Light Weight Inference",
+    "title": "Front-Loaded Robust Conformal Prediction: Heavy Calibration, Minimal Test-Time Cost",
     "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski",
-    "venue": "Under Review — International Conference on Machine Learning (ICML 2026)",
-    "venueTag": "Under Review — ICML 2026",
-    "venueTagItalic": true,
+    "venue": "International Conference on Machine Learning (ICML 2026)",
+    "venueTag": "ICML 2026",
+    "venueTagItalic": false,
     "tags": [
-      "Under Review · ICML 2026",
+      "ICML 2026",
       "Conformal Prediction",
       "Adversarial Robustness"
     ],
@@ -68,21 +68,42 @@
     "year": 2026,
     "title": "Quantifying Epistemic Predictive Uncertainty in Conformal Prediction",
     "authorsHtml": "Siu Lun Chau, <strong>Soroush H. Zargarbashi</strong>, Yusuf Sale, Michele Caprio",
-    "venue": "Under Review — International Conference on Machine Learning (ICML 2026)",
-    "venueTag": "Under Review — ICML 2026",
+    "venue": "Preprint — arXiv:2602.01667",
+    "venueTag": "Preprint · arXiv 2026",
     "venueTagItalic": true,
     "tags": [
-      "Under Review · ICML 2026",
+      "Preprint · arXiv 2026",
       "Conformal Prediction",
       "Epistemic Uncertainty"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/2602.01667",
       "poster": null,
       "talk": null
     },
     "selected": false,
     "abstract": "Conformal prediction provides marginal coverage guarantees but does not distinguish between uncertainty arising from model limitations (epistemic) and inherent data randomness (aleatoric). This distinction matters in practice: epistemic uncertainty signals inputs for which collecting more data or improving the model would reduce prediction uncertainty, while aleatoric uncertainty reflects irreducible noise. We develop a framework for quantifying epistemic predictive uncertainty within conformal prediction, enabling practitioners to identify predictions where model improvement would be most impactful. Our approach connects conformal theory with imprecise probability, providing theoretical guarantees on epistemic uncertainty quantification while maintaining the distribution-free coverage properties of classical conformal methods. Experiments on standard benchmarks demonstrate that our epistemic decomposition reveals meaningful structure in prediction sets beyond what marginal coverage alone provides."
+  },
+  {
+    "id": "optimal-epistemic-2025",
+    "year": 2026,
+    "title": "Optimal Conformal Prediction under Epistemic Uncertainty",
+    "authorsHtml": "Alireza Javanmardi*, <strong>Soroush H. Zargarbashi*</strong>, Santo M. A. R. Thies, Willem Waegeman, Aleksandar Bojchevski, Eyke Hüllermeier",
+    "venue": "42nd Conference on Uncertainty in Artificial Intelligence (UAI 2026) · * Equal contribution",
+    "venueTag": "UAI 2026",
+    "venueTagItalic": false,
+    "tags": [
+      "UAI 2026",
+      "Conformal Prediction",
+      "Epistemic Uncertainty"
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2505.19033",
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Conformal prediction sets are constructed using a threshold derived from calibration scores, but the choice of score function critically determines the size and informativeness of the resulting sets. We study optimal conformal prediction under epistemic uncertainty, characterizing the score functions that minimize expected set size while maintaining coverage. Our analysis reveals a fundamental connection between epistemic uncertainty and the efficiency of conformal sets: when the model's epistemic uncertainty is well-calibrated, score functions derived from uncertainty estimates achieve near-optimal efficiency. We propose a practical algorithm that approximates optimal scores under epistemic uncertainty and demonstrate consistent improvements in set size — without sacrificing coverage — over standard score-based baselines across a range of classification benchmarks."
   },
   {
     "id": "proxy-certs-2026",
@@ -119,33 +140,13 @@
       "Adversarial Robustness"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/2506.16553",
       "poster": null,
       "talk": null
     },
     "selected": true,
+    "postSlug": "one-sample-robust-conformal",
     "abstract": "Adversarially robust conformal prediction requires searching over worst-case perturbations for each calibration point — a process that scales poorly with the perturbation budget and model complexity. We show that a single adversarial example per calibration point is sufficient to obtain tight, valid coverage guarantees under attack. By augmenting each calibration score with exactly one adversarial perturbation and adjusting the quantile threshold accordingly, our method matches the coverage of computationally expensive worst-case methods while reducing calibration runtime by an order of magnitude. The approach generalizes across $\\ell_\\infty$ and $\\ell_2$ threat models with no change to the core algorithm, and we provide rigorous theoretical guarantees showing that the one-shot augmentation strategy yields prediction sets with the correct marginal coverage under the specified adversarial threat model."
-  },
-  {
-    "id": "optimal-epistemic-2025",
-    "year": 2025,
-    "title": "Optimal Conformal Prediction under Epistemic Uncertainty",
-    "authorsHtml": "Alireza Javanmardi*, <strong>Soroush H. Zargarbashi*</strong>, Aleksandar Bojchevski, Willem Waegeman, Eyke Hüllermeier",
-    "venue": "2025 · * Equal contribution",
-    "venueTag": "2025",
-    "venueTagItalic": false,
-    "tags": [
-      "2025",
-      "Conformal Prediction",
-      "Epistemic Uncertainty"
-    ],
-    "links": {
-      "paper": null,
-      "poster": null,
-      "talk": null
-    },
-    "selected": false,
-    "abstract": "Conformal prediction sets are constructed using a threshold derived from calibration scores, but the choice of score function critically determines the size and informativeness of the resulting sets. We study optimal conformal prediction under epistemic uncertainty, characterizing the score functions that minimize expected set size while maintaining coverage. Our analysis reveals a fundamental connection between epistemic uncertainty and the efficiency of conformal sets: when the model's epistemic uncertainty is well-calibrated, score functions derived from uncertainty estimates achieve near-optimal efficiency. We propose a practical algorithm that approximates optimal scores under epistemic uncertainty and demonstrate consistent improvements in set size — without sacrificing coverage — over standard score-based baselines across a range of classification benchmarks."
   },
   {
     "id": "single-cert-2025",
@@ -161,7 +162,7 @@
       "Adversarial Robustness"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/2503.05239",
       "poster": null,
       "talk": null
     },
@@ -182,7 +183,7 @@
       "Adversarial Robustness"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/2407.09165",
       "poster": null,
       "talk": null
     },
@@ -203,7 +204,7 @@
       "Conformal Prediction"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/2407.09173",
       "poster": null,
       "talk": null
     },
@@ -224,7 +225,7 @@
       "Conformal Prediction"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://proceedings.mlr.press/v202/h-zargarbashi23a.html",
       "poster": null,
       "talk": null
     },
@@ -236,16 +237,16 @@
     "year": 2019,
     "title": "A Multi-Modal Feature Embedding Approach to Diagnose Alzheimer Disease from Spoken Language",
     "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Bagher BabaAli",
-    "venue": "Interspeech 2019",
-    "venueTag": "Interspeech 2019",
-    "venueTagItalic": false,
+    "venue": "Preprint — arXiv:1910.00330",
+    "venueTag": "Preprint · arXiv 2019",
+    "venueTagItalic": true,
     "tags": [
-      "Interspeech 2019",
+      "Preprint · arXiv 2019",
       "Speech Processing",
       "Alzheimer Detection"
     ],
     "links": {
-      "paper": null,
+      "paper": "https://arxiv.org/abs/1910.00330",
       "poster": null,
       "talk": null
     },

@@ -2,3 +2,6 @@ node_modules
 .next
 out
 .DS_Store
+
+# Local design-tool sync folder (not part of the published site)
+Design feedback for portfolio/

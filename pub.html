@@ -4,134 +4,50 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publication — Soroush H. Zargarbashi</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<meta name="description" content="Abstract and resources for a publication by Soroush H. Zargarbashi." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
 <link rel="stylesheet" href="assets/site.css" />
+<script>document.documentElement.className += " js";</script>
 </head>
-<body data-screen-label="Publication">
+<body>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <a class="brand" href="index.html">
-      <span class="mark">SZ</span>
-      <span class="mark-text">
-        <span class="name">Soroush H. Zargarbashi</span>
-      </span>
-    </a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html">Soroush H. Zargarbashi</a>
     <nav class="nav" aria-label="Primary">
       <a href="index.html">Index</a>
-      <a href="publications.html" class="active">Publications</a>
+      <a href="publications.html" aria-current="page">Publications</a>
       <a href="blog.html">Writing</a>
       <a href="cv.html">CV</a>
     </nav>
   </div>
 </header>
 
-<div class="pub-wrap" id="pub-content">
+<main id="main">
+  <article class="detail">
+    <a class="back-link" href="publications.html">← Publications</a>
 
-  <a class="back-link" href="publications.html">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-    Back to Publications
-  </a>
-
-  <div id="pub-head">
-    <h1 class="pub-detail-title" id="pub-title"></h1>
-    <p class="pub-detail-authors" id="pub-authors"></p>
-    <p class="pub-detail-venue" id="pub-venue"></p>
-  </div>
-
-  <div class="pub-detail-links" id="pub-links"></div>
-
-  <div class="pub-detail-abstract">
-    <h2>Abstract</h2>
-    <div id="pub-abstract"></div>
-  </div>
-
-  <div class="pub-tags-row" id="pub-tags"></div>
-
-</div>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-glyph">ZARGAR<span class="accent">.</span>BASHI<span class="accent">/</span></div>
-    <div class="footer-row">
-      <div>
-        <h4>Colophon</h4>
-        <p style="font-family: var(--f-serif); font-size: 16px; line-height: 1.4; max-width: 420px;">
-          Set in <em>Space Grotesk</em> and Newsreader.
-        </p>
-      </div>
-      <div>
-        <h4>Pages</h4>
-        <a href="index.html">Index</a>
-        <a href="publications.html">Publications</a>
-        <a href="blog.html">Writing</a>
-        <a href="cv.html">CV</a>
-      </div>
-      <div>
-        <h4>Elsewhere</h4>
-        <a href="mailto:soroushzargar@gmail.com">Email</a>
-        <a href="https://linkedin.com/in/soroushzargar">LinkedIn</a>
-        <a href="https://github.com/soroushzargar">GitHub</a>
-        <a href="resume.pdf">CV (PDF)</a>
-      </div>
+    <div data-publication-detail>
+      <noscript><p>Publication details are loaded from a data file and need JavaScript. See the <a class="link-accent" href="publications.html">publication list</a>.</p></noscript>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Soroush H. Zargarbashi.</span>
-      <span>Made in Cologne.</span>
-    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>© 2026 Soroush H. Zargarbashi</span>
+    <span>Made in Cologne</span>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
 <script src="assets/site.js"></script>
-<script>
-  const SVG_PAPER  = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`;
-  const SVG_POSTER = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`;
-  const SVG_TALK   = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
-
-  const id = new URLSearchParams(location.search).get('id');
-
-  fetch('data/publications.json')
-    .then(r => r.json())
-    .then(pubs => {
-      const pub = pubs.find(p => p.id === id);
-      if (!pub) {
-        document.getElementById('pub-title').textContent = 'Publication not found.';
-        return;
-      }
-
-      document.title = `${pub.title} — Soroush H. Zargarbashi`;
-
-      document.getElementById('pub-title').textContent = pub.title;
-      document.getElementById('pub-authors').innerHTML = pub.authorsHtml;
-      document.getElementById('pub-venue').textContent = pub.venue;
-
-      document.getElementById('pub-tags').innerHTML =
-        pub.tags.map(t => `<span class="tag">${t}</span>`).join('');
-
-      const lnk = pub.links || {};
-      const btn = (url, svg, label) => {
-        const inactive = !url ? ' pub-detail-link--inactive' : '';
-        const attrs = url ? `href="${url}" target="_blank" rel="noopener"` : '';
-        return `<a ${attrs} class="pub-detail-link${inactive}">${svg} ${label}</a>`;
-      };
-      document.getElementById('pub-links').innerHTML =
-        btn(lnk.paper,  SVG_PAPER,  'Paper')  +
-        btn(lnk.poster, SVG_POSTER, 'Poster') +
-        btn(lnk.talk,   SVG_TALK,   'Talk');
-
-      const abstractEl = document.getElementById('pub-abstract');
-      abstractEl.innerHTML = marked.parse(pub.abstract || '');
-      renderMathInElement(abstractEl, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$',  right: '$',  display: false }
-        ],
-        throwOnError: false
-      });
-    });
-</script>
 </body>
 </html>

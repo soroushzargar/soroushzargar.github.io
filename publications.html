@@ -4,138 +4,63 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publications — Soroush H. Zargarbashi</title>
-<meta name="description" content="Complete list of research publications in trustworthy AI, conformal prediction, adversarial robustness, and graph neural networks." />
+<meta name="description" content="Research publications on trustworthy AI, conformal prediction, adversarial robustness, and graph neural networks." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Publications — Soroush H. Zargarbashi" />
+<meta property="og:description" content="Research publications on trustworthy AI, conformal prediction, adversarial robustness, and graph neural networks." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" />
 <link rel="stylesheet" href="assets/site.css" />
+<script>document.documentElement.className += " js";</script>
 </head>
-<body data-screen-label="Publications">
+<body>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <a class="brand" href="index.html">
-      <span class="mark">SZ</span>
-      <span class="mark-text">
-        <span class="name">Soroush H. Zargarbashi</span>
-      </span>
-    </a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html">Soroush H. Zargarbashi</a>
     <nav class="nav" aria-label="Primary">
       <a href="index.html">Index</a>
-      <a href="publications.html" class="active">Publications</a>
+      <a href="publications.html" aria-current="page">Publications</a>
       <a href="blog.html">Writing</a>
       <a href="cv.html">CV</a>
     </nav>
   </div>
 </header>
 
-<section class="pubs-head">
-  <div class="wrap">
-    <h1 class="pubs-mast reveal">
-      Publications<span style="color: var(--accent);">.</span>
-    </h1>
-    <p class="pubs-sub reveal reveal-delay-1">
-      Trustworthy AI, conformal prediction, adversarial robustness, graph neural networks. <strong>*</strong> denotes equal contribution.
+<main id="main">
+
+  <section class="band band--open">
+    <h1 class="page-title reveal">Publications</h1>
+    <p class="page-intro reveal d1">
+      Trustworthy AI, conformal prediction, adversarial robustness, and graph neural networks.
+      Asterisks denote equal contribution.
     </p>
-  </div>
-</section>
+  </section>
 
-<!-- Year-grouped publication sections are injected here -->
-<div id="pub-sections"></div>
+  <section class="band" data-publication-list aria-label="Publications by year">
+    <noscript><p class="page-intro">The publication list is loaded from a data file and needs JavaScript. The full list is also in the <a class="link-accent" href="resume.pdf">CV (PDF)</a>.</p></noscript>
+  </section>
 
-<section class="section" style="border-top: 1px solid var(--ink); padding: clamp(40px, 6vw, 80px) 0;">
-  <div class="wrap">
-    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-      <a class="cta cta-ghost" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar <span class="arrow">↗</span></a>
+  <section class="band band--tight">
+    <div class="contact-list">
+      <a class="link-more" href="https://scholar.google.com/citations?user=XnPiy-YAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+      <a class="link-more" href="resume.pdf" target="_blank">CV / PDF ↗</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-glyph">ZARGAR<span class="accent">.</span>BASHI<span class="accent">/</span></div>
-    <div class="footer-row">
-      <div>
-        <h4>Colophon</h4>
-        <p style="font-family: var(--f-serif); font-size: 16px; line-height: 1.4; max-width: 420px;">
-          Set in <em>Space Grotesk</em> and Newsreader.
-        </p>
-      </div>
-      <div>
-        <h4>Pages</h4>
-        <a href="index.html">Index</a>
-        <a href="publications.html">Publications</a>
-        <a href="blog.html">Writing</a>
-        <a href="cv.html">CV</a>
-      </div>
-      <div>
-        <h4>Elsewhere</h4>
-        <a href="mailto:soroushzargar@gmail.com">Email</a>
-        <a href="https://linkedin.com/in/soroushzargar">LinkedIn</a>
-        <a href="https://github.com/soroushzargar">GitHub</a>
-        <a href="resume.pdf">CV (PDF)</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Soroush H. Zargarbashi.</span>
-      <span>Made in Cologne.</span>
-    </div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>© 2026 Soroush H. Zargarbashi</span>
+    <span>Made in Cologne</span>
   </div>
 </footer>
 
 <script src="assets/site.js"></script>
-<script>
-  fetch('data/publications.json')
-    .then(r => r.json())
-    .then(pubs => {
-      const years = [...new Set(pubs.map(p => p.year))].sort((a, b) => b - a);
-      const byYear = {};
-      years.forEach(y => byYear[y] = pubs.filter(p => p.year === y));
-
-      let globalIdx = 0;
-
-      const html = years.map((year, yi) => {
-        const isLast = yi === years.length - 1;
-        const cards = byYear[year].map(pub => {
-          globalIdx++;
-          const num = String(globalIdx).padStart(2, '0');
-          const abstract = pub.abstract ? pub.abstract.substring(0, 240).trim() + '…' : '';
-          const links = pub.links || {};
-          const linkHtml = [
-            links.paper  ? `<a class="pc-link" href="${links.paper}" target="_blank" rel="noopener">PDF</a>` : '',
-            links.poster ? `<a class="pc-link" href="${links.poster}" target="_blank" rel="noopener">Poster</a>` : '',
-            links.talk   ? `<a class="pc-link" href="${links.talk}" target="_blank" rel="noopener">Talk</a>` : '',
-            `<a class="pc-link" href="pub.html?id=${pub.id}">Abstract →</a>`,
-          ].filter(Boolean).join('');
-          const venueStyle = pub.venueTagItalic ? ' style="font-style:italic;"' : '';
-
-          return `
-            <article class="pub-card">
-              <div class="pc-num">№ ${num}</div>
-              <div>
-                <h3 class="pc-title">${pub.title}.</h3>
-                <p class="pc-auth">${pub.authorsHtml}</p>
-                ${abstract ? `<p class="pc-abs">${abstract}</p>` : ''}
-                <div class="pc-tags">${pub.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-              </div>
-              <div class="pc-side">
-                <span class="pc-venue"${venueStyle}>${pub.venueTag}</span>
-                <div class="pc-links">${linkHtml}</div>
-              </div>
-            </article>`;
-        }).join('');
-
-        const sectionStyle = isLast ? ' style="border-bottom: 0;"' : '';
-        return `
-          <section class="pubs-group"${sectionStyle}>
-            <div class="wrap">
-              <div class="pubs-group-head">
-                <div class="pubs-group-year">${year}.</div>
-              </div>
-              ${cards}
-            </div>
-          </section>`;
-      }).join('');
-
-      document.getElementById('pub-sections').innerHTML = html;
-    });
-</script>
 </body>
 </html>
