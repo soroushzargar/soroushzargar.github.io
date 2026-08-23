@@ -47,6 +47,15 @@
     return "pub.html?id=" + encodeURIComponent(pub.id);
   }
 
+  function venueBadge(pub) {
+    var venue = pub.tags && pub.tags[0] ? pub.tags[0] : pub.venueTag;
+    return venue ? '<span class="venue-badge">' + esc(venue) + "</span>" : "";
+  }
+
+  function renderKeywords(tags) {
+    return esc((tags || []).slice(1).join(" · "));
+  }
+
   function postMetaLine(post) {
     var parts = [post.dateDisplay || post.date];
     if (post.readingMinutes) parts.push(post.readingMinutes + " min read");
@@ -113,10 +122,13 @@
 
         return (
           '<article class="pub-item">' +
-            '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + esc(pub.title) + "</h3></a>" +
+            '<div class="pub-heading">' +
+              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + esc(pub.title) + "</h3></a>" +
+              venueBadge(pub) +
+            "</div>" +
             '<p class="pub-authors">' + pub.authorsHtml + "</p>" +
             '<p class="pub-abstract">' + esc(truncate(pub.abstract, 320)) + "</p>" +
-            '<div class="pub-meta"><span class="tag">' + esc(pub.tags.join(" · ")) + "</span></div>" +
+            '<div class="pub-meta">' + renderKeywords(pub.tags) + "</div>" +
             '<div class="pub-links">' + links + "</div>" +
           "</article>"
         );
@@ -169,7 +181,10 @@
     var links = pub.links || {};
 
     host.innerHTML =
-      '<h1 class="detail-title">' + esc(pub.title) + "</h1>" +
+      '<div class="detail-heading">' +
+        venueBadge(pub) +
+        '<h1 class="detail-title">' + esc(pub.title) + "</h1>" +
+      "</div>" +
       '<p class="detail-authors">' + pub.authorsHtml + "</p>" +
       '<p class="detail-venue">' + pub.venue + "</p>" +
       '<div class="resource-links">' +
@@ -181,7 +196,7 @@
       '<div class="detail-section-label">Abstract</div>' +
       '<div class="prose" id="pub-abstract"><p>' + esc(pub.abstract) + "</p></div>" +
       '<div class="detail-section-label mt-32">Topics</div>' +
-      '<p class="tag">' + esc(pub.tags.join(" · ")) + "</p>";
+      '<div class="keyword-list">' + renderKeywords(pub.tags) + "</div>";
 
     typesetMath($("#pub-abstract"));
   }
