@@ -17,7 +17,7 @@
       "poster": null,
       "talk": null
     },
-    "selected": false,
+    "selected": true,
     "abstract": "Even though current safety-aligned language models are able to refuse harmful requests, their guard can still be bypassed by adversarial perturbations. As in other domains, adversarial training is considered a standard defense. However, due to the autoregressive nature of language generation, supervised finetuning on template refusals does not necessarily teach the model to refuse. Evidence of this is that the adversarially trained model still complies when the attacker injects a compliant prefill. We propose Adversarial Self-Distillation (ASD), which extends a model’s own safe behavior to the space of adversarial perturbations. The teacher (the model itself given the clean prompt) can refuse the harmful request by default, or with the help of an additional instruction in its context. ASD distills this knowledge to the student (which is the same model under attack) at the prefixes that the student visits (due to on-policy sampling). These potentially include compliant openings. ASD achieves lower attack success than state-of-the-art defenses with little loss in multiple-choice accuracy, and it becomes able to recover a refusal even after a compliant opening."
   },
   {
@@ -38,7 +38,7 @@
       "poster": null,
       "talk": null
     },
-    "selected": false,
+    "selected": true,
     "abstract": "Conformal prediction (CP) is a post-hoc calibration method that returns prediction sets with distribution-free coverage guarantees, and the size of the output set is often interpreted as a notion of uncertainty. We show that the difference in set size between full and split CP is directly connected to Bayesian posterior variance, which is the epistemic uncertainty of the model. Essentially, this difference in set size is an aggregation of two opposite effects: (1) better model accuracy and therefore smaller set size achieved by training over extra calibration points, and (2) the “formability” of the model at test point towards every possible label. The latter effect vanishes with stronger models or more calibration data (as epistemic uncertainty is known for that behavior). It turns out that the model’s formability itself (without the quantization effect of prediction sets, and through estimating the posterior variance) is a useful tool to quantify the epistemic uncertainty. In our empirical evaluation it performs on par with the state of the art in many setups."
   },
   {
@@ -59,7 +59,7 @@
       "poster": null,
       "talk": "https://iclr.cc/virtual/2026/poster/10010630"
     },
-    "selected": true,
+    "selected": false,
     "abstract": "Adversarial attacks on graph neural networks typically rely on gradient-based methods that struggle with the discrete, combinatorial structure of graphs. We introduce EvA, an evolutionary algorithm for generating adversarial perturbations on graphs. By treating graph modifications as a combinatorial search problem, EvA leverages population-based optimization to find highly effective perturbations without requiring gradient computations through the graph structure. Our method achieves state-of-the-art attack performance across multiple datasets and GNN architectures while remaining computationally efficient and applicable to non-differentiable defenses. Extensive experiments demonstrate that EvA consistently outperforms gradient-based baselines, especially in settings where the defense is non-differentiable or the perturbation budget is large, establishing a new standard for evaluating the robustness of graph learning systems."
   },
   {
@@ -81,7 +81,7 @@
       "poster": null,
       "talk": "https://slideslive.com/39063180/cats-conformalized-adaptive-testtime-scaling"
     },
-    "selected": false,
+    "selected": true,
     "abstract": "Distribution shift at test time undermines the reliability of conformal prediction, which relies on an exchangeability assumption between calibration and test data. We introduce CATS (Conformalized Adaptive Test-time Scaling), a method that recalibrates the conformal threshold adaptively during deployment using only the unlabeled test stream. CATS couples a lightweight test-time scaling mechanism with a conformal wrapper, restoring valid coverage guarantees under a broad class of covariate shifts. We provide a formal characterization of the conditions under which adaptive updates remain compatible with conformal validity and demonstrate significant improvements in coverage and efficiency across vision and language benchmarks. CATS requires no labeled target data and adds minimal overhead to the inference pipeline, making it practical for real-world deployment scenarios where distribution shift is common and labels are unavailable."
   },
   {
@@ -102,7 +102,7 @@
       "poster": null,
       "talk": "https://icml.cc/virtual/2026/poster/64333"
     },
-    "selected": true,
+    "selected": false,
     "abstract": "Standard approaches to adversarially robust conformal prediction require expensive worst-case computations at every test point, making them impractical for latency-sensitive deployment scenarios. We propose a front-loading strategy that shifts the computational burden entirely to calibration time: by performing adversarial augmentation during calibration, we derive prediction sets that maintain validity under adversarial perturbations at test time with no additional overhead beyond a standard forward pass. This clean separation between a heavy calibration phase and a lightweight inference phase makes adversarially robust uncertainty quantification practical for real-time systems. We prove that the resulting prediction sets achieve the desired coverage guarantee under the specified threat model, and show empirically that the front-loaded approach matches the coverage tightness of per-sample robust methods while reducing inference-time cost by orders of magnitude."
   },
   {
@@ -144,7 +144,7 @@
       "poster": null,
       "talk": null
     },
-    "selected": true,
+    "selected": false,
     "abstract": "Conformal prediction sets are constructed using a threshold derived from calibration scores, but the choice of score function critically determines the size and informativeness of the resulting sets. We study optimal conformal prediction under epistemic uncertainty, characterizing the score functions that minimize expected set size while maintaining coverage. Our analysis reveals a fundamental connection between epistemic uncertainty and the efficiency of conformal sets: when the model's epistemic uncertainty is well-calibrated, score functions derived from uncertainty estimates achieve near-optimal efficiency. We propose a practical algorithm that approximates optimal scores under epistemic uncertainty and demonstrate consistent improvements in set size — without sacrificing coverage — over standard score-based baselines across a range of classification benchmarks."
   },
   {
@@ -186,7 +186,7 @@
       "poster": null,
       "talk": "https://neurips.cc/virtual/2025/poster/116678"
     },
-    "selected": true,
+    "selected": false,
     "postSlug": "one-sample-robust-conformal",
     "abstract": "Adversarially robust conformal prediction requires searching over worst-case perturbations for each calibration point — a process that scales poorly with the perturbation budget and model complexity. We show that a single adversarial example per calibration point is sufficient to obtain tight, valid coverage guarantees under attack. By augmenting each calibration score with exactly one adversarial perturbation and adjusting the quantile threshold accordingly, our method matches the coverage of computationally expensive worst-case methods while reducing calibration runtime by an order of magnitude. The approach generalizes across $\\ell_\\infty$ and $\\ell_2$ threat models with no change to the core algorithm, and we provide rigorous theoretical guarantees showing that the one-shot augmentation strategy yields prediction sets with the correct marginal coverage under the specified adversarial threat model."
   },
@@ -208,7 +208,7 @@
       "poster": "https://iclr.cc/media/PosterPDFs/ICLR%202025/28494.png",
       "talk": "https://iclr.cc/virtual/2025/poster/28494"
     },
-    "selected": true,
+    "selected": false,
     "abstract": "Existing approaches to adversarially robust conformal prediction require computing a separate, continuous certificate for each candidate class at calibration time, leading to computational costs that scale with the number of classes. We show that a single binary certificate — one that answers only whether the true class is included in the prediction set under any perturbation in the threat model — is sufficient to construct valid robust prediction sets. This reduction from per-class continuous certification to a single binary query reduces computational cost by a factor equal to the number of classes and enables the use of efficient binary certification methods that are not applicable in the continuous setting. We prove that the resulting prediction sets achieve valid marginal coverage under adversarial perturbations and show empirically that they are tighter than those produced by prior class-wise certification approaches, especially on tasks with many classes."
   },
   {
@@ -271,7 +271,7 @@
       "poster": "https://icml.cc/media/PosterPDFs/ICML%202023/23958.png",
       "talk": "https://icml.cc/virtual/2023/poster/23958"
     },
-    "selected": true,
+    "selected": false,
     "abstract": "Conformal prediction requires that calibration and test examples be exchangeable, an assumption that fails for node classification in graphs due to message passing: each node's representation is influenced by its neighbors, creating statistical dependencies across the dataset. We study when and how conformal prediction can be validly applied to graph neural networks, providing a rigorous analysis of the exchangeability violations induced by message passing and identifying sufficient conditions under which coverage guarantees are preserved. We introduce a calibration strategy that provably satisfies these conditions by exploiting the structure of GNN message passing and demonstrate that it yields smaller, more informative prediction sets than naive conformal methods. Extensive empirical evaluation across standard graph benchmarks with multiple GNN architectures confirms that the theoretical guarantees translate to strong practical coverage and efficiency."
   },
   {
