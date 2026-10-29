@@ -1,5 +1,26 @@
 [
   {
+    "id": "form-uncertainty-2026",
+    "year": 2026,
+    "title": "What “Form” of Uncertainty Does Conformal Prediction Quantify?",
+    "authorsHtml": "<strong>Soroush H. Zargarbashi</strong>, Mohammad Sadegh Akhondzadeh, Rebekka Burkholz, Aleksandar Bojchevski",
+    "venue": "Preprint — arXiv:2610.24510",
+    "venueTag": "Preprint · arXiv 2026",
+    "venueTagItalic": true,
+    "tags": [
+      "Preprint · arXiv 2026",
+      "Conformal Prediction",
+      "Epistemic Uncertainty"
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.24510",
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Conformal prediction (CP) is a post-hoc calibration method that returns prediction sets with distribution-free coverage guarantees, and the size of the output set is often interpreted as a notion of uncertainty. We show that the difference in set size between full and split CP is directly connected to Bayesian posterior variance, which is the epistemic uncertainty of the model. Essentially, this difference in set size is an aggregation of two opposite effects: (1) better model accuracy and therefore smaller set size achieved by training over extra calibration points, and (2) the “formability” of the model at test point towards every possible label. The latter effect vanishes with stronger models or more calibration data (as epistemic uncertainty is known for that behavior). It turns out that the model’s formability itself (without the quantization effect of prediction sets, and through estimating the posterior variance) is a useful tool to quantify the epistemic uncertainty. In our empirical evaluation it performs on par with the state of the art in many setups."
+  },
+  {
     "id": "eva-2026",
     "year": 2026,
     "title": "EvA: Evolutionary Attacks on Graphs",
@@ -60,7 +81,7 @@
       "poster": null,
       "talk": "https://icml.cc/virtual/2026/poster/64333"
     },
-    "selected": false,
+    "selected": true,
     "abstract": "Standard approaches to adversarially robust conformal prediction require expensive worst-case computations at every test point, making them impractical for latency-sensitive deployment scenarios. We propose a front-loading strategy that shifts the computational burden entirely to calibration time: by performing adversarial augmentation during calibration, we derive prediction sets that maintain validity under adversarial perturbations at test time with no additional overhead beyond a standard forward pass. This clean separation between a heavy calibration phase and a lightweight inference phase makes adversarially robust uncertainty quantification practical for real-time systems. We prove that the resulting prediction sets achieve the desired coverage guarantee under the specified threat model, and show empirically that the front-loaded approach matches the coverage tightness of per-sample robust methods while reducing inference-time cost by orders of magnitude."
   },
   {
@@ -102,7 +123,7 @@
       "poster": null,
       "talk": null
     },
-    "selected": false,
+    "selected": true,
     "abstract": "Conformal prediction sets are constructed using a threshold derived from calibration scores, but the choice of score function critically determines the size and informativeness of the resulting sets. We study optimal conformal prediction under epistemic uncertainty, characterizing the score functions that minimize expected set size while maintaining coverage. Our analysis reveals a fundamental connection between epistemic uncertainty and the efficiency of conformal sets: when the model's epistemic uncertainty is well-calibrated, score functions derived from uncertainty estimates achieve near-optimal efficiency. We propose a practical algorithm that approximates optimal scores under epistemic uncertainty and demonstrate consistent improvements in set size — without sacrificing coverage — over standard score-based baselines across a range of classification benchmarks."
   },
   {
