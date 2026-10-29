@@ -1,5 +1,26 @@
 [
   {
+    "id": "asd-2026",
+    "year": 2026,
+    "title": "Adversarial Self-Distillation",
+    "authorsHtml": "Mohammad Sadegh Akhondzadeh*, <strong>Soroush H. Zargarbashi*</strong>, Aleksandar Bojchevski",
+    "venue": "Preprint — October 2026",
+    "venueTag": "Preprint 2026",
+    "venueTagItalic": true,
+    "tags": [
+      "Preprint 2026",
+      "Adversarial Robustness",
+      "LLM Safety"
+    ],
+    "links": {
+      "paper": null,
+      "poster": null,
+      "talk": null
+    },
+    "selected": false,
+    "abstract": "Even though current safety-aligned language models are able to refuse harmful requests, their guard can still be bypassed by adversarial perturbations. As in other domains, adversarial training is considered a standard defense. However, due to the autoregressive nature of language generation, supervised finetuning on template refusals does not necessarily teach the model to refuse. Evidence of this is that the adversarially trained model still complies when the attacker injects a compliant prefill. We propose Adversarial Self-Distillation (ASD), which extends a model’s own safe behavior to the space of adversarial perturbations. The teacher (the model itself given the clean prompt) can refuse the harmful request by default, or with the help of an additional instruction in its context. ASD distills this knowledge to the student (which is the same model under attack) at the prefixes that the student visits (due to on-policy sampling). These potentially include compliant openings. ASD achieves lower attack success than state-of-the-art defenses with little loss in multiple-choice accuracy, and it becomes able to recover a refusal even after a compliant opening."
+  },
+  {
     "id": "form-uncertainty-2026",
     "year": 2026,
     "title": "What “Form” of Uncertainty Does Conformal Prediction Quantify?",
