@@ -11,6 +11,16 @@
   },
   "posts": [
     {
+      "slug": "adversarial-self-distillation",
+      "title": "Teach the Model to Recover, Not Only to Refuse",
+      "date": "2026-10-30",
+      "dateDisplay": "October 30, 2026",
+      "readingMinutes": 6,
+      "category": "Technical",
+      "tags": ["Preprint 2026", "Adversarial Robustness", "LLM Safety"],
+      "description": "Adversarial training teaches a language model to open with a refusal, not to turn back from a harmful answer it has started. Adversarial Self-Distillation uses the model as its own teacher to train that recovery."
+    },
+    {
       "slug": "ai-is-competent",
       "title": "AI is Competent, But is it Intelligent?",
       "date": "2026-08-14",

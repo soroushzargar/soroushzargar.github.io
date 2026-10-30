@@ -297,8 +297,17 @@
         $("[data-post-title]").textContent = data.title || "";
         host.innerHTML = window.marked ? window.marked.parse(parsed.content) : esc(parsed.content);
         typesetMath(host);
+        loadPlots(host);
       })
       .catch(function () { showPostError(host); });
+  }
+
+  // Posts can embed live plots with <canvas data-plot="name">.
+  function loadPlots(host) {
+    if (!host.querySelector("[data-plot]")) return;
+    var script = document.createElement("script");
+    script.src = "assets/asd-plots/plots.js?v=20261030-3";
+    document.body.appendChild(script);
   }
 
   function showPostError(host) {

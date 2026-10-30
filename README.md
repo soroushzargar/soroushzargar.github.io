@@ -16,6 +16,7 @@ cv.html             CV
 
 assets/site.css     The whole design system
 assets/site.js      Scroll reveals + rendering of the data files
+assets/asd-plots/    Live canvas plots, embedded in a post with <canvas data-plot="name">
 
 data/publications.json   Source of truth for all publications
 data/blogs.json          Source of truth for the post listings
