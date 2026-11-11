@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://soroushzargar.github.io/sitemap.xml

@@ -8,6 +8,7 @@
 
   var PUBS_URL = "data/publications.json";
   var BLOGS_URL = "data/blogs.json";
+  var SITE_URL = "https://soroushzargar.github.io/";
   var WORDS_PER_MINUTE = 180; // technical prose reads slower; keep in sync with data/blogs.json
 
   /* ── helpers ─────────────────────────────────────────────────────────── */
@@ -27,6 +28,25 @@
       if (!res.ok) throw new Error(url + " → " + res.status);
       return res.json();
     });
+  }
+
+  // Detail pages are one HTML file for many URLs; give each its own head.
+  function setPageMeta(title, description) {
+    var url = SITE_URL + location.pathname.split("/").pop() + location.search;
+    function put(selector, make, attr, value) {
+      var node = document.head.querySelector(selector);
+      if (!node) { node = make(); document.head.appendChild(node); }
+      node.setAttribute(attr, value);
+    }
+    function meta(key, name) {
+      return function () { var m = document.createElement("meta"); m.setAttribute(key, name); return m; };
+    }
+    document.title = title + " — Soroush H. Zargarbashi";
+    put('meta[name="description"]', meta("name", "description"), "content", description);
+    put('meta[property="og:title"]', meta("property", "og:title"), "content", title);
+    put('meta[property="og:description"]', meta("property", "og:description"), "content", description);
+    put('meta[property="og:url"]', meta("property", "og:url"), "content", url);
+    put('link[rel="canonical"]', function () { var l = document.createElement("link"); l.rel = "canonical"; return l; }, "href", url);
   }
 
   function plainAuthors(authorsHtml) {
@@ -282,7 +302,7 @@
       return;
     }
 
-    document.title = pub.title + " — Soroush H. Zargarbashi";
+    setPageMeta(pub.title, truncate(plainAuthors(pub.authorsHtml).replace(/\*/g, "") + ". " + pub.venueTag + ". " + pub.abstract, 200));
 
     var resource = function (url, label) {
       return url
@@ -403,7 +423,8 @@
           meta.push(data.tags.replace(/^\[|\]$/g, "").split(",")[0].trim());
         }
 
-        document.title = (data.title || "Writing") + " — Soroush H. Zargarbashi";
+        var firstParagraph = parsed.content.trim().split(/\n\s*\n/)[0].replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`$]/g, "");
+        setPageMeta(data.title || "Writing", truncate("By Soroush H. Zargarbashi. " + firstParagraph, 200));
         $("[data-post-meta]").textContent = meta.filter(Boolean).join(" · ");
         $("[data-post-title]").textContent = data.title || "";
         host.innerHTML = window.marked ? window.marked.parse(parsed.content) : esc(parsed.content);

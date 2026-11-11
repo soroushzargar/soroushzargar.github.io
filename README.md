@@ -96,6 +96,13 @@ write a `function myLab(figure) { … }` in `lab.js` and register it in `LABS`.
 The publications page builds its topic filters from the `tags` in
 `data/publications.json` (every tag after the first, if at least two papers share it).
 
+## Search engines
+
+`robots.txt` and `sitemap.xml` sit at the root. After adding a publication or a
+post, rebuild the sitemap with `python3 tools/sitemap.py`. The home page carries
+the structured data (`application/ld+json`) that tells search engines who the
+site is about, including name variants; update it there if your position changes.
+
 ## Local preview
 
 ```sh
