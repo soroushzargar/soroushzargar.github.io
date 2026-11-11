@@ -84,6 +84,33 @@
     Array.prototype.forEach.call(targets, function (el) { observer.observe(el); });
   }
 
+  /* ── tabs (home: the interactive models) ─────────────────────────────── */
+
+  function initTabs() {
+    Array.prototype.forEach.call(document.querySelectorAll('[role="tablist"]'), function (list) {
+      var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+      function select(tab, focus) {
+        tabs.forEach(function (other) {
+          var on = other === tab;
+          other.setAttribute("aria-selected", String(on));
+          other.tabIndex = on ? 0 : -1;
+          var panel = document.getElementById(other.getAttribute("aria-controls"));
+          if (panel) panel.hidden = !on;
+        });
+        if (focus) tab.focus();
+      }
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener("click", function () { select(tab); });
+        tab.addEventListener("keydown", function (event) {
+          var step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+          if (!step) return;
+          event.preventDefault();
+          select(tabs[(i + step + tabs.length) % tabs.length], true);
+        });
+      });
+    });
+  }
+
   /* ── publications ────────────────────────────────────────────────────── */
 
   // Home: numbered rows for the publications flagged `selected`.
@@ -101,13 +128,25 @@
     }).join("");
   }
 
-  // Publications page: year-grouped entries with a trimmed abstract.
-  function renderPublicationList(host, pubs) {
+  // Publications page: year-grouped entries with a trimmed abstract,
+  // filtered by topic chips and a search box.
+  function pubTopics(pub) {
+    return (pub.tags || []).slice(1);
+  }
+
+  function highlight(text, query) {
+    var safe = esc(text);
+    if (!query) return safe;
+    var pattern = esc(query).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return safe.replace(new RegExp(pattern, "gi"), function (hit) { return "<mark>" + hit + "</mark>"; });
+  }
+
+  function publicationGroups(pubs, query) {
     var years = pubs.map(function (p) { return p.year; })
       .filter(function (y, i, all) { return all.indexOf(y) === i; })
       .sort(function (a, b) { return b - a; });
 
-    host.innerHTML = years.map(function (year) {
+    return years.map(function (year) {
       var items = pubs.filter(function (p) { return p.year === year; }).map(function (pub) {
         var writeUp = pub.postSlug
           ? '<a class="link-accent" href="blog-post.html?slug=' + encodeURIComponent(pub.postSlug) + '">Read the write-up →</a>'
@@ -123,7 +162,7 @@
         return (
           '<article class="pub-item">' +
             '<div class="pub-heading">' +
-              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + esc(pub.title) + "</h3></a>" +
+              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + highlight(pub.title, query) + "</h3></a>" +
               venueBadge(pub) +
             "</div>" +
             '<p class="pub-authors">' + pub.authorsHtml + "</p>" +
@@ -141,6 +180,78 @@
         "</div>"
       );
     }).join("");
+  }
+
+  function renderPublicationList(host, pubs) {
+    // Topics shared by at least two papers become filter chips.
+    var counts = {};
+    pubs.forEach(function (pub) {
+      pubTopics(pub).forEach(function (topic) { counts[topic] = (counts[topic] || 0) + 1; });
+    });
+    var topics = Object.keys(counts)
+      .filter(function (topic) { return counts[topic] > 1; })
+      .sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); });
+
+    var params = new URLSearchParams(location.search);
+    var state = {
+      topic: topics.indexOf(params.get("topic")) === -1 ? "" : params.get("topic"),
+      query: params.get("q") || ""
+    };
+
+    host.innerHTML =
+      '<div class="pub-tools">' +
+        '<input class="pub-search" type="search" placeholder="Search titles, authors, abstracts" aria-label="Search publications" value="' + esc(state.query) + '" />' +
+        '<div class="pub-chips" role="group" aria-label="Filter by topic">' +
+          '<button type="button" class="pub-chip" data-topic="">All<span>' + pubs.length + "</span></button>" +
+          topics.map(function (topic) {
+            return '<button type="button" class="pub-chip" data-topic="' + esc(topic) + '">' + esc(topic) + "<span>" + counts[topic] + "</span></button>";
+          }).join("") +
+        "</div>" +
+        '<div class="pub-count" aria-live="polite"></div>' +
+      "</div>" +
+      '<div data-pub-results></div>';
+
+    var results = host.querySelector("[data-pub-results]");
+    var count = host.querySelector(".pub-count");
+    var chips = host.querySelectorAll(".pub-chip");
+
+    function apply() {
+      var query = state.query.trim().toLowerCase();
+      var shown = pubs.filter(function (pub) {
+        if (state.topic && pubTopics(pub).indexOf(state.topic) === -1) return false;
+        if (!query) return true;
+        return [pub.title, plainAuthors(pub.authorsHtml), pub.abstract, pub.venueTag, (pub.tags || []).join(" ")]
+          .join(" ").toLowerCase().indexOf(query) !== -1;
+      });
+
+      Array.prototype.forEach.call(chips, function (chip) {
+        chip.setAttribute("aria-pressed", String(chip.getAttribute("data-topic") === state.topic));
+      });
+      count.textContent = shown.length === pubs.length
+        ? pubs.length + " papers"
+        : shown.length + " of " + pubs.length + " papers";
+      results.innerHTML = shown.length
+        ? publicationGroups(shown, state.query.trim())
+        : '<p class="pub-empty">Nothing matches. Try a shorter search or another topic.</p>';
+
+      var next = new URLSearchParams();
+      if (state.topic) next.set("topic", state.topic);
+      if (state.query.trim()) next.set("q", state.query.trim());
+      var search = next.toString();
+      history.replaceState(null, "", location.pathname + (search ? "?" + search : ""));
+    }
+
+    host.querySelector(".pub-search").addEventListener("input", function (event) {
+      state.query = event.target.value;
+      apply();
+    });
+    Array.prototype.forEach.call(chips, function (chip) {
+      chip.addEventListener("click", function () {
+        state.topic = chip.getAttribute("data-topic");
+        apply();
+      });
+    });
+    apply();
   }
 
   // CV: one compact line per selected publication.
@@ -298,6 +409,9 @@
         host.innerHTML = window.marked ? window.marked.parse(parsed.content) : esc(parsed.content);
         typesetMath(host);
         loadPlots(host);
+        loadLabs(host);
+        linkRelatedPaper(slug);
+        initReadProgress(host);
       })
       .catch(function () { showPostError(host); });
   }
@@ -308,6 +422,51 @@
     var script = document.createElement("script");
     script.src = "assets/asd-plots/plots.js?v=20261030-3";
     document.body.appendChild(script);
+  }
+
+  // …and interactive models with <figure class="lab" data-lab="name">.
+  function loadLabs(host) {
+    if (!host.querySelector("[data-lab]")) return;
+    if (window.siteLab) { window.siteLab.boot(host); return; }
+    var script = document.createElement("script");
+    script.src = "assets/lab/lab.js?v=20261111-1";
+    document.body.appendChild(script);
+  }
+
+  // Point the post's footer at its own paper when there is one.
+  function linkRelatedPaper(slug) {
+    var link = $("[data-related-paper]");
+    if (!link) return;
+    getJSON(PUBS_URL).then(function (pubs) {
+      var pub = pubs.filter(function (p) { return p.postSlug === slug; })[0];
+      if (!pub) return;
+      link.href = pubHref(pub);
+      link.textContent = "The paper: " + pub.title + " →";
+    }).catch(fail("related paper"));
+  }
+
+  // A thin bar under the top edge that fills as the post is read.
+  function initReadProgress(host) {
+    var bar = document.createElement("div");
+    bar.className = "read-progress";
+    bar.setAttribute("aria-hidden", "true");
+    document.body.appendChild(bar);
+    var queued = false;
+    function measure() {
+      queued = false;
+      var box = host.getBoundingClientRect();
+      var span = box.height - innerHeight * 0.6;
+      var done = span > 0 ? Math.max(0, Math.min(1, -box.top / span)) : 1;
+      bar.style.transform = "scaleX(" + done + ")";
+    }
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(measure);
+    }
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    measure();
   }
 
   function showPostError(host) {
@@ -322,6 +481,7 @@
   }
 
   initReveals();
+  initTabs();
 
   var selectedWork = $("[data-selected-work]");
   var pubList = $("[data-publication-list]");

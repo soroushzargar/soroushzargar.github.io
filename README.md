@@ -17,6 +17,7 @@ cv.html             CV
 assets/site.css     The whole design system
 assets/site.js      Scroll reveals + rendering of the data files
 assets/asd-plots/    Live canvas plots, embedded in a post with <canvas data-plot="name">
+assets/lab/lab.js   Interactive toy models, embedded with <figure class="lab" data-lab="name">
 
 data/publications.json   Source of truth for all publications
 data/blogs.json          Source of truth for the post listings
@@ -73,6 +74,27 @@ Append an object to `data/publications.json`:
 2. Add the matching entry to `posts` in `data/blogs.json` (see `_template`
    there). `readingMinutes` is used in listings; the post page computes its own
    from the Markdown at 180 wpm — keep the two roughly in step.
+
+## Interactive models
+
+`assets/lab/lab.js` holds small models that run in the browser and respond to
+sliders and the pointer. Two exist: `conformal` (split conformal prediction on a
+three-class toy problem, an attacker of radius ε, and robust sets) and `graph`
+(conformal sets on a toy graph with neighbourhood diffusion of the scores).
+
+Put one on any page, or in a post's Markdown, with
+
+```html
+<figure class="lab" data-lab="conformal">
+  <figcaption>Caption.</figcaption>
+</figure>
+```
+
+The home page loads the script itself; posts load it on demand. To add a model,
+write a `function myLab(figure) { … }` in `lab.js` and register it in `LABS`.
+
+The publications page builds its topic filters from the `tags` in
+`data/publications.json` (every tag after the first, if at least two papers share it).
 
 ## Local preview
 

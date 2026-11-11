@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@0;1&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Basic&display=swap" />
-<link rel="stylesheet" href="assets/site.css?v=20260823-2" />
+<link rel="stylesheet" href="assets/site.css?v=20261111-1" />
 <script>document.documentElement.className += " js";</script>
 </head>
 <body>
@@ -42,6 +42,7 @@
       In parallel, I live by thinking about how technology interacts with society, and how to avoid its pitfalls. I am also an amateur photographer, if you like nice photos, check out my <a class="link-accent" href="https://www.unsplash.com/@soroushzargar" target="_blank" rel="noopener">Unsplash</a>.
     </p>
     <div class="hero-links reveal d3">
+      <a class="link-underline" href="#research">Play with the research ↓</a>
       <a class="link-underline" href="publications.html">Publications →</a>
       <a class="link-underline" href="cv.html">Curriculum Vitae →</a>
     </div>
@@ -78,11 +79,57 @@
   </section>
 
   <!-- ── Research ──────────────────────────────────────────────────────── -->
-  <section class="band" aria-labelledby="research-label">
-    <div class="band-grid">
+  <section class="band" id="research" aria-labelledby="research-label">
+    <div class="band-grid band-head">
       <h2 class="band-label" id="research-label">Research</h2>
+      <p class="lab-intro reveal">
+        Most of what I work on fits in two small models. Both run live in this page, so
+        change the numbers and see what the guarantees do.
+      </p>
+    </div>
 
-      <div class="keywords reveal">
+    <div class="reveal">
+      <div class="lab-tabs" role="tablist" aria-label="Interactive models">
+        <button type="button" role="tab" id="tab-coverage" aria-controls="panel-coverage" aria-selected="true">Guarantees under attack</button>
+        <button type="button" role="tab" id="tab-graph" aria-controls="panel-graph" aria-selected="false" tabindex="-1">Sets on graphs</button>
+      </div>
+
+      <div class="lab-panel" role="tabpanel" id="panel-coverage" aria-labelledby="tab-coverage">
+        <p class="lab-dek">
+          <strong>A set of labels instead of one guess.</strong>
+          Conformal prediction returns a set that contains the true label with a probability you
+          choose. Move the point: the set grows where the classes overlap. Then give an attacker a
+          radius ε. The standard guarantee breaks, and robust sets pay in size to keep it.
+        </p>
+        <figure class="lab" data-lab="conformal">
+          <noscript><p class="lab-dek">This model runs in the browser and needs JavaScript.</p></noscript>
+          <figcaption>
+            Toy three-class classifier. Coverage and set size are measured on 2,000 fresh points; “attacked”
+            moves every point to the worst place within ε for its true label. Related papers:
+            <a href="pub.html?id=robust-efficient-2024">Robust Yet Efficient Conformal Prediction Sets</a>,
+            <a href="pub.html?id=single-cert-2025">a Single Binary Certificate</a>,
+            <a href="pub.html?id=one-sample-2025">One Sample is Enough</a>.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="lab-panel" role="tabpanel" id="panel-graph" aria-labelledby="tab-graph" hidden>
+        <p class="lab-dek">
+          <strong>Neighbours know something.</strong>
+          In many graphs, connected nodes tend to share a label. Mixing each node’s scores with its
+          neighbours’ keeps the coverage where you asked for it and makes the sets smaller. Raise λ
+          and watch the nodes darken.
+        </p>
+        <figure class="lab" data-lab="graph">
+          <figcaption>
+            Toy graph with three communities; every node has a noisy prediction of its own. Related papers:
+            <a href="pub.html?id=conformal-gnn-2023">Conformal Prediction Sets for Graph Neural Networks</a>,
+            <a href="pub.html?id=conformal-inductive-2024">Conformal Inductive Graph Neural Networks</a>.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="keywords keywords--after-lab">
         <div>
           <div class="keyword-label">Conformal prediction</div>
           <p>Prediction sets · Distribution-free coverage · Finite-sample guarantees · Nonconformity scores · Exchangeability · Set efficiency</p>
@@ -225,6 +272,7 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=20260823-2"></script>
+<script src="assets/site.js?v=20261111-1"></script>
+<script src="assets/lab/lab.js?v=20261111-1" defer></script>
 </body>
 </html>
