@@ -19,7 +19,14 @@
     },
     "selected": true,
     "postSlug": "adversarial-self-distillation",
-    "abstract": "Even though current safety-aligned language models are able to refuse harmful requests, their guard can still be bypassed by adversarial perturbations. As in other domains, adversarial training is considered a standard defense. However, due to the autoregressive nature of language generation, supervised finetuning on template refusals does not necessarily teach the model to refuse. Evidence of this is that the adversarially trained model still complies when the attacker injects a compliant prefill. We propose Adversarial Self-Distillation (ASD), which extends a model’s own safe behavior to the space of adversarial perturbations. The teacher (the model itself given the clean prompt) can refuse the harmful request by default, or with the help of an additional instruction in its context. ASD distills this knowledge to the student (which is the same model under attack) at the prefixes that the student visits (due to on-policy sampling). These potentially include compliant openings. ASD achieves lower attack success than state-of-the-art defenses with little loss in multiple-choice accuracy, and it becomes able to recover a refusal even after a compliant opening."
+    "abstract": "Even though current safety-aligned language models are able to refuse harmful requests, their guard can still be bypassed by adversarial perturbations. As in other domains, adversarial training is considered a standard defense. However, due to the autoregressive nature of language generation, supervised finetuning on template refusals does not necessarily teach the model to refuse. Evidence of this is that the adversarially trained model still complies when the attacker injects a compliant prefill. We propose Adversarial Self-Distillation (ASD), which extends a model’s own safe behavior to the space of adversarial perturbations. The teacher (the model itself given the clean prompt) can refuse the harmful request by default, or with the help of an additional instruction in its context. ASD distills this knowledge to the student (which is the same model under attack) at the prefixes that the student visits (due to on-policy sampling). These potentially include compliant openings. ASD achieves lower attack success than state-of-the-art defenses with little loss in multiple-choice accuracy, and it becomes able to recover a refusal even after a compliant opening.",
+    "lab": {
+      "plot": "river",
+      "title": "Train every word the attack reaches.",
+      "intro": "Fine-tuning on a template refusal trains only the first word of the answer. ASD trains every prefix the attacked model actually visits. So when the attacker writes the first two words, only ASD still turns back.",
+      "alt": "Two probability rivers. Trained at the first word, SFT refuses almost always, but after a forced two-word start it refuses 4 percent of the time. ASD, trained at every word, refuses 78 percent of the time after the same start.",
+      "caption": "Where each method puts its loss, then the same two forced words for both (toy policy). The write-up has seven more live plots."
+    }
   },
   {
     "id": "form-uncertainty-2026",
@@ -61,7 +68,13 @@
       "talk": "https://iclr.cc/virtual/2026/poster/10010630"
     },
     "selected": false,
-    "abstract": "Adversarial attacks on graph neural networks typically rely on gradient-based methods that struggle with the discrete, combinatorial structure of graphs. We introduce EvA, an evolutionary algorithm for generating adversarial perturbations on graphs. By treating graph modifications as a combinatorial search problem, EvA leverages population-based optimization to find highly effective perturbations without requiring gradient computations through the graph structure. Our method achieves state-of-the-art attack performance across multiple datasets and GNN architectures while remaining computationally efficient and applicable to non-differentiable defenses. Extensive experiments demonstrate that EvA consistently outperforms gradient-based baselines, especially in settings where the defense is non-differentiable or the perturbation budget is large, establishing a new standard for evaluating the robustness of graph learning systems."
+    "abstract": "Adversarial attacks on graph neural networks typically rely on gradient-based methods that struggle with the discrete, combinatorial structure of graphs. We introduce EvA, an evolutionary algorithm for generating adversarial perturbations on graphs. By treating graph modifications as a combinatorial search problem, EvA leverages population-based optimization to find highly effective perturbations without requiring gradient computations through the graph structure. Our method achieves state-of-the-art attack performance across multiple datasets and GNN architectures while remaining computationally efficient and applicable to non-differentiable defenses. Extensive experiments demonstrate that EvA consistently outperforms gradient-based baselines, especially in settings where the defense is non-differentiable or the perturbation budget is large, establishing a new standard for evaluating the robustness of graph learning systems.",
+    "lab": {
+      "name": "evolution",
+      "title": "Search instead of gradients.",
+      "intro": "Which edges should an attacker flip to hurt a graph classifier most? Accuracy is not differentiable in the graph structure, so EvA searches for it directly: a population of candidate perturbations is scored, the best survive, and the next generation is bred from them by crossover and mutation. The same loop runs here on a toy graph.",
+      "caption": "A toy graph and a one-step message-passing classifier running in your browser, not the paper’s models or search operators. Random search gets the same number of model evaluations per generation."
+    }
   },
   {
     "id": "cats-2026",
@@ -104,7 +117,13 @@
       "talk": "https://icml.cc/virtual/2026/poster/64333"
     },
     "selected": false,
-    "abstract": "Standard approaches to adversarially robust conformal prediction require expensive worst-case computations at every test point, making them impractical for latency-sensitive deployment scenarios. We propose a front-loading strategy that shifts the computational burden entirely to calibration time: by performing adversarial augmentation during calibration, we derive prediction sets that maintain validity under adversarial perturbations at test time with no additional overhead beyond a standard forward pass. This clean separation between a heavy calibration phase and a lightweight inference phase makes adversarially robust uncertainty quantification practical for real-time systems. We prove that the resulting prediction sets achieve the desired coverage guarantee under the specified threat model, and show empirically that the front-loaded approach matches the coverage tightness of per-sample robust methods while reducing inference-time cost by orders of magnitude."
+    "abstract": "Standard approaches to adversarially robust conformal prediction require expensive worst-case computations at every test point, making them impractical for latency-sensitive deployment scenarios. We propose a front-loading strategy that shifts the computational burden entirely to calibration time: by performing adversarial augmentation during calibration, we derive prediction sets that maintain validity under adversarial perturbations at test time with no additional overhead beyond a standard forward pass. This clean separation between a heavy calibration phase and a lightweight inference phase makes adversarially robust uncertainty quantification practical for real-time systems. We prove that the resulting prediction sets achieve the desired coverage guarantee under the specified threat model, and show empirically that the front-loaded approach matches the coverage tightness of per-sample robust methods while reducing inference-time cost by orders of magnitude.",
+    "lab": {
+      "name": "robust",
+      "title": "Pay once, at calibration.",
+      "intro": "Robust conformal prediction usually pays for a worst-case computation at every test point. Front-loading moves that work to calibration: the threshold is set with the worst case in mind, and a test point costs one ordinary forward pass. Compare the last two rows, and the “model calls” column.",
+      "caption": "A toy three-class classifier running in your browser, not an experiment from the paper. The worst case within ε is computed exactly here because the model is tiny; the paper bounds it with smoothing-based certificates. Coverage and set size are measured on 2,000 fresh points, and “attacked” moves every point to the worst place within ε for its true label. “Model calls” counts evaluations of the toy model per test point."
+    }
   },
   {
     "id": "epistemic-cp-2026",
@@ -231,7 +250,13 @@
       "talk": null
     },
     "selected": true,
-    "abstract": "Conformal prediction provides distribution-free coverage guarantees but is vulnerable to adversarial perturbations: a malicious actor can cause the true class to fall outside the prediction set with high probability. We propose a framework for constructing conformal prediction sets that are robust to adversarial inputs while remaining efficient at test time. Our key insight is that robustness can be certified at calibration time using existing smoothing-based certificates, without modifying the test-time prediction procedure. By incorporating worst-case nonconformity scores into the calibration quantile, the resulting prediction sets maintain valid coverage under adversarial attack. Empirically, the robust sets are only marginally larger than standard non-robust conformal sets on clean inputs, demonstrating that robustness and efficiency need not be at odds. We validate our approach across multiple vision benchmarks and threat models, achieving state-of-the-art coverage guarantees under adversarial attack."
+    "abstract": "Conformal prediction provides distribution-free coverage guarantees but is vulnerable to adversarial perturbations: a malicious actor can cause the true class to fall outside the prediction set with high probability. We propose a framework for constructing conformal prediction sets that are robust to adversarial inputs while remaining efficient at test time. Our key insight is that robustness can be certified at calibration time using existing smoothing-based certificates, without modifying the test-time prediction procedure. By incorporating worst-case nonconformity scores into the calibration quantile, the resulting prediction sets maintain valid coverage under adversarial attack. Empirically, the robust sets are only marginally larger than standard non-robust conformal sets on clean inputs, demonstrating that robustness and efficiency need not be at odds. We validate our approach across multiple vision benchmarks and threat models, achieving state-of-the-art coverage guarantees under adversarial attack.",
+    "lab": {
+      "name": "robust",
+      "title": "Where should robustness be paid for?",
+      "intro": "An attacker who can move an input by ε breaks the standard coverage guarantee. One answer enlarges every prediction set at test time. The other does the worst-case work on the calibration data and moves the threshold instead. Switch between the three and compare coverage under attack and set size.",
+      "caption": "A toy three-class classifier running in your browser, not an experiment from the paper. The worst case within ε is computed exactly here because the model is tiny; the paper bounds it with smoothing-based certificates. Coverage and set size are measured on 2,000 fresh points, and “attacked” moves every point to the worst place within ε for its true label."
+    }
   },
   {
     "id": "conformal-inductive-2024",
@@ -273,7 +298,13 @@
       "talk": "https://icml.cc/virtual/2023/poster/23958"
     },
     "selected": false,
-    "abstract": "Conformal prediction requires that calibration and test examples be exchangeable, an assumption that fails for node classification in graphs due to message passing: each node's representation is influenced by its neighbors, creating statistical dependencies across the dataset. We study when and how conformal prediction can be validly applied to graph neural networks, providing a rigorous analysis of the exchangeability violations induced by message passing and identifying sufficient conditions under which coverage guarantees are preserved. We introduce a calibration strategy that provably satisfies these conditions by exploiting the structure of GNN message passing and demonstrate that it yields smaller, more informative prediction sets than naive conformal methods. Extensive empirical evaluation across standard graph benchmarks with multiple GNN architectures confirms that the theoretical guarantees translate to strong practical coverage and efficiency."
+    "abstract": "Conformal prediction requires that calibration and test examples be exchangeable, an assumption that fails for node classification in graphs due to message passing: each node's representation is influenced by its neighbors, creating statistical dependencies across the dataset. We study when and how conformal prediction can be validly applied to graph neural networks, providing a rigorous analysis of the exchangeability violations induced by message passing and identifying sufficient conditions under which coverage guarantees are preserved. We introduce a calibration strategy that provably satisfies these conditions by exploiting the structure of GNN message passing and demonstrate that it yields smaller, more informative prediction sets than naive conformal methods. Extensive empirical evaluation across standard graph benchmarks with multiple GNN architectures confirms that the theoretical guarantees translate to strong practical coverage and efficiency.",
+    "lab": {
+      "name": "graph",
+      "title": "Neighbours know something.",
+      "intro": "In many graphs, connected nodes tend to share a label. Mixing each node’s scores with its neighbours’ keeps the coverage where you asked for it and makes the prediction sets smaller. Raise λ and watch the nodes darken; point at a node to see its set.",
+      "caption": "A toy graph with three communities running in your browser, not an experiment from the paper. Every node has a noisy prediction of its own, and scores are 1 − p."
+    }
   },
   {
     "id": "alzheimer-2019",

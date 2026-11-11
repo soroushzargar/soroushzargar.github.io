@@ -2,10 +2,13 @@
    Research lab — small interactive models that run in the page.
    Put one on a page (or in a post) with <figure class="lab" data-lab="name">.
 
-     conformal   split conformal prediction on a three-class toy problem,
-                 with an attacker of radius ε and the robust sets that answer it
+     robust      split conformal prediction on a three-class toy problem, an
+                 attacker of radius ε, and two ways to stay valid: enlarge the
+                 sets at test time, or shift the threshold at calibration time
      graph       conformal sets on a toy graph, with neighbourhood diffusion
                  of the scores (the idea behind DAPS)
+     evolution   an evolutionary search for the edge flips that hurt a toy
+                 graph classifier most (the idea behind EvA)
 
    Everything shown is computed here from the toy model; nothing is a recording.
    ========================================================================== */
@@ -153,7 +156,7 @@
     if (onVisible && "IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
         onVisible(entries[0].isIntersecting);
-      }, { threshold: 0.35 }).observe(figure);
+      }, { threshold: 0.2 }).observe(figure);
     }
   }
 
@@ -162,8 +165,13 @@
      posterior (softmax of linear logits). Score s(x, y) = 1 - p(y | x).
      Standard set   C(x)   = { y : p(y | x) >= tau },  tau = 1 - q
      Attack         the worst x~ within distance eps of x for the true label
-     Robust set     C_eps(x~) = { y : max over the eps-ball around x~ of p(y | .) >= tau }
-     The clean x is inside that ball, so the robust set keeps the clean guarantee.
+     Robust at test time     C_eps(x~) = { y : max over the eps-ball around x~ of p(y | .) >= tau }
+        The clean x is inside that ball, so the set keeps the clean guarantee,
+        at the price of a worst-case computation for every test point.
+     Robust at calibration   tau_c from the worst-case score of every calibration
+        point; the test set is the plain { y : p(y | x~) >= tau_c }, one model call.
+        An attacked test score is at most its worst case, which is exchangeable
+        with the calibration worst cases, so coverage holds under attack.
      Extremes over the ball are taken on DIRS boundary points; with linear logits
      log p is concave, so both the max and the min sit on the boundary.          */
   function conformalLab(figure) {
@@ -173,7 +181,7 @@
     var N_CAL = 200, N_TEST = 2000, DIRS = 32;
     var GW = 184, GH = 138;                   // map grid
 
-    var state = { coverage: 0.9, eps: 0, robust: false, x: -0.15, y: -0.2, calSeed: 1, touched: false };
+    var state = { coverage: 0.9, eps: 0.3, mode: 0, x: -0.15, y: -0.2, calSeed: 1, touched: false };
 
     function probs(x, y, out) {
       var m = -Infinity, k, z = out || [0, 0, 0];
@@ -218,17 +226,27 @@
 
     var test = sample(rng(4242), N_TEST);
     test.forEach(function (t) { t.p = probs(t.x, t.y).slice(); });
-    var cal, calScores, tau;
+    var cal, calScores, calWorst, tau, tauCal, tauShown;
 
     function drawCalibration() {
       cal = sample(rng(1000 + state.calSeed), N_CAL);
       calScores = cal.map(function (c) { return 1 - probs(c.x, c.y)[c.k]; }).sort(function (a, b) { return a - b; });
     }
 
+    // Lowest probability of class k within eps of (x, y): the attack on that label.
+    function attack(x, y, k, eps) {
+      var worst = probs(x, y, tmp)[k], ax = x, ay = y, p;
+      for (var i = 0; i < DIRS && eps; i++) {
+        p = probs(x + eps * COS[i], y + eps * SIN[i], tmp);
+        if (p[k] < worst) { worst = p[k]; ax = x + eps * COS[i]; ay = y + eps * SIN[i]; }
+      }
+      return { p: worst, x: ax, y: ay };
+    }
+
     // Everything that depends on eps but not on the threshold.
     var grid = { p: new Float32Array(GW * GH * K), reach: new Float32Array(GW * GH * K) };
     function recomputeEps() {
-      var eps = state.eps, out = [0, 0, 0], i, j, k, d, p;
+      var eps = state.eps, out = [0, 0, 0], i, j, k, p;
       for (j = 0; j < GH; j++) for (i = 0; i < GW; i++) {
         var x = -XR + 2 * XR * (i + 0.5) / GW, y = YR - 2 * YR * (j + 0.5) / GH, o = (j * GW + i) * K;
         p = probs(x, y, tmp);
@@ -238,26 +256,26 @@
       }
       test.forEach(function (t) {
         t.reach = reach(t.x, t.y, eps, [0, 0, 0]);         // robust set on the clean point
-        var worst = t.p[t.k], ax = t.x, ay = t.y;           // the attack on the true label
-        for (d = 0; d < DIRS && eps; d++) {
-          p = probs(t.x + eps * COS[d], t.y + eps * SIN[d], tmp);
-          if (p[t.k] < worst) { worst = p[t.k]; ax = t.x + eps * COS[d]; ay = t.y + eps * SIN[d]; }
-        }
-        t.attacked = worst;                                 // p(true) at the attacked point
-        t.attackedReach = reach(ax, ay, eps, [0, 0, 0])[t.k]; // what the robust set sees there
+        var hit = attack(t.x, t.y, t.k, eps);
+        t.attacked = hit.p;                                       // p(true) at the attacked point
+        t.attackedReach = reach(hit.x, hit.y, eps, [0, 0, 0])[t.k]; // what the test-time robust set sees there
       });
+      calWorst = cal.map(function (c) { return 1 - attack(c.x, c.y, c.k, eps).p; }).sort(function (a, b) { return a - b; });
     }
 
     function stats() {
-      var s = { cov: 0, covAtt: 0, size: 0, rCov: 0, rCovAtt: 0, rSize: 0 }, k;
+      var s = { cov: 0, covAtt: 0, size: 0, rCov: 0, rCovAtt: 0, rSize: 0, cCov: 0, cCovAtt: 0, cSize: 0 }, k;
       test.forEach(function (t) {
         if (t.p[t.k] >= tau) s.cov++;
         if (t.attacked >= tau) s.covAtt++;
         if (t.reach[t.k] >= tau) s.rCov++;
         if (t.attackedReach >= tau) s.rCovAtt++;
+        if (t.p[t.k] >= tauCal) s.cCov++;
+        if (t.attacked >= tauCal) s.cCovAtt++;
         for (k = 0; k < K; k++) {
           if (t.p[k] >= tau) s.size++;
           if (t.reach[k] >= tau) s.rSize++;
+          if (t.p[k] >= tauCal) s.cSize++;
         }
       });
       Object.keys(s).forEach(function (key) { s[key] /= N_TEST; });
@@ -302,9 +320,10 @@
 
     var table = el("table", "lab-table");
     table.innerHTML =
-      "<thead><tr><th></th><th>Coverage</th><th>Attacked</th><th>Set size</th></tr></thead>" +
-      '<tbody><tr><th>Standard</th><td></td><td></td><td></td></tr>' +
-      "<tr><th>Robust</th><td></td><td></td><td></td></tr></tbody>";
+      "<thead><tr><th></th><th>Coverage</th><th>Attacked</th><th>Set size</th><th>Model calls</th></tr></thead>" +
+      "<tbody><tr><th>Standard</th><td></td><td></td><td></td><td>1</td></tr>" +
+      "<tr><th>Robust at test time</th><td></td><td></td><td></td><td>" + (DIRS + 1) + "</td></tr>" +
+      "<tr><th>Robust at calibration</th><td></td><td></td><td></td><td>1</td></tr></tbody>";
     var cells = table.querySelectorAll("td");
 
     side.appendChild(setBlock); side.appendChild(histBlock); side.appendChild(table);
@@ -317,14 +336,15 @@
     controls.appendChild(slider("Attack radius ε", 0, 0.6, 0.02, state.eps,
       function (v) { return v.toFixed(2); },
       function (v) { state.eps = v; recomputeEps(); update(); }));
+    var MODES = ["Standard", "Robust at test time", "Robust at calibration"];
 
     var seg = el("div", "lab-seg");
     seg.setAttribute("role", "group");
-    seg.setAttribute("aria-label", "Sets shown on the map");
-    var segButtons = ["Standard sets", "Robust sets"].map(function (label, i) {
+    seg.setAttribute("aria-label", "Method shown on the map");
+    var segButtons = MODES.map(function (label, i) {
       var b = el("button", "", label);
       b.type = "button";
-      b.addEventListener("click", function () { state.robust = !!i; update(); });
+      b.addEventListener("click", function () { state.mode = i; update(); });
       seg.appendChild(b);
       return b;
     });
@@ -332,7 +352,7 @@
 
     var again = el("button", "lab-button", "New calibration draw");
     again.type = "button";
-    again.addEventListener("click", function () { state.calSeed++; drawCalibration(); update(); });
+    again.addEventListener("click", function () { state.calSeed++; drawCalibration(); recomputeEps(); update(); });
     controls.appendChild(again);
 
     figure.insertBefore(controls, figure.firstChild);
@@ -347,10 +367,10 @@
     var TWO = [217, 211, 198], THREE = [186, 179, 164], NONE = [255, 255, 255];
 
     function paintTile() {
-      var src = state.robust ? grid.reach : grid.p;
+      var src = state.mode === 1 ? grid.reach : grid.p;
       for (var c = 0; c < GW * GH; c++) {
         var n = 0, last = 0, k;
-        for (k = 0; k < K; k++) if (src[c * K + k] >= tau) { n++; last = k; }
+        for (k = 0; k < K; k++) if (src[c * K + k] >= tauShown) { n++; last = k; }
         var col = n === 0 ? NONE : n === 1 ? TINT[last] : n === 2 ? TWO : THREE;
         image.data[c * 4] = col[0]; image.data[c * 4 + 1] = col[1];
         image.data[c * 4 + 2] = col[2]; image.data[c * 4 + 3] = 255;
@@ -396,9 +416,9 @@
       if (!f) return;
       var ctx = f.ctx, w = f.w, h = f.h, BINS = 28, counts = [], i, top = 0;
       for (i = 0; i < BINS; i++) counts.push(0);
-      calScores.forEach(function (s) { counts[Math.min(BINS - 1, Math.floor(s * BINS))]++; });
+      (state.mode === 2 ? calWorst : calScores).forEach(function (s) { counts[Math.min(BINS - 1, Math.floor(s * BINS))]++; });
       counts.forEach(function (c) { if (c > top) top = c; });
-      var q = 1 - tau, bw = w / BINS;
+      var q = 1 - tauShown, bw = w / BINS;
       for (i = 0; i < BINS; i++) {
         var bh = (h - 4) * counts[i] / top;
         ctx.fillStyle = (i + 0.5) / BINS <= q ? ACCENT : "#c9c3b5";
@@ -415,28 +435,38 @@
     function updatePoint() {
       var p = probs(state.x, state.y).slice();
       reach(state.x, state.y, state.eps, pointReach);
-      var shown = state.robust ? pointReach : p;
-      var inSet = shown.map(function (v) { return v >= tau; });
+      var shown = state.mode === 1 ? pointReach : p;
+      var inSet = shown.map(function (v) { return v >= tauShown; });
       setOut.textContent = setText(inSet);
-      updateBars(p, state.robust ? pointReach : null, tau, inSet);
-      barNote.textContent = state.robust
-        ? "A label is in the robust set when its bar can reach the mark somewhere within ε (lighter part)."
-        : "A label is in the set when its bar reaches the mark.";
+      updateBars(p, state.mode === 1 ? pointReach : null, tauShown, inSet);
+      barNote.textContent = [
+        "A label is in the set when its bar reaches the mark.",
+        "The bars stretch: a label is in when it can reach the mark anywhere within ε (lighter part).",
+        "The mark moves instead: calibration already assumed the worst, so the bars stay as they are."
+      ][state.mode];
     }
 
     function update() {
       tau = 1 - quantile(calScores, state.coverage);
-      if (!state.eps) state.robust = false;
-      segButtons[0].setAttribute("aria-pressed", String(!state.robust));
-      segButtons[1].setAttribute("aria-pressed", String(state.robust));
-      segButtons[1].disabled = !state.eps;
+      tauCal = 1 - quantile(calWorst, state.coverage);
+      if (!state.eps) state.mode = 0;
+      tauShown = state.mode === 2 ? tauCal : tau;
+      segButtons.forEach(function (b, i) {
+        b.setAttribute("aria-pressed", String(i === state.mode));
+        b.disabled = i > 0 && !state.eps;
+      });
 
       var s = stats();
-      [pct(s.cov), pct(s.covAtt), s.size.toFixed(2), pct(s.rCov), pct(s.rCovAtt), s.rSize.toFixed(2)]
-        .forEach(function (text, i) { cells[i].textContent = text; });
+      [pct(s.cov), pct(s.covAtt), s.size.toFixed(2), null,
+       pct(s.rCov), pct(s.rCovAtt), s.rSize.toFixed(2), null,
+       pct(s.cCov), pct(s.cCovAtt), s.cSize.toFixed(2), null]
+        .forEach(function (text, i) { if (text != null) cells[i].textContent = text; });
       cells[1].classList.toggle("is-bad", s.covAtt < state.coverage - 0.02);
-      table.rows[2].classList.toggle("is-idle", !state.eps);
-      histLabel.innerHTML = N_CAL + " calibration scores · threshold q̂ = " + (1 - tau).toFixed(2);
+      for (var r = 1; r <= 3; r++) {
+        table.rows[r].classList.toggle("is-idle", r > 1 && !state.eps);
+        table.rows[r].classList.toggle("is-on", r - 1 === state.mode);
+      }
+      histLabel.innerHTML = N_CAL + (state.mode === 2 ? " worst-case" : "") + " calibration scores · threshold q̂ = " + (1 - tauShown).toFixed(2);
 
       paintTile(); drawMap(); drawHist(); updatePoint();
     }
@@ -489,15 +519,14 @@
     });
   }
 
-  /* ── lab: conformal sets on a graph ──────────────────────────────────────
-     A homophilous toy graph (three communities). Every node has a noisy class
-     probability vector, standing in for a model that reads only the node's own
-     features. Diffusion mixes a node's scores with the mean of its neighbours':
-        s'(v, y) = (1 - lambda) s(v, y) + lambda * mean over neighbours u of s(u, y)
-     with s = 1 - p. Half of the nodes calibrate, the other half are tested.
-     The numbers in the table are averaged over SPLITS random halves.          */
-  function graphLab(figure) {
-    var N = 90, PER = 30, P_IN = 0.16, P_OUT = 0.012, SIGNAL = 1.6, NOISE = 1.3, SPLITS = 300;
+  /* ── the toy graph both graph labs use ───────────────────────────────────
+     Three communities of 30 nodes, dense inside and sparse across. Every node
+     has a noisy class probability vector: a model that reads only the node's
+     own features. Layout is a short seeded force simulation, scaled to [0, 1]. */
+  var toyGraphCache;
+  function toyGraph() {
+    if (toyGraphCache) return toyGraphCache;
+    var N = 90, PER = 30, P_IN = 0.16, P_OUT = 0.012, SIGNAL = 1.6, NOISE = 1.3;
     var r = rng(3), i, j, k;
 
     var label = [], nb = [], P = [];
@@ -543,6 +572,18 @@
       pos.forEach(function (p) { for (k = 0; k < 2; k++) { lo[k] = Math.min(lo[k], p[k]); hi[k] = Math.max(hi[k], p[k]); } });
       pos.forEach(function (p) { for (k = 0; k < 2; k++) p[k] = (p[k] - lo[k]) / (hi[k] - lo[k]); });
     })();
+
+    toyGraphCache = { N: N, label: label, nb: nb, P: P, pos: pos };
+    return toyGraphCache;
+  }
+
+  /* ── lab: conformal sets on a graph ──────────────────────────────────────
+     Diffusion mixes a node's scores with the mean of its neighbours':
+        s'(v, y) = (1 - lambda) s(v, y) + lambda * mean over neighbours u of s(u, y)
+     with s = 1 - p. Half of the nodes calibrate, the other half are tested.
+     The numbers in the table are averaged over SPLITS random halves.          */
+  function graphLab(figure) {
+    var G = toyGraph(), N = G.N, label = G.label, nb = G.nb, P = G.P, pos = G.pos, SPLITS = 300, i, j, k;
 
     var state = { coverage: 0.9, lambda: 0, splitSeed: 1, node: 0, touched: false };
     // Start on a node whose own prediction is wrong but whose neighbourhood is not.
@@ -743,9 +784,257 @@
     watch(figure, draw);
   }
 
+  /* ── lab: evolutionary attack on a graph ─────────────────────────────────
+     The classifier: one round of message passing on the toy graph, each node
+     predicts argmax of (1 - MIX) * own probabilities + MIX * neighbours' mean.
+     The attacker may flip BUDGET edges (add or remove) and wants low accuracy.
+     Accuracy is not differentiable in the edges, so search instead of descend:
+     keep a population of candidate flip sets, score each by the accuracy it
+     leaves, keep the best, and breed the next generation by crossover and
+     mutation. The grey line is random search given the same number of model
+     evaluations, as a reference.                                              */
+  function evolutionLab(figure) {
+    var G = toyGraph(), N = G.N, label = G.label, P = G.P, pos = G.pos;
+    var MIX = 0.8, POP = 32, ELITE = 6, GENERATIONS = 150, MUTATION = 0.12;
+    var PAIRS = N * (N - 1) / 2;
+    var edgeCount = 0, i;
+    var base = G.nb.map(function (list) {
+      var set = {};
+      list.forEach(function (u) { set[u] = true; });
+      edgeCount += list.length;
+      return set;
+    });
+    edgeCount /= 2;
+
+    var state = { budget: 12, gen: 0, running: false, run: 0 };
+    var r, population, best, randomBest, history, randomHistory;
+
+    function pairOf(code) {            // code in [0, PAIRS) -> (a, b) with a < b
+      var a = 0, left = code;
+      while (left >= N - 1 - a) { left -= N - 1 - a; a++; }
+      return [a, a + 1 + left];
+    }
+
+    // Accuracy of the classifier after toggling the given edges; also who is wrong.
+    function evaluate(flips, wrongOut) {
+      var touched = {}, v, c;
+      flips.forEach(function (code) {
+        var e = pairOf(code);
+        (touched[e[0]] = touched[e[0]] || {})[e[1]] = true;
+        (touched[e[1]] = touched[e[1]] || {})[e[0]] = true;
+      });
+      var correct = 0;
+      for (v = 0; v < N; v++) {
+        var sum = [0, 0, 0], deg = 0, u, t = touched[v];
+        for (u in base[v]) if (!(t && t[u])) { deg++; for (c = 0; c < K; c++) sum[c] += P[u][c]; }
+        if (t) for (u in t) if (!base[v][u]) { deg++; for (c = 0; c < K; c++) sum[c] += P[u][c]; }
+        var bestC = 0, bestV = -1;
+        for (c = 0; c < K; c++) {
+          var val = deg ? (1 - MIX) * P[v][c] + MIX * sum[c] / deg : P[v][c];
+          if (val > bestV) { bestV = val; bestC = c; }
+        }
+        if (bestC === label[v]) correct++;
+        else if (wrongOut) wrongOut[v] = true;
+      }
+      return correct / N;
+    }
+    var cleanAccuracy = evaluate([]);
+
+    function randomFlips() {
+      var flips = [];
+      while (flips.length < state.budget) {
+        var code = Math.floor(r() * PAIRS);
+        if (flips.indexOf(code) === -1) flips.push(code);
+      }
+      return flips;
+    }
+    function scored(flips) { return { flips: flips, acc: evaluate(flips) }; }
+    function byAccuracy(a, b) { return a.acc - b.acc; }
+
+    function reset() {
+      r = rng(100 + state.budget);
+      state.gen = 0; state.running = false; state.run++;
+      population = [];
+      for (i = 0; i < POP; i++) population.push(scored(randomFlips()));
+      population.sort(byAccuracy);
+      best = population[0];
+      randomBest = best;                 // the first generation is random search for both
+      history = [best.acc]; randomHistory = [best.acc];
+    }
+
+    function pickParent() {              // tournament among the better half
+      var a = Math.floor(r() * POP / 2), b = Math.floor(r() * POP / 2);
+      return population[Math.min(a, b)];
+    }
+
+    function generation() {
+      var next = population.slice(0, ELITE), k2;
+      while (next.length < POP) {
+        var pool = pickParent().flips.concat(pickParent().flips), child = [];
+        while (child.length < state.budget && pool.length) {       // crossover
+          var code = pool.splice(Math.floor(r() * pool.length), 1)[0];
+          if (child.indexOf(code) === -1) child.push(code);
+        }
+        for (k2 = 0; k2 < state.budget; k2++) {                    // mutation
+          if (k2 >= child.length || r() < MUTATION) {
+            var fresh;
+            do { fresh = Math.floor(r() * PAIRS); } while (child.indexOf(fresh) !== -1);
+            child[k2] = fresh;
+          }
+        }
+        next.push(scored(child));
+      }
+      population = next.sort(byAccuracy);
+      best = population[0];
+      for (k2 = 0; k2 < POP - ELITE; k2++) {                       // random search, same evaluations
+        var candidate = scored(randomFlips());
+        if (candidate.acc < randomBest.acc) randomBest = candidate;
+      }
+      state.gen++;
+      history.push(best.acc); randomHistory.push(randomBest.acc);
+    }
+
+    /* build */
+    var body = el("div", "lab-body");
+    var main = el("div", "lab-main");
+    var canvas = el("canvas", "lab-canvas lab-graph");
+    canvas.setAttribute("role", "img");
+    main.appendChild(canvas);
+    main.appendChild(el("div", "lab-legend",
+      '<span><i class="lab-swatch lab-swatch--right"></i>classified correctly</span>' +
+      '<span><i class="lab-swatch lab-swatch--wrong"></i>misclassified</span>' +
+      '<span><i class="lab-swatch lab-swatch--added"></i>edge added</span>' +
+      '<span><i class="lab-swatch lab-swatch--removed"></i>edge removed</span>' +
+      "<span>shape: true class</span>"));
+
+    var side = el("div", "lab-side");
+    var block = el("div", "lab-block");
+    block.appendChild(el("div", "lab-label", "Accuracy under attack"));
+    var big = el("div", "lab-big");
+    big.setAttribute("aria-live", "polite");
+    block.appendChild(big);
+    var chart = el("canvas", "lab-canvas lab-chart");
+    chart.setAttribute("role", "img");
+    block.appendChild(chart);
+    var axis = el("div", "lab-axis");
+    block.appendChild(axis);
+    block.appendChild(el("div", "lab-legend",
+      '<span><i class="lab-swatch lab-swatch--line"></i>evolution</span>' +
+      '<span><i class="lab-swatch lab-swatch--line-quiet"></i>random search, same evaluations</span>'));
+
+    var table = el("table", "lab-table");
+    table.innerHTML =
+      "<thead><tr><th></th><th>Accuracy</th></tr></thead>" +
+      "<tbody><tr><th>No attack</th><td>" + pct(cleanAccuracy) + "</td></tr>" +
+      "<tr><th>Random search</th><td></td></tr>" +
+      "<tr><th>Evolution</th><td></td></tr></tbody>";
+    var cells = table.querySelectorAll("td");
+    side.appendChild(block); side.appendChild(table);
+    body.appendChild(main); body.appendChild(side);
+
+    var controls = el("div", "lab-controls");
+    controls.appendChild(slider("Edge flips allowed", 2, 30, 1, state.budget,
+      function (v) { return v + " (" + (100 * v / edgeCount).toFixed(1) + "% of edges)"; },
+      function (v) { state.budget = v; reset(); started = true; play(); }));
+    var go = el("button", "lab-button lab-button--primary", "Run the attack");
+    go.type = "button";
+    go.addEventListener("click", function () { reset(); started = true; play(); });
+    controls.appendChild(go);
+
+    figure.insertBefore(controls, figure.firstChild);
+    figure.insertBefore(body, controls);
+
+    /* draw */
+    function drawGraph() {
+      var f = fit(canvas, 1.25);
+      if (!f) return;
+      var ctx = f.ctx, PAD = 18, v;
+      var xy = pos.map(function (p) { return [PAD + p[0] * (f.w - 2 * PAD), PAD + p[1] * (f.h - 2 * PAD)]; });
+      var flipped = {}, wrong = {};
+      best.flips.forEach(function (code) { flipped[code] = true; });
+      evaluate(best.flips, wrong);
+
+      function segment(a, b) { ctx.beginPath(); ctx.moveTo(xy[a][0], xy[a][1]); ctx.lineTo(xy[b][0], xy[b][1]); ctx.stroke(); }
+      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(116,113,106,0.26)";
+      for (v = 0; v < N; v++) for (var u in base[v]) if (+u > v) segment(v, +u);
+      best.flips.forEach(function (code) {
+        var e = pairOf(code), removed = base[e[0]][e[1]];
+        ctx.strokeStyle = removed ? "#c9a0a7" : MAROON;
+        ctx.lineWidth = removed ? 2.2 : 1.8;
+        ctx.setLineDash(removed ? [5, 4] : []);
+        segment(e[0], e[1]);
+      });
+      ctx.setLineDash([]);
+
+      for (v = 0; v < N; v++) {
+        marker(ctx, label[v], xy[v][0], xy[v][1], 5.5);
+        ctx.fillStyle = wrong[v] ? "#ffffff" : "#2a3f5c";
+        ctx.fill();
+        ctx.strokeStyle = wrong[v] ? MAROON : "rgba(28,28,26,0.35)";
+        ctx.lineWidth = wrong[v] ? 2.2 : 1;
+        ctx.stroke();
+      }
+      canvas.setAttribute("aria-label", "Toy graph after " + state.gen + " generations: " + best.flips.length +
+        " edges flipped, accuracy " + pct(best.acc) + ".");
+    }
+
+    function drawChart() {
+      var f = fit(chart, 2.6);
+      if (!f) return;
+      var ctx = f.ctx, w = f.w, h = f.h;
+      var lo = Math.min(0.3, Math.floor(10 * Math.min(best.acc, randomBest.acc)) / 10);
+      var hi = Math.ceil(10 * cleanAccuracy) / 10;
+      var X = function (g) { return 2 + (w - 4) * g / GENERATIONS; };
+      var Y = function (a) { return 4 + (h - 8) * (hi - a) / (hi - lo); };
+      ctx.fillStyle = RULE; ctx.fillRect(0, h - 1, w, 1);
+      ctx.setLineDash([3, 4]); ctx.strokeStyle = MUTED; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, Y(cleanAccuracy)); ctx.lineTo(w, Y(cleanAccuracy)); ctx.stroke();
+      ctx.setLineDash([]);
+      [[randomHistory, "#a9a394", 2], [history, MAROON, 2.4]].forEach(function (line) {
+        ctx.strokeStyle = line[1]; ctx.lineWidth = line[2]; ctx.lineJoin = "round";
+        ctx.beginPath();
+        line[0].forEach(function (a, g) { if (g) ctx.lineTo(X(g), Y(a)); else ctx.moveTo(X(g), Y(a)); });
+        ctx.stroke();
+      });
+      ctx.fillStyle = MAROON;
+      ctx.beginPath(); ctx.arc(X(state.gen), Y(best.acc), 3.5, 0, 2 * Math.PI); ctx.fill();
+      axis.innerHTML = "<span>generation 0</span><span>dashed: no attack</span><span>" + GENERATIONS + "</span>";
+      chart.setAttribute("aria-label", "Accuracy by generation. Evolution reaches " + pct(best.acc) +
+        ", random search " + pct(randomBest.acc) + ", from " + pct(cleanAccuracy) + " without attack.");
+    }
+
+    function render() {
+      big.innerHTML = pct(cleanAccuracy) + " <span>→</span> " + pct(best.acc) +
+        ' <span style="font-size:14px;font-family:var(--sans)">generation ' + state.gen + "</span>";
+      cells[1].textContent = pct(randomBest.acc);
+      cells[2].textContent = pct(best.acc);
+      drawGraph(); drawChart();
+    }
+
+    var started = false;
+    function play() {
+      if (reducedMotion) { while (state.gen < GENERATIONS) generation(); render(); return; }
+      state.running = true;
+      var id = state.run;
+      requestAnimationFrame(function tick() {
+        if (id !== state.run || !state.running) return;
+        generation();
+        render();
+        if (state.gen < GENERATIONS) requestAnimationFrame(tick);
+        else state.running = false;
+      });
+    }
+
+    reset();
+    render();
+    watch(figure, function () { drawGraph(); drawChart(); }, function (isVisible) {
+      if (isVisible && !started) { started = true; play(); }
+    });
+  }
+
   /* ── boot ────────────────────────────────────────────────────────────── */
 
-  var LABS = { conformal: conformalLab, graph: graphLab };
+  var LABS = { robust: conformalLab, graph: graphLab, evolution: evolutionLab };
 
   function boot(root) {
     Array.prototype.forEach.call((root || document).querySelectorAll("figure[data-lab]"), function (figure) {

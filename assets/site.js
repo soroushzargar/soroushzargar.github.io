@@ -72,6 +72,10 @@
     return venue ? '<span class="venue-badge">' + esc(venue) + "</span>" : "";
   }
 
+  function liveBadge(pub) {
+    return pub.lab ? '<span class="pub-live">Interactive</span>' : "";
+  }
+
   function renderKeywords(tags) {
     return esc((tags || []).slice(1).join(" · "));
   }
@@ -104,33 +108,6 @@
     Array.prototype.forEach.call(targets, function (el) { observer.observe(el); });
   }
 
-  /* ── tabs (home: the interactive models) ─────────────────────────────── */
-
-  function initTabs() {
-    Array.prototype.forEach.call(document.querySelectorAll('[role="tablist"]'), function (list) {
-      var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
-      function select(tab, focus) {
-        tabs.forEach(function (other) {
-          var on = other === tab;
-          other.setAttribute("aria-selected", String(on));
-          other.tabIndex = on ? 0 : -1;
-          var panel = document.getElementById(other.getAttribute("aria-controls"));
-          if (panel) panel.hidden = !on;
-        });
-        if (focus) tab.focus();
-      }
-      tabs.forEach(function (tab, i) {
-        tab.addEventListener("click", function () { select(tab); });
-        tab.addEventListener("keydown", function (event) {
-          var step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
-          if (!step) return;
-          event.preventDefault();
-          select(tabs[(i + step + tabs.length) % tabs.length], true);
-        });
-      });
-    });
-  }
-
   /* ── publications ────────────────────────────────────────────────────── */
 
   // Home: numbered rows for the publications flagged `selected`.
@@ -140,7 +117,7 @@
       return (
         '<a class="work-row" href="' + pubHref(pub) + '">' +
           '<span class="work-num">' + String(i + 1).padStart(2, "0") + "</span>" +
-          '<span class="work-title">' + esc(pub.title) + "</span>" +
+          '<span class="work-title">' + esc(pub.title) + liveBadge(pub) + "</span>" +
           '<span class="work-venue">' + esc(pub.venueTag) + "</span>" +
           '<span class="work-arrow" aria-hidden="true">→</span>' +
         "</a>"
@@ -175,14 +152,14 @@
           pub.links && pub.links.paper ? '<a class="link-underline" href="' + esc(pub.links.paper) + '" target="_blank" rel="noopener">Paper ↗</a>' : "",
           pub.links && pub.links.poster ? '<a class="link-underline" href="' + esc(pub.links.poster) + '" target="_blank" rel="noopener">Poster ↗</a>' : "",
           pub.links && pub.links.talk ? '<a class="link-underline" href="' + esc(pub.links.talk) + '" target="_blank" rel="noopener">Talk ↗</a>' : "",
-          '<a class="link-underline" href="' + pubHref(pub) + '">Abstract →</a>',
+          '<a class="link-underline" href="' + pubHref(pub) + '">' + (pub.lab ? "Abstract and live demo →" : "Abstract →") + "</a>",
           writeUp
         ].filter(Boolean).join("");
 
         return (
           '<article class="pub-item">' +
             '<div class="pub-heading">' +
-              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + highlight(pub.title, query) + "</h3></a>" +
+              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + highlight(pub.title, query) + liveBadge(pub) + "</h3></a>" +
               venueBadge(pub) +
             "</div>" +
             '<p class="pub-authors">' + pub.authorsHtml + "</p>" +
@@ -324,12 +301,36 @@
         resource(links.talk, "Talk") +
         (pub.postSlug ? '<a class="link-underline" href="blog-post.html?slug=' + encodeURIComponent(pub.postSlug) + '">Write-up →</a>' : "") +
       "</div>" +
+      labSection(pub) +
       '<div class="detail-section-label">Abstract</div>' +
       '<div class="prose" id="pub-abstract"><p>' + esc(pub.abstract) + "</p></div>" +
       '<div class="detail-section-label mt-32">Topics</div>' +
       '<div class="keyword-list">' + renderKeywords(pub.tags) + "</div>";
 
     typesetMath($("#pub-abstract"));
+    if (pub.lab) {
+      host.parentNode.classList.add("has-lab");
+      loadPlots(host);
+      loadLabs(host);
+    }
+  }
+
+  // A publication can carry one interactive model of its idea (`lab` in the data file):
+  // { name } picks a model from assets/lab/lab.js, { plot } a canvas plot from assets/asd-plots.
+  function labSection(pub) {
+    var lab = pub.lab;
+    if (!lab) return "";
+    var figure = lab.plot
+      ? '<div class="prose"><figure class="plot"><canvas data-plot="' + esc(lab.plot) + '" role="img" aria-label="' + esc(lab.alt || "") + '"></canvas>' +
+        "<figcaption>" + esc(lab.caption) + "</figcaption></figure></div>"
+      : '<figure class="lab" data-lab="' + esc(lab.name) + '"><figcaption>' + esc(lab.caption) + "</figcaption></figure>";
+    return (
+      '<div class="detail-section-label">The idea, live</div>' +
+      '<div class="detail-lab">' +
+        '<p class="lab-dek"><strong>' + esc(lab.title) + "</strong>" + esc(lab.intro) + "</p>" +
+        figure +
+      "</div>"
+    );
   }
 
   /* ── writing ─────────────────────────────────────────────────────────── */
@@ -450,7 +451,7 @@
     if (!host.querySelector("[data-lab]")) return;
     if (window.siteLab) { window.siteLab.boot(host); return; }
     var script = document.createElement("script");
-    script.src = "assets/lab/lab.js?v=20261111-1";
+    script.src = "assets/lab/lab.js?v=20261111-3";
     document.body.appendChild(script);
   }
 
@@ -502,7 +503,6 @@
   }
 
   initReveals();
-  initTabs();
 
   var selectedWork = $("[data-selected-work]");
   var pubList = $("[data-publication-list]");

@@ -11,12 +11,6 @@ This post is about our NeurIPS 2025 paper, where we show that a **single adversa
 
 Conformal prediction provides a clean, distribution-free guarantee: the prediction set contains the true label with at least $1 - \alpha$ probability. But this guarantee breaks under adversarial perturbations. An attacker who shifts the test input by even a small $\ell_\infty$ or $\ell_2$ perturbation can reliably push the true class out of the prediction set.
 
-You can try it. Raise the attack radius ε below and watch the "attacked" coverage of the standard sets fall under the target, then switch the map to robust sets.
-
-<figure class="lab" data-lab="conformal">
-<figcaption>A toy three-class classifier running in your browser, not an experiment from the paper. Here the robust sets use the exact worst case within ε, which is only affordable because the model is tiny.</figcaption>
-</figure>
-
 Prior work on *adversarially robust conformal prediction* restores the guarantee by searching over all perturbations in the threat model for each calibration point — finding the **worst-case nonconformity score** before computing the quantile threshold. This works, but the cost is prohibitive: for a budget of $\epsilon$ under randomized smoothing, you may need thousands of forward passes per calibration point.
 
 ## The Insight

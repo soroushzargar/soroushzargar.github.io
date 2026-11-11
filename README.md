@@ -77,21 +77,32 @@ Append an object to `data/publications.json`:
 
 ## Interactive models
 
-`assets/lab/lab.js` holds small models that run in the browser and respond to
-sliders and the pointer. Two exist: `conformal` (split conformal prediction on a
-three-class toy problem, an attacker of radius ε, and robust sets) and `graph`
-(conformal sets on a toy graph with neighbourhood diffusion of the scores).
+A publication page can carry one interactive model of the paper's idea, shown
+above the abstract under "The idea, live". `assets/lab/lab.js` holds the models,
+which run in the browser and respond to sliders and the pointer:
 
-Put one on any page, or in a post's Markdown, with
+- `robust` — conformal prediction on a three-class toy problem under an attacker
+  of radius ε: standard sets, robust sets at test time, robust calibration
+- `graph` — conformal sets on a toy graph with neighbourhood diffusion of scores
+- `evolution` — evolutionary search for the edge flips that hurt a toy graph
+  classifier most, against random search with the same budget
 
-```html
-<figure class="lab" data-lab="conformal">
-  <figcaption>Caption.</figcaption>
-</figure>
+Attach one to a paper with a `lab` object in `data/publications.json`:
+
+```json
+"lab": {
+  "name": "graph",
+  "title": "Short headline",
+  "intro": "Two or three sentences on what to try.",
+  "caption": "What the toy is, and that it is not an experiment from the paper."
+}
 ```
 
-The home page loads the script itself; posts load it on demand. To add a model,
-write a `function myLab(figure) { … }` in `lab.js` and register it in `LABS`.
+Use `"plot": "river"` (plus `"alt"`) instead of `"name"` to show one of the canvas
+plots from `assets/asd-plots/`. Papers with a `lab` get an "Interactive" marker in
+the lists. To add a model, write a `function myLab(figure) { … }` in `lab.js` and
+register it in `LABS`. A model can also go in a post's Markdown with
+`<figure class="lab" data-lab="graph"><figcaption>…</figcaption></figure>`.
 
 The publications page builds its topic filters from the `tags` in
 `data/publications.json` (every tag after the first, if at least two papers share it).

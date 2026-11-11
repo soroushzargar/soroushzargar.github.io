@@ -137,7 +137,6 @@ p { margin: 0; }
   border-top: 1px solid var(--rule);
 }
 .band--open { border-top: 0; }
-.band[id] { scroll-margin-top: 72px; }
 .band--tight { padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(40px, 6vw, 64px); }
 
 .band-grid {
@@ -624,34 +623,8 @@ a.pub-title:hover, .pub-item a:hover .pub-title { color: var(--accent); }
 .plot-repeat svg { display: block; width: 100%; height: 100%; }
 
 /* ── Research lab (interactive models, assets/lab/lab.js) ─────────────── */
-.lab-intro { max-width: 640px; font-size: 17px; line-height: 1.6; color: var(--ink-body); }
-.lab-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 28px;
-  margin: 28px 0 0;
-  border-bottom: 1px solid var(--rule);
-}
-.lab-tabs button {
-  margin-bottom: -1px;
-  padding: 0 0 12px;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  background: none;
-  color: var(--muted);
-  font: inherit;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-.lab-tabs button:hover { color: var(--accent); }
-.lab-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--maroon); }
-.lab-panel { padding-top: 28px; }
-.lab-panel[hidden] { display: none; }
-.lab-dek { max-width: 680px; margin-bottom: 24px; font-size: 15.5px; line-height: 1.65; color: var(--ink-body); }
-.lab-dek strong { font-weight: 400; color: var(--ink); font-family: var(--serif); font-size: 19px; display: block; margin-bottom: 6px; }
+.lab-dek { max-width: 680px; margin-bottom: 24px; font-size: 16px; line-height: 1.65; color: var(--ink-body); }
+.lab-dek strong { font-weight: 400; color: var(--ink); font-family: var(--serif); font-size: 21px; line-height: 1.3; display: block; margin-bottom: 8px; }
 
 .lab { margin: 0; container-type: inline-size; }
 .prose .lab { margin: 32px 0 28px; }
@@ -760,6 +733,7 @@ a.pub-title:hover, .pub-item a:hover .pub-title { color: var(--accent); }
 }
 .lab .lab-table td.is-bad { color: var(--maroon); font-weight: 600; }
 .lab .lab-table tr.is-idle { color: var(--faint); }
+.lab .lab-table tr.is-on th:first-child { box-shadow: inset 2px 0 0 var(--maroon); padding-left: 8px; }
 
 .lab-controls {
   display: flex;
@@ -796,7 +770,42 @@ a.pub-title:hover, .pub-item a:hover .pub-title { color: var(--accent); }
   .lab-body { grid-template-columns: 1fr; }
 }
 
-.keywords--after-lab { margin-top: clamp(40px, 6vw, 64px); padding-top: clamp(32px, 5vw, 48px); border-top: 1px solid var(--rule-soft); }
+/* A publication page that carries an interactive model gets a wider column. */
+.detail.has-lab { max-width: 1000px; }
+.detail.has-lab .detail-heading,
+.detail.has-lab .detail-authors,
+.detail.has-lab .detail-venue,
+.detail.has-lab .prose,
+.detail.has-lab .keyword-list { max-width: 720px; }
+.detail-lab { padding-bottom: 36px; }
+.detail-lab .prose { max-width: 720px; }
+.detail-lab .plot { margin-top: 0; }
+.lab-chart { aspect-ratio: 2.6 / 1; }
+.lab-swatch--line, .lab-swatch--added { width: 16px; height: 0; border: 0; border-top: 2px solid var(--maroon); }
+.lab-swatch--line-quiet { width: 16px; height: 0; border: 0; border-top: 2px solid var(--faint); }
+.lab-swatch--removed { width: 16px; height: 0; border: 0; border-top: 2px dashed #c9a0a7; }
+.lab-swatch--wrong { background: #fff; border: 2px solid var(--maroon); border-radius: 50%; }
+.lab-swatch--right { background: #2a3f5c; border-radius: 50%; }
+.lab-big { font-family: var(--serif); font-size: 26px; line-height: 1.2; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+.lab-big span { color: var(--muted); }
+.lab-button--primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.lab-button--primary:hover { background: none; }
+.lab-seg { flex-wrap: wrap; }
+.pub-live {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 6px 1px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 
 /* ── Publication filters ──────────────────────────────────────────────── */
 .pub-tools {
