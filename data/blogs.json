@@ -110,6 +110,20 @@
         "Graph Neural Networks"
       ],
       "description": "Gradient attacks on graph neural networks relax the discrete choice of edge flips and follow a surrogate loss. EvA searches over sets of flips directly with a genetic algorithm, scoring each one by the real objective."
+    },
+    {
+      "slug": "single-binary-certificate",
+      "title": "Binarize the Score, Then Certify Once",
+      "date": "2026-11-12",
+      "dateDisplay": "November 12, 2026",
+      "readingMinutes": 3,
+      "category": "Paper TL;DR",
+      "tags": [
+        "ICLR 2025",
+        "Conformal Prediction",
+        "Adversarial Robustness"
+      ],
+      "description": "We make conformal prediction robust by smoothing a yes-or-no question about the score, so one binary certificate, computed once, and exact Clopper–Pearson intervals replace per-point certificates and thousands of Monte Carlo samples."
     }
   ]
 }

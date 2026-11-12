@@ -19,7 +19,7 @@ The usual repair is randomized smoothing. We average the conformal score over Ga
 
 We call our method BinCP. We binarize first. Fix a threshold $\tau$, add noise to the input many times, and ask for each noisy copy whether the score of a label clears $\tau$. What smoothing keeps is one probability:
 
-$$\bar{s}(x, y) = \Pr_{\epsilon}\big[\, s(x+\epsilon, y) \ge \tau \,\big], \qquad \epsilon \sim \mathcal{N}(0, \sigma^2 I).$$
+$$\bar{s}(x, y) = \Pr_{\epsilon}\big[ s(x+\epsilon, y) \ge \tau \big], \qquad \epsilon \sim \mathcal{N}(0, \sigma^2 I).$$
 
 The prediction set holds the labels with $\bar{s}(x,y) \ge p$. We fix one of $p$ and $\tau$ and calibrate the other, so that the true label makes it into the set for a $1-\alpha$ fraction of calibration points.
 
@@ -52,6 +52,6 @@ We still estimate $\bar s$ from samples, and the guarantee needs a margin for th
 
 ## The Limitation
 
-BinCP still smooths. Each prediction still costs about 150 forward passes, far more than plain conformal prediction needs. The guarantee also covers only the threat model of the noise. Here that is an $\ell_2$ ball under Gaussian noise, and the sets grow as $r/\sigma$ grows.
+BinCP still smooths. Each prediction costs about 150 forward passes, far more than plain conformal prediction needs. The guarantee also covers only the threat model of the noise. Here that is an $\ell_2$ ball under Gaussian noise, and the sets grow as $r/\sigma$ grows.
 
 The proofs and experiments are in the [paper on arXiv](https://arxiv.org/abs/2503.05239), and the abstract is on its [publication page](pub.html?id=single-cert-2025).
