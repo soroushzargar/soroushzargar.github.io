@@ -61,13 +61,13 @@
       "date": "2025-12-15",
       "dateDisplay": "December 15, 2025",
       "readingMinutes": 3,
-      "category": "Technical",
+      "category": "Paper TL;DR",
       "tags": [
         "NeurIPS 2025",
         "Conformal Prediction",
         "Adversarial Robustness"
       ],
-      "description": "We show that augmenting each calibration point with a single adversarial example is sufficient to obtain tight, valid coverage guarantees under attack — matching expensive worst-case methods at a fraction of the cost."
+      "description": "Conformal prediction on a single noisy copy of each input is already valid, and by certifying the whole procedure instead of each score we get robust prediction sets from one forward pass per input."
     },
     {
       "slug": "conformal-sets-on-graphs",
