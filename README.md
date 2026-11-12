@@ -17,7 +17,7 @@ cv.html             CV
 assets/site.css     The whole design system
 assets/site.js      Scroll reveals + rendering of the data files
 assets/asd-plots/    Live canvas plots, embedded in a post with <canvas data-plot="name">
-assets/lab/lab.js   Interactive toy models, embedded with <figure class="lab" data-lab="name">
+assets/plots/       Animated plots for paper TL;DRs: runtime.js plus one scene file per post
 
 data/publications.json   Source of truth for all publications
 data/blogs.json          Source of truth for the post listings
@@ -75,34 +75,25 @@ Append an object to `data/publications.json`:
    there). `readingMinutes` is used in listings; the post page computes its own
    from the Markdown at 180 wpm — keep the two roughly in step.
 
-## Interactive models
+## Animated plots in a post
 
-A publication page can carry one interactive model of the paper's idea, shown
-above the abstract under "The idea, live". `assets/lab/lab.js` holds the models,
-which run in the browser and respond to sliders and the pointer:
+A paper's TL;DR is a short post whose figures are animations computed in the
+page. Each plot waits in grayscale on its first frame, runs once when it reaches
+the middle of the screen, and has a repeat icon.
 
-- `robust` — conformal prediction on a three-class toy problem under an attacker
-  of radius ε: standard sets, robust sets at test time, robust calibration
-- `graph` — conformal sets on a toy graph with neighbourhood diffusion of scores
-- `evolution` — evolutionary search for the edge flips that hurt a toy graph
-  classifier most, against random search with the same budget
-
-Attach one to a paper with a `lab` object in `data/publications.json`:
-
-```json
-"lab": {
-  "name": "graph",
-  "title": "Short headline",
-  "intro": "Two or three sentences on what to try.",
-  "caption": "What the toy is, and that it is not an experiment from the paper."
-}
+```html
+<figure class="plot">
+<canvas data-plot="name" data-scene="file" role="img" aria-label="What the finished plot shows."></canvas>
+<figcaption>Caption.</figcaption>
+</figure>
 ```
 
-Use `"plot": "river"` (plus `"alt"`) instead of `"name"` to show one of the canvas
-plots from `assets/asd-plots/`. Papers with a `lab` get an "Interactive" marker in
-the lists. To add a model, write a `function myLab(figure) { … }` in `lab.js` and
-register it in `LABS`. A model can also go in a post's Markdown with
-`<figure class="lab" data-lab="graph"><figcaption>…</figcaption></figure>`.
+`data-scene` names a file in `assets/plots/`. That file registers its plots with
+`sitePlots.define(function (kit) { … return { name: { size, duration, draw } }; })`;
+`assets/plots/runtime.js` documents the kit (text, lines, bars, easing, seeded
+random numbers) and does the playback. The Adversarial Self-Distillation post
+predates this and keeps its own file in `assets/asd-plots/` (canvases without
+`data-scene`).
 
 The publications page builds its topic filters from the `tags` in
 `data/publications.json` (every tag after the first, if at least two papers share it).

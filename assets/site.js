@@ -8,6 +8,7 @@
 
   var PUBS_URL = "data/publications.json";
   var BLOGS_URL = "data/blogs.json";
+  var PLOTS_VERSION = "20261112-1";
   var SITE_URL = "https://soroushzargar.github.io/";
   var WORDS_PER_MINUTE = 180; // technical prose reads slower; keep in sync with data/blogs.json
 
@@ -72,10 +73,6 @@
     return venue ? '<span class="venue-badge">' + esc(venue) + "</span>" : "";
   }
 
-  function liveBadge(pub) {
-    return pub.lab ? '<span class="pub-live">Interactive</span>' : "";
-  }
-
   function renderKeywords(tags) {
     return esc((tags || []).slice(1).join(" · "));
   }
@@ -117,7 +114,7 @@
       return (
         '<a class="work-row" href="' + pubHref(pub) + '">' +
           '<span class="work-num">' + String(i + 1).padStart(2, "0") + "</span>" +
-          '<span class="work-title">' + esc(pub.title) + liveBadge(pub) + "</span>" +
+          '<span class="work-title">' + esc(pub.title) + "</span>" +
           '<span class="work-venue">' + esc(pub.venueTag) + "</span>" +
           '<span class="work-arrow" aria-hidden="true">→</span>' +
         "</a>"
@@ -152,14 +149,14 @@
           pub.links && pub.links.paper ? '<a class="link-underline" href="' + esc(pub.links.paper) + '" target="_blank" rel="noopener">Paper ↗</a>' : "",
           pub.links && pub.links.poster ? '<a class="link-underline" href="' + esc(pub.links.poster) + '" target="_blank" rel="noopener">Poster ↗</a>' : "",
           pub.links && pub.links.talk ? '<a class="link-underline" href="' + esc(pub.links.talk) + '" target="_blank" rel="noopener">Talk ↗</a>' : "",
-          '<a class="link-underline" href="' + pubHref(pub) + '">' + (pub.lab ? "Abstract and live demo →" : "Abstract →") + "</a>",
+          '<a class="link-underline" href="' + pubHref(pub) + '">' + "Abstract →</a>",
           writeUp
         ].filter(Boolean).join("");
 
         return (
           '<article class="pub-item">' +
             '<div class="pub-heading">' +
-              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + highlight(pub.title, query) + liveBadge(pub) + "</h3></a>" +
+              '<a href="' + pubHref(pub) + '"><h3 class="pub-title">' + highlight(pub.title, query) + "</h3></a>" +
               venueBadge(pub) +
             "</div>" +
             '<p class="pub-authors">' + pub.authorsHtml + "</p>" +
@@ -301,36 +298,12 @@
         resource(links.talk, "Talk") +
         (pub.postSlug ? '<a class="link-underline" href="blog-post.html?slug=' + encodeURIComponent(pub.postSlug) + '">Write-up →</a>' : "") +
       "</div>" +
-      labSection(pub) +
       '<div class="detail-section-label">Abstract</div>' +
       '<div class="prose" id="pub-abstract"><p>' + esc(pub.abstract) + "</p></div>" +
       '<div class="detail-section-label mt-32">Topics</div>' +
       '<div class="keyword-list">' + renderKeywords(pub.tags) + "</div>";
 
     typesetMath($("#pub-abstract"));
-    if (pub.lab) {
-      host.parentNode.classList.add("has-lab");
-      loadPlots(host);
-      loadLabs(host);
-    }
-  }
-
-  // A publication can carry one interactive model of its idea (`lab` in the data file):
-  // { name } picks a model from assets/lab/lab.js, { plot } a canvas plot from assets/asd-plots.
-  function labSection(pub) {
-    var lab = pub.lab;
-    if (!lab) return "";
-    var figure = lab.plot
-      ? '<div class="prose"><figure class="plot"><canvas data-plot="' + esc(lab.plot) + '" role="img" aria-label="' + esc(lab.alt || "") + '"></canvas>' +
-        "<figcaption>" + esc(lab.caption) + "</figcaption></figure></div>"
-      : '<figure class="lab" data-lab="' + esc(lab.name) + '"><figcaption>' + esc(lab.caption) + "</figcaption></figure>";
-    return (
-      '<div class="detail-section-label">The idea, live</div>' +
-      '<div class="detail-lab">' +
-        '<p class="lab-dek"><strong>' + esc(lab.title) + "</strong>" + esc(lab.intro) + "</p>" +
-        figure +
-      "</div>"
-    );
   }
 
   /* ── writing ─────────────────────────────────────────────────────────── */
@@ -431,28 +404,37 @@
         host.innerHTML = window.marked ? window.marked.parse(parsed.content) : esc(parsed.content);
         typesetMath(host);
         loadPlots(host);
-        loadLabs(host);
         linkRelatedPaper(slug);
         initReadProgress(host);
       })
       .catch(function () { showPostError(host); });
   }
 
-  // Posts can embed live plots with <canvas data-plot="name">.
-  function loadPlots(host) {
-    if (!host.querySelector("[data-plot]")) return;
+  // Posts embed animated plots with <canvas data-plot="name" data-scene="file">:
+  // the shared runtime plus assets/plots/<file>.js. A canvas without data-scene
+  // belongs to the Adversarial Self-Distillation post, which has its own file.
+  function loadScript(src) {
     var script = document.createElement("script");
-    script.src = "assets/asd-plots/plots.js?v=20261030-3";
+    script.src = src;
+    script.async = false; // keep the order: runtime first, then scenes
     document.body.appendChild(script);
   }
 
-  // …and interactive models with <figure class="lab" data-lab="name">.
-  function loadLabs(host) {
-    if (!host.querySelector("[data-lab]")) return;
-    if (window.siteLab) { window.siteLab.boot(host); return; }
-    var script = document.createElement("script");
-    script.src = "assets/lab/lab.js?v=20261111-3";
-    document.body.appendChild(script);
+  function loadPlots(host) {
+    var canvases = Array.prototype.slice.call(host.querySelectorAll("canvas[data-plot]"));
+    if (!canvases.length) return;
+    var scenes = [];
+    canvases.forEach(function (canvas) {
+      var scene = canvas.getAttribute("data-scene");
+      if (scene && /^[a-z0-9-]+$/.test(scene) && scenes.indexOf(scene) === -1) scenes.push(scene);
+    });
+    if (canvases.some(function (canvas) { return !canvas.hasAttribute("data-scene"); })) {
+      loadScript("assets/asd-plots/plots.js?v=20261030-3");
+    }
+    if (scenes.length) {
+      loadScript("assets/plots/runtime.js?v=" + PLOTS_VERSION);
+      scenes.forEach(function (scene) { loadScript("assets/plots/" + scene + ".js?v=" + PLOTS_VERSION); });
+    }
   }
 
   // Point the post's footer at its own paper when there is one.
