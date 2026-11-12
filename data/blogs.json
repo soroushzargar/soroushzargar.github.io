@@ -96,6 +96,20 @@
         "Adversarial Robustness"
       ],
       "description": "Robust conformal prediction bounds how far an attack can lower a smoothed score. Bounding every level of the score's distribution, instead of only its mean, gives the same coverage guarantee with smaller prediction sets."
+    },
+    {
+      "slug": "evolutionary-attacks-on-graphs",
+      "title": "Attack a Graph by Evolving Its Edge Flips",
+      "date": "2026-11-12",
+      "dateDisplay": "November 12, 2026",
+      "readingMinutes": 3,
+      "category": "Paper TL;DR",
+      "tags": [
+        "ICLR 2026",
+        "Adversarial Robustness",
+        "Graph Neural Networks"
+      ],
+      "description": "Gradient attacks on graph neural networks relax the discrete choice of edge flips and follow a surrogate loss. EvA searches over sets of flips directly with a genetic algorithm, scoring each one by the real objective."
     }
   ]
 }

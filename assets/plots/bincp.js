@@ -139,7 +139,7 @@ sitePlots.define(function (kit) {
       bins[bin]++;
     });
     // region of the plane where the cat score clears tau (cells of the left panel)
-    var CELL = 6, cells = [];
+    var CELL = 4, cells = [];
     for (var gx = -PAD; gx < PAD; gx += CELL) for (var gy = -PAD; gy < PAD; gy += CELL) {
       var u = X[0] + (gx + CELL / 2) / S, v = X[1] - (gy + CELL / 2) / S;
       if (softmax(u, v)[0] >= TAU) cells.push([CX + gx, CY + gy]);
@@ -229,7 +229,7 @@ sitePlots.define(function (kit) {
     function worst(p, r) { return Phi(PhiInv(p) - r); }
 
     var OX = 110, OY = 410, SZ = 280;                    // left: the curve, unit square
-    var BX0 = 490, BX1 = 860, SLOT = (BX1 - BX0) / K, BWID = 34;
+    var BX0 = 490, BX1 = 860, SLOT = (BX1 - BX0) / K, BWID = 44;
     function yv(v) { return OY - v * SZ; }
     function xv(v) { return OX + v * SZ; }
     var ORDER = [0, 1, 5, 2, 4, 3];                      // cat, dog, bee, then the rest
